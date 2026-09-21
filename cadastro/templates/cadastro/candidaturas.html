@@ -1,13 +1,29 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Job Tracker — cadastre uma nova candidatura."
+    >
 
     <title>Job Tracker | Nova candidatura</title>
 
-    <link rel="stylesheet" href="{% static 'cadastro/nova_candidatura.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/nova_candidatura.css' %}"
+    >
+
 </head>
 
 <body>
@@ -16,12 +32,19 @@
 
         <div class="form-container">
 
-            <a class="back-link" href="{% url 'candidaturas' %}">
+            <!-- VOLTAR -->
+            <a
+                href="{% url 'candidaturas' %}"
+                class="back-link"
+            >
                 ← Voltar para candidaturas
             </a>
 
+
+            <!-- CARD -->
             <section class="form-card">
 
+                <!-- CABEÇALHO -->
                 <div class="form-header">
 
                     <span class="page-eyebrow">
@@ -33,19 +56,31 @@
                     </h1>
 
                     <p>
-                        Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker.
+                        Registre uma nova vaga e acompanhe todo o
+                        processo seletivo pelo Job Tracker.
                     </p>
 
                 </div>
 
-                <form method="post" class="candidatura-form">
+
+                <!-- FORMULÁRIO -->
+                <form
+                    method="post"
+                    class="candidatura-form"
+                >
 
                     {% csrf_token %}
 
+
+                    <!-- CAMPOS -->
                     <div class="form-fields">
+
                         {{ form.as_p }}
+
                     </div>
 
+
+                    <!-- AÇÕES -->
                     <div class="form-actions">
 
                         <a
@@ -59,7 +94,7 @@
                             type="submit"
                             class="btn-primary"
                         >
-                            Salvar candidatura
+                            Salvar candidatura →
                         </button>
 
                     </div>
@@ -68,6 +103,8 @@
 
             </section>
 
+
+            <!-- RODAPÉ -->
             <p class="form-footer">
                 Job Tracker · Organize sua busca. Acompanhe sua evolução.
             </p>
@@ -77,4 +114,5 @@
     </main>
 
 </body>
+
 </html>

@@ -1,0 +1,544 @@
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f8f9fc;
+
+    color: #111827;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
+.form-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 48px 24px 60px;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(99, 102, 241, 0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59, 130, 246, 0.08),
+            transparent 30%
+        ),
+        #f8f9fc;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.form-container {
+    width: 100%;
+
+    max-width: 900px;
+}
+
+
+/* =========================================================
+   LINK VOLTAR
+   ========================================================= */
+
+.back-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    color: #4f46e5;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.back-link:hover {
+    color: #3730a3;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+   ========================================================= */
+
+.form-card {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 22px;
+
+    padding: 42px 44px;
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.07),
+        0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.form-header {
+    max-width: 680px;
+
+    margin-bottom: 34px;
+}
+
+
+.page-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 11px;
+
+    color: #6366f1;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+.form-header h1 {
+    margin-bottom: 11px;
+
+    color: #111827;
+
+    font-size: clamp(30px, 4vw, 42px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.035em;
+}
+
+
+.form-header p {
+    max-width: 620px;
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.candidatura-form {
+    width: 100%;
+}
+
+
+.form-fields {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 24px;
+
+    row-gap: 18px;
+
+    padding-top: 2px;
+}
+
+
+/* =========================================================
+   CADA CAMPO
+   ========================================================= */
+
+.form-fields p {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.form-fields label {
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA
+   ========================================================= */
+
+.form-fields input,
+.form-fields select,
+.form-fields textarea {
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* =========================================================
+   HOVER DOS CAMPOS
+   ========================================================= */
+
+.form-fields input:hover,
+.form-fields select:hover,
+.form-fields textarea:hover {
+    border-color: #c7cad3;
+}
+
+
+/* =========================================================
+   FOCO DOS CAMPOS
+   ========================================================= */
+
+.form-fields input:focus,
+.form-fields select:focus,
+.form-fields textarea:focus {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.10);
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.form-fields textarea {
+    height: auto;
+
+    min-height: 110px;
+
+    padding: 12px 14px;
+
+    resize: vertical;
+}
+
+
+/* =========================================================
+   TEXTAREA OCUPA A LINHA INTEIRA
+   ========================================================= */
+
+.form-fields p:has(textarea) {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   ERROS DO DJANGO
+   ========================================================= */
+
+.form-fields .errorlist {
+    list-style: none;
+
+    margin: 0;
+
+    color: #dc2626;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+.form-fields input:has(+ .errorlist),
+.form-fields select:has(+ .errorlist),
+.form-fields textarea:has(+ .errorlist) {
+    border-color: #ef4444;
+}
+
+
+/* =========================================================
+   ÁREA DOS BOTÕES
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 32px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #eef0f4;
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR
+   ========================================================= */
+
+.btn-secondary {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 44px;
+
+    min-width: 110px;
+
+    padding: 0 18px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-secondary:hover {
+    background: #f9fafb;
+
+    border-color: #d1d5db;
+
+    color: #111827;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO SALVAR
+   ========================================================= */
+
+.form-actions .btn-primary {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 44px;
+
+    min-width: 170px;
+
+    padding: 0 20px;
+
+    border: 1px solid #111827;
+
+    border-radius: 10px;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-actions .btn-primary:hover {
+    background: #374151;
+
+    border-color: #374151;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px rgba(17, 24, 39, 0.12);
+}
+
+
+.form-actions .btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+.form-footer {
+    margin-top: 22px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .form-page {
+        padding: 28px 16px 40px;
+    }
+
+
+    .form-card {
+        padding: 32px 24px;
+
+        border-radius: 20px;
+    }
+
+
+    .form-header {
+        margin-bottom: 30px;
+    }
+
+
+    .form-header h1 {
+        font-size: 30px;
+    }
+
+
+    .form-header p {
+        font-size: 14px;
+    }
+
+
+    .form-fields {
+        grid-template-columns: 1fr;
+
+        column-gap: 0;
+
+        row-gap: 18px;
+    }
+
+
+    .form-fields p:has(textarea) {
+        grid-column: auto;
+    }
+
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
