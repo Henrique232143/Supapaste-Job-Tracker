@@ -21,12 +21,12 @@ def lista_empresas(request):
 
 
 @login_required(login_url='login')
-def lista_candidaturas(request):
+def candidaturas(request):
     candidaturas = Candidatura.objects.filter(
         usuario=request.user
     ).order_by('-data_candidatura')
 
-    return render(request, 'cadastro/lista_candidaturas.html', {
+    return render(request, 'cadastro/candidaturas.html', {
         'candidaturas': candidaturas
     })
 
@@ -43,7 +43,7 @@ def nova_candidatura(request):
 
             candidatura.save()
 
-            return redirect('lista_candidaturas')
+            return redirect('candidaturas')
 
     else:
         form = CandidaturaForm()
@@ -71,7 +71,7 @@ def cadastro(request):
 
             login(request, usuario)
 
-            return redirect('lista_candidaturas')
+            return redirect('candidaturas')
 
     else:
         form = CadastroForm()
@@ -95,7 +95,7 @@ def login_usuario(request):
         if usuario is not None:
             login(request, usuario)
 
-            return redirect('lista_candidaturas')
+            return redirect('candidaturas')
 
         return render(request, 'cadastro/login.html', {
             'erro': 'E-mail ou senha incorretos.'

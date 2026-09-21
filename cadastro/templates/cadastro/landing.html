@@ -51,7 +51,7 @@
                 {% if request.user.is_authenticated %}
 
                     <a
-                        href="{% url 'lista_candidaturas' %}"
+                        href="{% url 'candidaturas' %}"
                         class="nav-button"
                     >
                         Meu painel
@@ -124,7 +124,7 @@
                         {% if request.user.is_authenticated %}
 
                             <a
-                                href="{% url 'lista_candidaturas' %}"
+                                href="{% url 'candidaturas' %}"
                                 class="btn-primary"
                             >
                                 Acessar meu painel →
@@ -581,7 +581,7 @@
                 {% if request.user.is_authenticated %}
 
                     <a
-                        href="{% url 'lista_candidaturas' %}"
+                        href="{% url 'candidaturas' %}"
                         class="btn-primary light"
                     >
                         Ir para meu painel →

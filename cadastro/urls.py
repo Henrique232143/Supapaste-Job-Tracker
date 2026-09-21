@@ -21,8 +21,8 @@ urlpatterns = [
     # Candidaturas
     path(
         'candidaturas/',
-        views.lista_candidaturas,
-        name='lista_candidaturas'
+        views.candidaturas,
+        name='candidaturas'
     ),
 
     path(
