@@ -1,0 +1,633 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Job Tracker — organize e acompanhe suas candidaturas de emprego."
+    >
+
+    <title>Job Tracker | Organize sua busca por emprego</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/landing.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="navbar-container">
+
+            <a href="{% url 'landing' %}" class="logo">
+                JOB TRACKER
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="#recursos">
+                    Recursos
+                </a>
+
+                <a href="#como-funciona">
+                    Como funciona
+                </a>
+
+                {% if request.user.is_authenticated %}
+
+                    <a
+                        href="{% url 'lista_candidaturas' %}"
+                        class="nav-button"
+                    >
+                        Meu painel
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="nav-login"
+                    >
+                        Entrar
+                    </a>
+
+                    <a
+                        href="{% url 'cadastro' %}"
+                        class="nav-button"
+                    >
+                        Criar conta
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+
+                <!-- TEXTO -->
+
+                <div class="hero-content">
+
+
+                    <div class="hero-badge">
+                        ✦ Seu processo seletivo, organizado
+                    </div>
+
+
+                    <h1>
+
+                        Transforme sua busca por emprego
+                        em um processo sob controle.
+
+                    </h1>
+
+
+                    <p>
+
+                        Organize suas candidaturas, acompanhe cada etapa
+                        dos processos seletivos e tenha uma visão clara
+                        das oportunidades que estão em andamento.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        {% if request.user.is_authenticated %}
+
+                            <a
+                                href="{% url 'lista_candidaturas' %}"
+                                class="btn-primary"
+                            >
+                                Acessar meu painel →
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'cadastro' %}"
+                                class="btn-primary"
+                            >
+                                Começar agora →
+                            </a>
+
+                            <a
+                                href="{% url 'login' %}"
+                                class="btn-secondary"
+                            >
+                                Já tenho uma conta
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <span>✓</span>
+                        Organize suas vagas
+                        
+                        <span>✓</span>
+                        Acompanhe seus processos
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- PREVIEW DO DASHBOARD -->
+
+                <div class="hero-visual">
+
+
+                    <div class="dashboard-window">
+
+
+                        <!-- TOPO DO MOCKUP -->
+
+                        <div class="dashboard-top">
+
+                            <div class="window-dots">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="dashboard-title">
+                                Job Tracker
+                            </div>
+
+                        </div>
+
+
+                        <!-- DASHBOARD -->
+
+                        <div class="dashboard-content">
+
+
+                            <div class="preview-welcome">
+
+                                <div>
+
+                                    <small>
+                                        Visão geral
+                                    </small>
+
+                                    <h3>
+                                        Suas candidaturas
+                                    </h3>
+
+                                </div>
+
+
+                                <div class="preview-avatar">
+                                    H
+                                </div>
+
+                            </div>
+
+
+                            <!-- MÉTRICAS -->
+
+                            <div class="preview-metrics">
+
+
+                                <div class="metric-card">
+
+                                    <span>
+                                        Total
+                                    </span>
+
+                                    <strong>
+                                        18
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="metric-card">
+
+                                    <span>
+                                        Entrevistas
+                                    </span>
+
+                                    <strong>
+                                        6
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="metric-card">
+
+                                    <span>
+                                        Em andamento
+                                    </span>
+
+                                    <strong>
+                                        9
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- LISTA -->
+
+                            <div class="preview-list">
+
+
+                                <div class="preview-list-header">
+
+                                    <strong>
+                                        Candidaturas recentes
+                                    </strong>
+
+                                    <span>
+                                        Ver todas
+                                    </span>
+
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div>
+
+                                        <strong>
+                                            Analista de QA
+                                        </strong>
+
+                                        <small>
+                                            Empresa Tech
+                                        </small>
+
+                                    </div>
+
+                                    <span class="status blue">
+                                        Entrevista
+                                    </span>
+
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div>
+
+                                        <strong>
+                                            Analista de Dados JR
+                                        </strong>
+
+                                        <small>
+                                            Empresa Digital
+                                        </small>
+
+                                    </div>
+
+                                    <span class="status purple">
+                                        Teste técnico
+                                    </span>
+
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div>
+
+                                        <strong>
+                                            Analista de Suporte
+                                        </strong>
+
+                                        <small>
+                                            Empresa Solutions
+                                        </small>
+
+                                    </div>
+
+                                    <span class="status green">
+                                        Aprovado
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD FLUTUANTE -->
+
+                    <div class="floating-card">
+
+                        <div class="floating-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Processo atualizado
+                            </strong>
+
+                            <small>
+                                Entrevista confirmada
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECURSOS -->
+
+        <section
+            class="section"
+            id="recursos"
+        >
+
+            <div class="section-heading">
+
+                <span>
+                    RECURSOS
+                </span>
+
+                <h2>
+                    Tudo que você precisa para
+                    organizar sua busca.
+                </h2>
+
+                <p>
+                    Menos planilhas espalhadas.
+                    Mais controle sobre cada oportunidade.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        Organize
+                    </h3>
+
+                    <p>
+                        Centralize suas candidaturas em um único lugar,
+                        com empresa, cargo, salário, modalidade e muito mais.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        Acompanhe
+                    </h3>
+
+                    <p>
+                        Saiba exatamente em qual etapa cada processo
+                        seletivo está e mantenha sua busca organizada.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Tenha controle
+                    </h3>
+
+                    <p>
+                        Visualize suas oportunidades e acompanhe seu
+                        progresso ao longo da sua jornada profissional.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- COMO FUNCIONA -->
+
+        <section
+            class="section how-section"
+            id="como-funciona"
+        >
+
+            <div class="section-heading">
+
+                <span>
+                    COMO FUNCIONA
+                </span>
+
+                <h2>
+                    Simples de usar.
+                    Fácil de acompanhar.
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Crie sua conta
+                    </h3>
+
+                    <p>
+                        Cadastre-se gratuitamente e tenha seu
+                        próprio espaço para organizar sua busca.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Cadastre suas vagas
+                    </h3>
+
+                    <p>
+                        Registre as oportunidades para as quais
+                        você se candidatou.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Acompanhe tudo
+                    </h3>
+
+                    <p>
+                        Atualize o status de cada candidatura e
+                        acompanhe sua evolução.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA FINAL -->
+
+        <section class="final-cta">
+
+
+            <div class="final-cta-content">
+
+                <span>
+                    JOB TRACKER
+                </span>
+
+                <h2>
+                    Sua busca por emprego
+                    merece organização.
+                </h2>
+
+                <p>
+                    Comece agora a centralizar suas candidaturas
+                    e tenha mais controle sobre cada oportunidade.
+                </p>
+
+
+                {% if request.user.is_authenticated %}
+
+                    <a
+                        href="{% url 'lista_candidaturas' %}"
+                        class="btn-primary light"
+                    >
+                        Ir para meu painel →
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'cadastro' %}"
+                        class="btn-primary light"
+                    >
+                        Criar minha conta →
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <strong>
+                JOB TRACKER
+            </strong>
+
+            <span>
+                Organize. Acompanhe. Conquiste.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+
+

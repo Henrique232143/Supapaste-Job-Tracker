@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Supapaste | Empresas</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        color: #1f2937;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 50px auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .header p {
+        color: #6b7280;
+        margin-top: 5px;
+    }
+
+    .contador {
+        background: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .contador strong {
+        font-size: 24px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #111827;
+        color: white;
+        text-align: left;
+        padding: 16px;
+    }
+
+    td {
+        padding: 16px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    tr:hover {
+        background: #f9fafb;
+    }
+
+    .empresa {
+        font-weight: bold;
+    }
+
+    a {
+        color: #2563eb;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .vazio {
+        text-align: center;
+        padding: 30px;
+        color: #6b7280;
+    }
+
+    @media (max-width: 700px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+            <h1> Empresas</h1>
+            <p>Empresas cadastradas no sistema</p>
+        </div>
+
+        <div class="contador">
+            <strong>{{ empresas|length }}</strong>
+            <br>
+            empresas
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Website</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for empresa in empresas %}
+
+                <tr>
+
+                    <td class="empresa">
+                        {{ empresa.name }}
+                    </td>
+
+                    <td>
+                        {{ empresa.city }}
+                    </td>
+
+                    <td>
+                        {{ empresa.state }}
+                    </td>
+
+                    <td>
+                        {% if empresa.website %}
+                            <a href="{{ empresa.website }}" target="_blank">
+                                Acessar site ↗
+                            </a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="4" class="vazio">
+                        Nenhuma empresa cadastrada.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
