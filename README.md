@@ -4,22 +4,32 @@
 
 **Job Tracker** é uma aplicação web construída com Django para organizar e acompanhar candidaturas a vagas de emprego.
 
-A ideia central é transformar uma busca de emprego que normalmente fica espalhada entre planilhas, anotações e favoritos do navegador em um único sistema.
+A ideia central é transformar uma busca de emprego que normalmente fica espalhada entre planilhas, anotações, favoritos do navegador e diferentes sites em um único sistema.
 
-O projeto atualmente possui:
+O projeto evoluiu de um CRUD simples de empresas e candidaturas para uma aplicação com uma estrutura mais próxima de um produto real, incluindo:
 
-- Landing Page pública
-- Cadastro de usuário
-- Login e logout
-- Sessões de autenticação do Django
-- Candidaturas separadas por usuário
-- Cadastro de empresas
-- Cadastro de novas candidaturas
-- PostgreSQL hospedado no Supabase
-- Templates HTML com Django Templates
-- CSS separado em arquivos estáticos
-- Interface responsiva
-- Primeira camada de identidade visual do produto
+* Landing Page pública
+* Cadastro de usuário
+* Login e logout
+* Sessões de autenticação do Django
+* Candidaturas separadas por usuário
+* Cadastro e reutilização de empresas
+* Catálogo global de empresas
+* Catálogo de cargos
+* Normalização de nomes
+* Tratamento de empresas duplicadas ou semelhantes
+* Sistema de aliases de empresas
+* Detalhamento individual de uma candidatura
+* Criação rápida de empresa durante o cadastro da candidatura
+* Criação rápida de cargo
+* Campo para local da vaga
+* Camada de serviços para concentrar regras de negócio
+* Comando administrativo para manutenção de catálogos
+* Internacionalização inicial
+* Seletor de idioma
+* Interface mais consistente entre as páginas
+* PostgreSQL hospedado no Supabase
+* Versionamento com Git/GitHub
 
 ---
 
@@ -33,12 +43,13 @@ O projeto atualmente possui:
 
 Ela executa a lógica do sistema, como:
 
-- receber requisições
-- validar formulários
-- autenticar usuários
-- consultar o banco
-- salvar candidaturas
-- renderizar páginas
+* receber requisições
+* validar formulários
+* autenticar usuários
+* consultar o banco
+* aplicar regras de negócio
+* salvar registros
+* renderizar páginas
 
 ### Django
 
@@ -46,13 +57,16 @@ Ela executa a lógica do sistema, como:
 
 Ele organiza o projeto em partes como:
 
-- Models
-- Views
-- URLs
-- Templates
-- Forms
-- Static files
-- Authentication
+* Models
+* Views
+* URLs
+* Templates
+* Forms
+* Static files
+* Authentication
+* Migrations
+* Management Commands
+* Internationalization
 
 ### PostgreSQL
 
@@ -62,14 +76,34 @@ Ele organiza o projeto em partes como:
 
 O Supabase está sendo utilizado como serviço para hospedar o PostgreSQL.
 
+### HTML / Django Templates
+
+Responsáveis pela estrutura das páginas e pela renderização dinâmica dos dados.
+
+### CSS
+
+Responsável pela identidade visual e pelos layouts das páginas.
+
+### Git / GitHub
+
+Utilizados para versionamento do projeto.
+
+A branch atual de desenvolvimento é:
+
+```text
+melhorar-cards-vagas
+```
+
 ---
 
 # 3. Estrutura atual do projeto
 
+A estrutura evoluiu bastante desde a primeira versão.
+
 Estrutura principal:
 
 ```text
-supapaste/
+Supapaste/
 │
 ├── manage.py
 │
@@ -77,28 +111,58 @@ supapaste/
 │   ├── settings.py
 │   └── urls.py
 │
+├── locale/
+│   ├── de/
+│   ├── en/
+│   ├── ja/
+│   └── pt_PT/
+│
 └── cadastro/
     │
+    ├── management/
+    │   └── commands/
+    │       └── catalogos.py
+    │
     ├── migrations/
+    │   ├── 0001_initial.py
+    │   ├── 0002_...
+    │   ├── 0003_candidatura_usuario.py
+    │   ├── 0004_cargo_empresa_name_normalized.py
+    │   ├── 0005_empresaalias.py
+    │   ├── 0006_candidatura_local_vaga.py
+    │   └── 0007_alter_empresa_city_alter_empresa_state_and_more.py
     │
     ├── templates/
     │   └── cadastro/
     │       ├── landing.html
     │       ├── login.html
     │       ├── cadastro.html
-    │       ├── lista_candidaturas.html
+    │       ├── candidaturas.html
+    │       ├── detalhe_candidatura.html
     │       ├── nova_candidatura.html
-    │       └── ...
+    │       ├── nova_empresa.html
+    │       ├── novo_cargo.html
+    │       ├── ...
+    │       ├── locale/
+    │       └── partials/
+    │           └── language_selector.html
     │
     ├── static/
     │   └── cadastro/
+    │       ├── candidaturas.css
+    │       ├── detalhe_candidatura.css
+    │       ├── language-switcher.css
+    │       ├── nova_candidatura.css
+    │       ├── nova_empresa.css
+    │       ├── novo_cargo.css
     │       ├── landing.css
     │       ├── auth.css
-    │       └── style.css
+    │       └── ...
     │
     ├── models.py
-    ├── views.py
     ├── forms.py
+    ├── servicos.py
+    ├── views.py
     └── urls.py
 ```
 
@@ -128,13 +192,15 @@ Cria arquivos de migration a partir das mudanças nos models.
 python manage.py migrate
 ```
 
-Aplica as migrations no banco.
+Aplica as migrations ao banco de dados.
 
 ```powershell
 python manage.py shell
 ```
 
-Abre um shell Python com o Django carregado.
+Abre um shell Python com o ambiente Django carregado.
+
+Também foi adicionada uma estrutura de **Management Commands** para tarefas internas do projeto.
 
 ---
 
@@ -144,28 +210,25 @@ Abre um shell Python com o Django carregado.
 
 ## `config/settings.py`
 
-Contém configurações globais do Django, como:
+Contém as configurações globais do Django, incluindo:
 
-- aplicativos instalados
-- banco de dados
-- arquivos estáticos
-- templates
-- middleware
-- configurações de segurança
-- configurações de autenticação
-
-O app `cadastro` está instalado no projeto.
+* aplicativos instalados
+* banco de dados
+* templates
+* arquivos estáticos
+* middleware
+* autenticação
+* internacionalização
+* configurações de idioma
+* configurações de segurança
 
 ## `config/urls.py`
 
 É a porta de entrada das URLs do projeto.
 
-A configuração atual é:
+Configuração conceitual:
 
 ```python
-from django.contrib import admin
-from django.urls import path, include
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cadastro.urls')),
@@ -184,8 +247,6 @@ Django Admin
 cadastro.urls
 ```
 
-Ou seja, o `config/urls.py` encaminha as requisições para as URLs do app.
-
 ---
 
 # 6. `cadastro/`
@@ -194,180 +255,303 @@ Ou seja, o `config/urls.py` encaminha as requisições para as URLs do app.
 
 Ele concentra a lógica relacionada a:
 
-- empresas
-- candidaturas
-- usuários
-- autenticação
-- páginas da aplicação
+* empresas
+* aliases
+* cargos
+* candidaturas
+* usuários
+* autenticação
+* formulários
+* catálogos
+* páginas da aplicação
+* regras de negócio
 
 ---
 
 # 7. Modelos do banco
 
-## `Empresa`
+A modelagem do banco evoluiu significativamente.
 
-Modelo atual:
-
-```python
-class Empresa(models.Model):
-    name = models.CharField(max_length=200)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2)
-    website = models.URLField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-```
-
-### Significado dos campos
-
-### `name`
-
-```python
-models.CharField(max_length=200)
-```
-
-Armazena o nome da empresa.
-
-`CharField` é utilizado para textos curtos.
-
-`max_length=200` limita o tamanho máximo do texto.
-
-### `city`
-
-Armazena a cidade.
-
-### `state`
-
-Armazena a UF.
-
-Foi definido:
-
-```python
-max_length=2
-```
-
-porque uma UF brasileira possui duas letras, como:
+Atualmente, o projeto trabalha conceitualmente com:
 
 ```text
-DF
-SP
-RJ
-MG
+User
+    │
+    └── Candidaturas
+             │
+             ├── Empresa
+             ├── Cargo
+             └── dados da vaga
+
+Empresa
+    │
+    └── Aliases
+
+Cargo
+    │
+    └── Empresa
 ```
-
-### `website`
-
-Armazena a URL da empresa.
-
-```python
-blank=True
-```
-
-significa que o campo pode ficar vazio no formulário.
-
-### `created_at`
-
-```python
-auto_now_add=True
-```
-
-faz o Django gravar automaticamente a data/hora de criação do registro.
 
 ---
 
-# 8. Modelo `Candidatura`
+# 8. Modelo `Empresa`
 
-O modelo de candidatura possui atualmente campos para:
+A entidade `Empresa` representa as empresas utilizadas no Job Tracker.
 
-- empresa
-- usuário
-- cargo
-- data da candidatura
-- salário
-- link da vaga
-- modalidade
-- status
-- observações
-- último contato
-- data de criação
+Ela possui dados relacionados à identificação da empresa e à sua localização.
+
+A aplicação também passou a trabalhar com **normalização de nomes**, permitindo identificar melhor empresas que aparecem escritas de maneiras diferentes.
+
+Exemplo conceitual:
+
+```text
+Serasa Experian
+SERASA EXPERIAN
+Serasa
+Serasa Experian Ltda.
+```
+
+Podem representar a mesma empresa.
+
+A normalização existe para ajudar o sistema a enxergar essa equivalência.
+
+---
+
+# 9. Normalização
+
+Uma das mudanças mais importantes da evolução recente foi a criação da lógica de **normalização**.
+
+Normalizar significa transformar diferentes representações de um texto em uma forma mais consistente para comparação.
+
+Exemplo conceitual:
+
+```text
+"Serasa Experian"
+"SERASA EXPERIAN"
+" serasa experian "
+```
+
+podem ser transformados em uma representação equivalente para comparação.
+
+A normalização é importante porque:
+
+* reduz duplicidades
+* melhora pesquisas
+* facilita identificação de empresas semelhantes
+* permite reutilizar empresas existentes
+* cria uma base melhor para automações futuras
+
+A migration:
+
+```text
+0004_cargo_empresa_name_normalized.py
+```
+
+faz parte dessa evolução.
+
+---
+
+# 10. Modelo `EmpresaAlias`
+
+Foi criado o modelo:
+
+```text
+EmpresaAlias
+```
+
+Seu objetivo é representar nomes alternativos associados a uma empresa principal.
+
+Conceito:
+
+```text
+Empresa
+Serasa Experian
+        │
+        ├── Serasa
+        ├── SERASA
+        └── Serasa Experian S.A.
+```
+
+Isso permite separar:
+
+```text
+nome oficial/canônico
+```
+
+de:
+
+```text
+nomes alternativos usados na prática
+```
+
+Essa estrutura é importante para evitar que a mesma empresa seja cadastrada diversas vezes.
+
+A migration relacionada é:
+
+```text
+0005_empresaalias.py
+```
+
+---
+
+# 11. Empresas semelhantes e duplicidade
+
+O projeto passou a tratar a criação de empresas de maneira mais inteligente.
+
+Em vez de simplesmente verificar se uma string é exatamente igual à outra, o sistema pode trabalhar com:
+
+```text
+nome informado
+      ↓
+normalização
+      ↓
+comparação
+      ↓
+empresa existente?
+      ↓
+sim / não / semelhante
+```
+
+Isso permite construir uma experiência mais próxima de:
+
+> "Essa empresa talvez já exista no catálogo."
+
+Essa camada é fundamental para que o catálogo global não fique cheio de duplicações.
+
+---
+
+# 12. Modelo `Cargo`
+
+O projeto passou a ter uma entidade própria para cargos.
+
+O objetivo é evitar que os cargos sejam tratados apenas como texto solto espalhado pelas candidaturas.
+
+Conceito:
+
+```text
+Empresa
+   ↓
+Cargo
+   ├── Analista de Qualidade
+   ├── Analista de Dados
+   └── Desenvolvedor Júnior
+```
+
+O modelo também passou a participar da lógica de normalização.
+
+A migration:
+
+```text
+0004_cargo_empresa_name_normalized.py
+```
+
+está relacionada a essa evolução.
+
+---
+
+# 13. Cargo e candidatura
+
+É importante diferenciar duas coisas:
+
+### Cadastro de Cargo
+
+O sistema já possui uma entidade de cargo e mecanismos para trabalhar com o catálogo.
+
+### FK definitiva na candidatura
+
+A associação definitiva entre:
+
+```text
+Candidatura
+       ↓
+Cargo
+```
+
+como uma `ForeignKey` real ainda faz parte da evolução arquitetural.
+
+Portanto, o projeto já possui a estrutura de cargos, mas essa etapa ainda pode ser refinada para eliminar completamente a dependência de cargo como texto dentro da candidatura.
+
+---
+
+# 14. Modelo `Candidatura`
+
+A candidatura continua sendo a principal entidade operacional do sistema.
+
+Ela reúne informações como:
+
+* empresa
+* usuário
+* cargo
+* data da candidatura
+* salário
+* link da vaga
+* modalidade
+* status
+* observações
+* último contato
+* local da vaga
+* data de criação
 
 Estrutura conceitual:
 
 ```text
 Candidatura
 │
-├── empresa
 ├── usuario
+├── empresa
 ├── cargo
 ├── data_candidatura
 ├── salario
 ├── link_vaga
 ├── modalidade
 ├── status
+├── local_vaga
 ├── observacoes
 ├── ultimo_contato
 └── created_at
 ```
 
----
-
-# 9. Relação entre `Candidatura` e `Empresa`
-
-A candidatura possui:
-
-```python
-empresa = models.ForeignKey(
-    Empresa,
-    on_delete=models.CASCADE,
-    related_name='candidaturas'
-)
-```
-
-Isso significa que várias candidaturas podem apontar para uma mesma empresa.
-
-Exemplo:
+A migration:
 
 ```text
-Google
-│
-├── Analista de QA
-├── Analista de Dados
-└── Desenvolvedor Jr
+0006_candidatura_local_vaga.py
 ```
 
-## `ForeignKey`
-
-É uma relação entre tabelas.
-
-A tabela `Candidatura` guarda uma referência para a empresa.
-
-## `on_delete=models.CASCADE`
-
-Determina o que acontece quando a empresa relacionada é excluída.
-
-Com `CASCADE`, suas candidaturas relacionadas também seriam excluídas.
-
-Essa decisão precisa ser considerada com cuidado em uma aplicação real.
+representa a adição relacionada ao local da vaga.
 
 ---
 
-# 10. Relação entre `Candidatura` e usuário
+# 15. Relação entre `Candidatura` e `Empresa`
 
-O campo foi adicionado:
+A candidatura está relacionada à empresa.
 
-```python
-usuario = models.ForeignKey(
-    User,
-    on_delete=models.CASCADE,
-    related_name='candidaturas',
-    null=True,
-    blank=True
-)
+Conceito:
+
+```text
+Empresa
+   │
+   ├── Candidatura A
+   ├── Candidatura B
+   └── Candidatura C
 ```
 
-Esse campo é responsável por separar as candidaturas entre usuários.
+Uma mesma empresa pode aparecer em diversas candidaturas.
+
+Isso permite que o sistema tenha:
+
+```text
+1 Empresa
+   ↓
+N Candidaturas
+```
+
+em vez de criar uma nova empresa para cada candidatura.
+
+---
+
+# 16. Relação entre `Candidatura` e usuário
+
+A candidatura possui associação com o usuário logado.
 
 Conceito:
 
@@ -377,99 +561,121 @@ Usuário Henrique
 Candidatura A
 Candidatura B
 
-Usuário Teste2
+Usuário Teste
     ↓
 Candidatura C
 Candidatura D
 ```
 
-## Por que `ForeignKey`?
+Isso garante que cada usuário veja suas próprias candidaturas.
 
-Porque um usuário pode possuir várias candidaturas.
-
-A relação é:
-
-```text
-1 usuário
-   ↓
-N candidaturas
-```
-
-Isso é uma relação **um-para-muitos**.
-
-## Por que `null=True`?
-
-O campo foi criado depois de já existirem candidaturas antigas.
-
-O Django não sabia automaticamente a qual usuário aquelas candidaturas pertenciam.
-
-Por isso, durante a implementação, foi permitido:
-
-```text
-usuario_id = NULL
-```
-
-para os registros antigos.
-
-### Estado atual
-
-O próximo passo, depois da limpeza ou atribuição das candidaturas antigas, pode ser transformar esse campo em obrigatório.
+A filtragem continua baseada no usuário autenticado.
 
 ---
 
-# 11. Migrations
+# 17. Catálogo global
 
-Quando o campo `usuario` foi adicionado ao modelo, executamos:
+O sistema deixou de tratar empresas e cargos somente como informações digitadas em uma candidatura.
 
-```powershell
-python manage.py makemigrations
-```
+Foi criada uma lógica de **catálogo global**.
 
-O Django criou:
+A ideia é:
 
 ```text
-cadastro/migrations/0003_candidatura_usuario.py
+Catálogo
+│
+├── Empresas
+│
+└── Cargos
 ```
 
-Esse arquivo descreve a alteração.
+Esse catálogo pode ser reutilizado por diferentes usuários.
 
-Depois executamos:
+Isso é diferente das candidaturas, que continuam sendo privadas de cada usuário.
 
-```powershell
-python manage.py migrate
-```
-
-Resultado:
+Exemplo:
 
 ```text
-Applying cadastro.0003_candidatura_usuario... OK
+Catálogo global
+    ↓
+Google
+Meta
+Serasa Experian
+Deloitte
+Microsoft
+
+Usuário Henrique
+    ↓
+Candidatura na Serasa
+
+Usuário Teste
+    ↓
+Candidatura na Microsoft
 ```
 
-Isso significa que a alteração foi aplicada ao PostgreSQL.
-
-## Regra mental
-
-```text
-models.py
-    ↓
-makemigrations
-    ↓
-arquivo de migration
-    ↓
-migrate
-    ↓
-banco de dados
-```
-
-`makemigrations` prepara a alteração.
-
-`migrate` aplica a alteração.
+O catálogo funciona como uma base compartilhada de entidades.
 
 ---
 
-# 12. Autenticação
+# 18. Comando `catalogos.py`
 
-O projeto usa o sistema de autenticação nativo do Django.
+Foi criada a estrutura:
+
+```text
+cadastro/
+└── management/
+    └── commands/
+        └── catalogos.py
+```
+
+Esse tipo de arquivo permite criar comandos próprios do Django.
+
+A existência desse comando prepara o sistema para tarefas como:
+
+* manutenção de catálogos
+* criação de registros
+* atualização de dados
+* normalização
+* operações administrativas
+* preparação de dados
+
+Isso também tira determinadas tarefas de dentro das views.
+
+---
+
+# 19. `servicos.py`
+
+Foi criada uma camada:
+
+```text
+cadastro/servicos.py
+```
+
+A ideia é concentrar regras de negócio em um lugar próprio, evitando colocar toda a inteligência da aplicação dentro de:
+
+```text
+views.py
+```
+
+A arquitetura passa a caminhar para:
+
+```text
+View
+  ↓
+Service
+  ↓
+Model
+  ↓
+Banco
+```
+
+Isso melhora a organização do projeto e facilita futuras automações.
+
+---
+
+# 20. Autenticação
+
+O projeto continua utilizando o sistema nativo de autenticação do Django.
 
 Foram utilizados:
 
@@ -480,32 +686,13 @@ from django.contrib.auth import authenticate, login, logout
 
 ## Cadastro
 
-O usuário informa:
+O usuário informa os dados necessários e o sistema cria um usuário Django.
 
-- nome
-- e-mail
-- senha
-
-O sistema cria um `User` do Django.
-
-A criação utiliza:
-
-```python
-User.objects.create_user(
-    username=email,
-    email=email,
-    password=senha,
-    first_name=nome
-)
-```
-
-A senha não é armazenada como texto puro pelo Django.
-
-O sistema de autenticação do Django faz o tratamento adequado da senha.
+A senha é tratada pelo sistema de autenticação do próprio Django, em vez de ser armazenada em texto puro.
 
 ---
 
-# 13. Login
+# 21. Login
 
 O login recebe:
 
@@ -514,424 +701,395 @@ email
 senha
 ```
 
-A aplicação executa:
+O sistema autentica o usuário com:
 
 ```python
-usuario = authenticate(
-    request,
-    username=email,
-    password=senha
-)
+authenticate()
 ```
 
 Se as credenciais forem válidas:
 
 ```python
-login(request, usuario)
+login()
 ```
 
-A partir desse momento o Django sabe qual usuário está associado à sessão atual.
-
-Isso permite:
+A partir daí:
 
 ```python
 request.user
 ```
 
-Exemplo:
-
-```text
-login do teste1
-    ↓
-request.user = teste1
-
-login do teste2
-    ↓
-request.user = teste2
-```
+representa o usuário atualmente autenticado.
 
 ---
 
-# 14. Logout
+# 22. Logout
 
-A função de logout é:
-
-```python
-def logout_usuario(request):
-    logout(request)
-    return redirect('login')
-```
-
-Fluxo:
-
-```text
-clique em SAIR
-    ↓
-/logout/
-    ↓
-logout(request)
-    ↓
-sessão encerrada
-    ↓
-/login/
-```
-
----
-
-# 15. Proteção das páginas
-
-Foi utilizado:
-
-```python
-@login_required(login_url='login')
-```
-
-Isso significa que a página exige autenticação.
-
-Exemplo:
-
-```python
-@login_required(login_url='login')
-def lista_candidaturas(request):
-    ...
-```
-
-Se alguém tentar acessar sem estar logado:
+O fluxo continua sendo:
 
 ```text
 /candidaturas/
-```
-
-o Django manda a pessoa para:
-
-```text
+      ↓
+Sair
+      ↓
+/logout/
+      ↓
+logout()
+      ↓
 /login/
 ```
 
 ---
 
-# 16. Separação das candidaturas por usuário
+# 23. Proteção das páginas
 
-A lógica da listagem é:
-
-```python
-candidaturas = Candidatura.objects.filter(
-    usuario=request.user
-).order_by('-data_candidatura')
-```
-
-Isso é uma das partes mais importantes do projeto.
-
-`objects.filter(...)` significa:
-
-> buscar apenas registros que atendam ao critério informado.
-
-Neste caso:
+Páginas privadas continuam utilizando:
 
 ```python
-usuario=request.user
+@login_required(login_url='login')
 ```
 
-significa:
+Isso protege áreas como o painel e as candidaturas.
 
-> buscar somente candidaturas pertencentes ao usuário atualmente logado.
+O objetivo é impedir acesso aos dados sem autenticação.
 
 ---
 
-# 17. Salvando o usuário na candidatura
+# 24. Views atuais
 
-Na criação da candidatura, usamos:
+As views cresceram junto com a aplicação.
 
-```python
-candidatura = form.save(commit=False)
+Entre as principais responsabilidades estão:
 
-candidatura.usuario = request.user
+## Landing
 
-candidatura.save()
-```
+Exibe a página pública inicial.
 
-## Por que `commit=False`?
+## Empresas
 
-Normalmente:
+Lista e trabalha com empresas do catálogo.
 
-```python
-form.save()
-```
+## Candidaturas
 
-já salva diretamente no banco.
+Exibe as candidaturas do usuário.
 
-Mas precisamos modificar a candidatura antes de salvar.
+## Nova candidatura
 
-O fluxo é:
+Exibe e processa o cadastro de uma candidatura.
 
-```text
-form.save(commit=False)
-        ↓
-objeto criado na memória
-        ↓
-usuario = request.user
-        ↓
-save()
-        ↓
-banco
-```
+## Detalhe da candidatura
 
-Isso permite adicionar o dono da candidatura automaticamente.
-
----
-
-# 18. Views atuais
-
-As principais views são:
-
-## `landing`
-
-Mostra a Landing Page.
-
-```python
-def landing(request):
-    return render(request, 'cadastro/landing.html')
-```
-
-## `lista_empresas`
-
-Lista empresas.
-
-## `lista_candidaturas`
-
-Lista somente as candidaturas do usuário atual.
-
-## `nova_candidatura`
-
-Exibe e processa o formulário de nova candidatura.
-
-## `cadastro`
-
-Cria um usuário e faz login automaticamente.
-
-## `login_usuario`
-
-Autentica o usuário.
-
-## `logout_usuario`
-
-Encerra a sessão.
-
----
-
-# 19. URLs atuais
-
-No app:
-
-```python
-urlpatterns = [
-    path('', views.landing, name='landing'),
-
-    path(
-        'empresas/',
-        views.lista_empresas,
-        name='lista_empresas'
-    ),
-
-    path(
-        'candidaturas/',
-        views.lista_candidaturas,
-        name='lista_candidaturas'
-    ),
-
-    path(
-        'candidaturas/nova/',
-        views.nova_candidatura,
-        name='nova_candidatura'
-    ),
-
-    path(
-        'cadastro/',
-        views.cadastro,
-        name='cadastro'
-    ),
-
-    path(
-        'login/',
-        views.login_usuario,
-        name='login'
-    ),
-
-    path(
-        'logout/',
-        views.logout_usuario,
-        name='logout'
-    ),
-]
-```
-
-Mapa das páginas:
-
-```text
-/                       Landing Page
-/login/                 Login
-/cadastro/              Cadastro
-/logout/                Logout
-/candidaturas/          Lista de candidaturas
-/candidaturas/nova/     Nova candidatura
-/empresas/              Lista de empresas
-```
-
----
-
-# 20. Templates
-
-Os templates são os arquivos HTML que o Django renderiza.
-
-Eles usam Django Template Language.
+Foi criada uma página específica para visualizar uma candidatura individual.
 
 Exemplo:
 
-```django
-{{ request.user.first_name }}
+```text
+/candidaturas/
+       ↓
+seleciona candidatura
+       ↓
+detalhe da candidatura
 ```
 
-Isso acessa o nome do usuário atual.
+## Cadastro
 
-Outro exemplo:
+Cria novos usuários.
 
-```django
-{% url 'login' %}
+## Login
+
+Autentica usuários.
+
+## Logout
+
+Encerra sessões.
+
+## Empresa
+
+Foi adicionada uma tela própria para criação de empresa:
+
+```text
+nova_empresa.html
 ```
 
-pede ao Django para gerar a URL associada ao nome `login`.
+## Cargo
+
+Também foi adicionada uma tela própria para criação de cargo:
+
+```text
+novo_cargo.html
+```
 
 ---
 
-# 21. Arquivos estáticos
+# 25. Nova candidatura
 
-O projeto começou a separar o CSS em arquivos próprios.
+O fluxo de criação ficou mais completo.
+
+Anteriormente, a candidatura era essencialmente um formulário isolado.
+
+Agora a experiência pode envolver:
+
+```text
+Nova candidatura
+       ↓
+Empresa
+   ├── existente
+   ├── semelhante
+   └── nova empresa
+       ↓
+Cargo
+   ├── existente
+   └── novo cargo
+       ↓
+Dados da vaga
+       ↓
+Salvar
+```
+
+Isso aproxima o sistema de uma experiência real de produto.
+
+---
+
+# 26. Detalhe da candidatura
+
+Foi criada uma página específica:
+
+```text
+detalhe_candidatura.html
+```
+
+com CSS próprio:
+
+```text
+detalhe_candidatura.css
+```
+
+O objetivo é separar a visualização detalhada de uma candidatura da listagem geral.
+
+Isso cria uma arquitetura mais organizada:
+
+```text
+Lista
+  ↓
+Resumo
+
+Detalhe
+  ↓
+Informações completas
+```
+
+Essa separação será especialmente útil quando forem adicionadas ações como:
+
+* editar
+* excluir
+* histórico
+* movimentação de status
+* observações
+* contatos
+
+---
+
+# 27. Templates
+
+Os templates passaram a cobrir uma quantidade maior de funcionalidades.
+
+Entre os principais:
+
+```text
+landing.html
+login.html
+cadastro.html
+candidaturas.html
+detalhe_candidatura.html
+nova_candidatura.html
+nova_empresa.html
+novo_cargo.html
+```
+
+Também foi criada a estrutura:
+
+```text
+partials/
+└── language_selector.html
+```
+
+Isso permite reutilizar componentes de interface sem duplicar HTML.
+
+---
+
+# 28. Arquivos estáticos
+
+A organização do CSS ficou mais modular.
+
+Entre os arquivos atuais:
+
+```text
+candidaturas.css
+detalhe_candidatura.css
+language-switcher.css
+nova_candidatura.css
+nova_empresa.css
+novo_cargo.css
+```
+
+Além dos arquivos já existentes para:
+
+```text
+landing
+auth
+```
+
+A ideia é que cada área tenha seu estilo próprio quando necessário, reduzindo conflitos entre páginas.
+
+---
+
+# 29. Interface consistente
+
+A interface passou a seguir uma identidade visual mais definida.
+
+Direção adotada:
+
+* fundo claro
+* superfícies brancas
+* tons escuros para textos
+* roxo/índigo como destaque
+* bordas suaves
+* sombras discretas
+* cantos arredondados
+* bastante espaço em branco
+* hierarquia visual clara
+* aparência de produto SaaS
+* responsividade
+
+O objetivo deixou de ser apenas:
+
+```text
+"fazer funcionar"
+```
+
+e passou a ser:
+
+```text
+"fazer funcionar + parecer um produto"
+```
+
+---
+
+# 30. Internacionalização
+
+O projeto começou a receber suporte à internacionalização do Django.
+
+Foram criadas estruturas de tradução para:
+
+```text
+de
+en
+ja
+pt_PT
+```
+
+Além disso, foi criada uma interface própria de seleção de idioma.
 
 Estrutura:
 
 ```text
-static/
-└── cadastro/
-    ├── landing.css
-    ├── auth.css
-    └── style.css
+locale/
+├── de/
+├── en/
+├── ja/
+└── pt_PT/
 ```
 
-## `landing.css`
-
-Responsável pela aparência da Landing Page.
-
-## `auth.css`
-
-Compartilhado pelas páginas:
-
-- login
-- cadastro
-
-Isso evita duplicar CSS.
-
-## `style.css`
-
-Responsável pela interface da área de candidaturas.
-
----
-
-# 22. HTML x CSS
-
-Uma regra importante adotada no projeto:
-
-### HTML
-
-Define estrutura e conteúdo.
-
-Exemplo:
-
-```html
-<h1>JOB TRACKER</h1>
-```
-
-### CSS
-
-Define aparência.
-
-Exemplo:
-
-```css
-font-size: 20px;
-font-weight: 900;
-letter-spacing: 4px;
-```
-
-A separação facilita manutenção.
-
-Em vez de colocar dezenas de regras dentro do HTML, cada responsabilidade fica em seu arquivo.
-
----
-
-# 23. Landing Page
-
-A Landing Page é pública.
-
-Ela apresenta:
-
-- marca Job Tracker
-- proposta do produto
-- chamada principal
-- botões de cadastro/login
-- preview de dashboard
-- recursos
-- como funciona
-- chamada final para cadastro
-
-A rota é:
+e também:
 
 ```text
-/
+cadastro/templates/cadastro/locale/
 ```
 
-O sistema diferencia automaticamente visitante e usuário autenticado.
+Essa etapa prepara o Job Tracker para trabalhar com múltiplos idiomas sem precisar duplicar templates inteiros.
 
-Exemplo:
+---
 
-```django
-{% if request.user.is_authenticated %}
-```
+# 31. Sistema de idiomas
 
-Permite mostrar um botão como:
+Foi adicionada uma estrutura visual específica para o seletor de idioma:
 
 ```text
-Meu painel
+language_selector.html
+language-switcher.css
 ```
 
-para usuários logados.
+A ideia é centralizar a seleção do idioma em um componente reutilizável.
 
-Para visitantes:
+Arquitetura conceitual:
 
 ```text
-Entrar
-Criar conta
+Usuário
+   ↓
+Seleciona idioma
+   ↓
+Django
+   ↓
+Sistema de tradução
+   ↓
+Interface no idioma selecionado
 ```
 
 ---
 
-# 24. Identidade visual
+# 32. Migrations recentes
 
-A identidade atual segue uma direção de SaaS moderno:
+As últimas mudanças estruturais geraram novas migrations.
 
-- fundo claro
-- preto/cinza escuro
-- azul/roxo como destaque
-- cantos arredondados
-- sombras suaves
-- bastante espaço em branco
-- hover e transições
-- responsividade
+## `0004_cargo_empresa_name_normalized.py`
 
-O objetivo é fazer o projeto parecer um produto real, e não apenas uma tela CRUD.
+Relacionada à evolução de cargos, empresas e normalização de nomes.
+
+## `0005_empresaalias.py`
+
+Criação da estrutura de aliases de empresas.
+
+## `0006_candidatura_local_vaga.py`
+
+Adição do local associado à vaga/candidatura.
+
+## `0007_alter_empresa_city_alter_empresa_state_and_more.py`
+
+Atualizações adicionais na estrutura de empresa e outros ajustes de schema.
+
+A sequência atual mostra que o banco está evoluindo junto com a arquitetura da aplicação.
 
 ---
 
-# 25. Fluxo completo do sistema
+# 33. Regra mental sobre migrations
+
+A lógica continua sendo:
+
+```text
+models.py
+    ↓
+makemigrations
+    ↓
+arquivo de migration
+    ↓
+migrate
+    ↓
+PostgreSQL
+```
+
+É importante lembrar:
+
+`makemigrations`
+
+prepara a alteração.
+
+`migrate`
+
+aplica a alteração ao banco.
+
+---
+
+# 34. Fluxo atual do sistema
 
 ## Visitante
 
@@ -946,9 +1104,9 @@ Cadastro
  ↓
 Usuário criado
  ↓
-Login automático
+Login
  ↓
-/candidaturas/
+Área de candidaturas
 ```
 
 ## Usuário existente
@@ -956,9 +1114,7 @@ Login automático
 ```text
 /
  ↓
-Entrar
- ↓
-/login/
+Login
  ↓
 authenticate()
  ↓
@@ -974,297 +1130,453 @@ login()
  ↓
 Nova candidatura
  ↓
-/candidaturas/nova/
- ↓
-Formulário
- ↓
-form.save(commit=False)
- ↓
-usuario = request.user
- ↓
-save()
- ↓
-/candidaturas/
-```
-
-## Logout
-
-```text
-/candidaturas/
- ↓
-SAIR
- ↓
-/logout/
- ↓
-logout()
- ↓
-/login/
-```
-
----
-
-# 26. Banco de dados — visão conceitual
-
-Estrutura simplificada:
-
-```text
-User
-│
-├── id
-├── username
-├── email
-├── first_name
-└── password
-       │
-       │ 1:N
-       ▼
-Candidatura
-│
-├── id
-├── usuario_id
-├── empresa_id
-├── cargo
-├── data_candidatura
-├── salario
-├── link_vaga
-├── modalidade
-├── status
-├── observacoes
-├── ultimo_contato
-└── created_at
-       │
-       │ N:1
-       ▼
 Empresa
-├── id
-├── name
-├── city
-├── state
-├── website
-└── created_at
+ ↓
+Empresa existente?
+ ├── sim
+ ├── semelhante
+ └── nova
+ ↓
+Cargo
+ ↓
+Dados da vaga
+ ↓
+Salvar
+ ↓
+Candidatura criada
+```
+
+## Visualização
+
+```text
+/candidaturas/
+ ↓
+Seleciona candidatura
+ ↓
+detalhe_candidatura
 ```
 
 ---
 
-# 27. Decisão importante: um banco só
-
-O projeto não cria um banco de dados PostgreSQL separado para cada usuário.
-
-Usamos um banco único.
-
-A separação acontece através do relacionamento:
+# 35. Banco de dados — visão conceitual atual
 
 ```text
-Candidatura.usuario_id
+                         User
+                          │
+                          │ 1:N
+                          ▼
+                     Candidatura
+                    /      │      \
+                   /       │       \
+                  ▼        ▼        ▼
+             Empresa     Cargo    dados
+                │
+                │
+                ▼
+          EmpresaAlias
 ```
+
+O catálogo funciona como uma base global de entidades:
+
+```text
+Empresa
+   ↓
+Catálogo global
+
+Cargo
+   ↓
+Catálogo global
+```
+
+Enquanto:
+
+```text
+Candidatura
+   ↓
+pertence a um usuário específico
+```
+
+---
+
+# 36. Separação entre catálogo global e dados do usuário
+
+Essa é uma decisão arquitetural importante.
+
+### Catálogo
+
+É compartilhado.
 
 Exemplo:
 
 ```text
-User id 1
-    ↓
-Candidatura 10
-Candidatura 11
-
-User id 2
-    ↓
-Candidatura 20
-Candidatura 21
+Empresa:
+Serasa Experian
 ```
 
-Esse modelo é o padrão para muitos sistemas web.
+pode existir uma única vez no catálogo.
+
+### Candidatura
+
+É individual.
+
+Exemplo:
+
+```text
+Henrique
+   ↓
+Candidatura na Serasa
+```
+
+Outro usuário poderia ter:
+
+```text
+Outro usuário
+   ↓
+Candidatura na Serasa
+```
+
+Os dois reutilizam a mesma entidade `Empresa`, mas possuem candidaturas diferentes.
 
 ---
 
-# 28. Estado atual
+# 37. Estado atual
 
-### Funcionalidades concluídas
+## Base
 
-- [x] Projeto Django funcionando
-- [x] PostgreSQL/Supabase conectado
-- [x] Model Empresa
-- [x] Model Candidatura
-- [x] Cadastro
-- [x] Login
-- [x] Logout
-- [x] Sessão de usuário
-- [x] Proteção com `login_required`
-- [x] Candidaturas associadas a usuário
-- [x] Filtro de candidaturas por usuário
-- [x] Landing Page
-- [x] CSS separado
-- [x] Identidade visual inicial
-- [x] Layout responsivo
+* [x] Projeto Django funcionando
+* [x] PostgreSQL/Supabase conectado
+* [x] Estrutura de app
+* [x] Migrations
+* [x] Git/GitHub
+
+## Usuários
+
+* [x] Cadastro
+* [x] Login
+* [x] Logout
+* [x] Sessão
+* [x] `request.user`
+* [x] `login_required`
+
+## Candidaturas
+
+* [x] Cadastro
+* [x] Associação ao usuário
+* [x] Listagem
+* [x] Status
+* [x] Data
+* [x] Salário
+* [x] Link da vaga
+* [x] Modalidade
+* [x] Observações
+* [x] Último contato
+* [x] Local da vaga
+* [x] Tela de detalhe
+
+## Empresas
+
+* [x] Model `Empresa`
+* [x] Cadastro
+* [x] Catálogo global
+* [x] Normalização
+* [x] Identificação de semelhantes
+* [x] Aliases
+* [x] Tela de nova empresa
+
+## Cargos
+
+* [x] Estrutura de `Cargo`
+* [x] Catálogo de cargos
+* [x] Normalização
+* [x] Tela de novo cargo
+* [ ] FK definitiva de `Cargo` em `Candidatura`
+
+## Interface
+
+* [x] Landing Page
+* [x] Login
+* [x] Cadastro
+* [x] Área de candidaturas
+* [x] Tela de detalhe
+* [x] Tela de nova empresa
+* [x] Tela de novo cargo
+* [x] CSS separado
+* [x] Identidade visual consistente
+* [x] Seletor de idioma
+* [x] Base de internacionalização
+
+## Arquitetura
+
+* [x] Camada de services
+* [x] Management Command para catálogos
+* [x] Organização de templates
+* [x] Partial reutilizável
+* [x] Estrutura global de catálogos
 
 ---
 
-# 29. Pendências técnicas
+# 38. Pendências técnicas
 
 ## Candidaturas antigas
 
-Existem registros criados antes do relacionamento com usuário.
+Ainda pode existir a necessidade de tratar registros criados antes da associação das candidaturas aos usuários.
 
-Esses registros podem estar com:
+Esses registros podem ter:
 
 ```text
 usuario = NULL
 ```
 
-Eles precisam ser tratados.
+Eles devem ser analisados antes de tornar a relação definitivamente obrigatória.
 
-Possibilidades:
+---
 
-- apagar dados de teste
-- atribuir a um usuário
-- manter como registros sem dono apenas temporariamente
+# 39. Próxima grande etapa
 
-Depois disso, pode ser interessante tornar o campo obrigatório:
+A prioridade atual deixa de ser a construção da base de empresas semelhantes e aliases, porque essa camada já foi implementada.
 
-```python
-null=False
-blank=False
+O próximo passo passa a ser o **CRUD completo das entidades já existentes**.
+
+Prioridade imediata:
+
+```text
+1. Editar candidatura
+2. Excluir candidatura
+3. Confirmação de exclusão
+4. Revisar edição/exclusão de empresas
+5. Revisar edição/exclusão de cargos
 ```
 
 ---
 
-# 30. Próximos passos planejados
+# 40. Roadmap atualizado
 
-## Interface
-
-A próxima grande tarefa é refazer:
+## ✅ CONCLUÍDO
 
 ```text
-/candidaturas/
-```
-
-para seguir a mesma identidade visual da Landing Page e do Login/Cadastro.
-
-Objetivo:
-
-```text
-Dashboard moderno
-        ↓
-métricas
-        ↓
-lista de candidaturas
-        ↓
-status visuais
-        ↓
-ações
-```
-
-## CRUD completo
-
-Adicionar:
-
-- editar candidatura
-- excluir candidatura
-- confirmação antes de excluir
-
-## Dashboard
-
-Adicionar indicadores como:
-
-```text
-TOTAL
-ENTREVISTAS
-TESTES
-APROVADAS
-RECUSADAS
-```
-
-Todos calculados somente a partir das candidaturas do usuário logado.
-
-## Filtros
-
-Permitir filtrar por:
-
-- status
-- modalidade
-- empresa
-- período
-
-## Melhorias futuras
-
-- pesquisa
-- ordenação
-- gráficos
-- notificações
-- histórico de alterações
-- recuperação de senha
-- validação de e-mail
-- publicação online
-- domínio próprio
-- melhoria de segurança
-- testes automatizados
-
----
-
-# 31. Comandos importantes
-
-Iniciar servidor:
-
-```powershell
-python manage.py runserver
-```
-
-Criar migration:
-
-```powershell
-python manage.py makemigrations
-```
-
-Aplicar migration:
-
-```powershell
-python manage.py migrate
-```
-
-Shell Django:
-
-```powershell
-python manage.py shell
-```
-
-Criar superusuário:
-
-```powershell
-python manage.py createsuperuser
+✅ Base Django
+✅ PostgreSQL / Supabase
+✅ Login / usuários
+✅ Sessões
+✅ Proteção de páginas
+✅ Candidaturas
+✅ Empresas
+✅ Catálogo global
+✅ Cargos
+✅ Normalização
+✅ Duplicidade
+✅ Empresas semelhantes
+✅ Aliases de empresas
+✅ Detalhe da candidatura
+✅ Cadastro rápido de empresa
+✅ Cadastro rápido de cargo
+✅ Local da vaga
+✅ Camada de serviços
+✅ Management Command de catálogos
+✅ Interface consistente
+✅ CSS modularizado
+✅ Internacionalização inicial
+✅ Seletor de idioma
+✅ Git / GitHub
 ```
 
 ---
 
-# 32. Regra de estudo adotada no projeto
+## 🔵 AGORA
 
-A partir desta etapa, o objetivo não é apenas terminar o Job Tracker.
+### CRUD
 
-O objetivo também é aprender a construir aplicações Django.
+```text
+→ Editar candidatura
+→ Excluir candidatura
+→ Confirmação de exclusão
+→ Revisar edição/exclusão de empresa
+→ Revisar edição/exclusão de cargo
+```
 
-Para cada mudança de código, devemos entender:
+---
+
+## 🔵 DEPOIS
+
+### Catálogo
+
+```text
+→ Catálogo de empresas com interface completa
+→ Busca de empresas
+→ Busca de cargos
+→ Melhor gerenciamento de aliases
+→ Melhor tratamento de duplicidades
+```
+
+### Estrutura de cargos
+
+```text
+→ FK real de Cargo em Candidatura
+→ Relacionamento definitivo Empresa → Cargo
+→ Reutilização de cargos do catálogo
+```
+
+### Pesquisa e filtros
+
+```text
+→ Filtro por status
+→ Filtro por modalidade
+→ Filtro por empresa
+→ Filtro por cargo
+→ Filtro por período
+→ Pesquisa textual
+→ Ordenação
+```
+
+### Dashboard
+
+```text
+→ Indicadores principais
+→ Total de candidaturas
+→ Entrevistas
+→ Testes
+→ Processos em andamento
+→ Aprovadas
+→ Recusadas
+→ Indicadores por período
+→ Gráficos
+```
+
+### Automação
+
+```text
+→ Atualização automática de dados
+→ Organização automática
+→ Detecção de duplicidades
+→ Sugestões de empresas
+→ Sugestões de cargos
+→ Alertas
+```
+
+### IA
+
+```text
+→ Classificação de vagas
+→ Extração de informações da vaga
+→ Sugestão de cargo
+→ Sugestão de empresa
+→ Resumo da vaga
+→ Comparação com perfil
+→ Apoio à candidatura
+```
+
+### Deploy
+
+```text
+→ Preparação para produção
+→ Configuração de variáveis de ambiente
+→ Segurança
+→ Banco em produção
+→ Deploy
+→ Domínio próprio
+```
+
+---
+
+# 41. Roadmap visual
+
+```text
+                    JOB TRACKER
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │     BASE      │
+                 │ Django / DB   │
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │   USUÁRIOS    │
+                 │ Login / Auth  │
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │ CANDIDATURAS  │
+                 └───────┬───────┘
+                         │
+                         ▼
+             ┌────────────────────────┐
+             │ EMPRESAS + CARGOS      │
+             │ Catálogo / Normalização│
+             │ Aliases / Duplicidade  │
+             └───────────┬────────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │      CRUD       │
+                │ Editar/Excluir  │
+                └────────┬────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │     FILTROS     │
+                └────────┬────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │    DASHBOARD    │
+                └────────┬────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │   AUTOMAÇÃO     │
+                └────────┬────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │       IA        │
+                └────────┬────────┘
+                         │
+                         ▼
+                ┌─────────────────┐
+                │     DEPLOY      │
+                └─────────────────┘
+```
+
+---
+
+# 42. Regra de estudo adotada no projeto
+
+O Job Tracker não está sendo desenvolvido apenas para terminar a aplicação.
+
+Ele também está sendo utilizado como projeto de aprendizado.
+
+A regra adotada é que cada mudança importante deve ser entendida, e não somente copiada.
+
+Para cada alteração de código, devemos entender:
 
 1. O que o código faz.
 2. Por que ele é necessário.
 3. O significado dos parâmetros.
 4. Como uma parte conversa com outra.
 5. O que aconteceria se aquela linha fosse removida.
-6. Como poderíamos implementar a mesma ideia de outra forma.
+6. Quais alternativas existem.
 
-Exemplo:
+Por exemplo:
 
 ```css
 font-size: 20px;
 ```
 
-Não basta saber que "aumenta o texto".
+Não basta saber que aumenta o texto.
 
-É necessário entender:
+É importante entender:
 
-- `font-size` controla o tamanho da fonte.
-- `20px` é o valor escolhido.
-- o valor não é uma regra universal.
-- a escolha depende da hierarquia visual.
-- títulos normalmente são maiores que textos auxiliares.
-- aumentar demais um elemento pode quebrar a hierarquia da interface.
+* `font-size` controla o tamanho da fonte.
+* `20px` é o valor escolhido.
+* esse valor depende da hierarquia visual.
+* títulos, subtítulos e textos auxiliares possuem funções diferentes.
+* aumentar um elemento demais pode prejudicar a composição da página.
+
+---
+
+# 43. Evolução esperada do aprendizado
 
 A intenção é migrar progressivamente de:
 
@@ -1275,7 +1587,7 @@ A intenção é migrar progressivamente de:
 para:
 
 ```text
-"me deixe tentar construir"
+"me explique para eu tentar"
 ```
 
 e finalmente:
@@ -1284,104 +1596,144 @@ e finalmente:
 "eu consigo construir sozinho"
 ```
 
----
-
-# 33. Filosofia do projeto
-
-O Job Tracker está sendo construído com duas metas simultâneas:
-
-### Produto
-
-Uma aplicação visualmente agradável, funcional e apresentável.
-
-### Aprendizado
-
-Um projeto que ensina:
-
-- Python
-- Django
-- PostgreSQL
-- modelagem de banco
-- autenticação
-- HTTP
-- HTML
-- CSS
-- JavaScript futuramente
-- Git/GitHub futuramente
-- deploy futuramente
-
-Por isso, as decisões devem ser explicadas e não apenas copiadas.
-
----
-
-# 34. Visão de arquitetura atual
+Por isso, as próximas implementações devem continuar explicando:
 
 ```text
-                    NAVEGADOR
-                        │
-                        ▼
-                    Django URLs
-                        │
-          ┌─────────────┴──────────────┐
-          ▼                            ▼
-       Landing                     Auth / App
-          │                            │
-          ▼                            ▼
-      Templates                      Views
-                                       │
-                          ┌────────────┼────────────┐
-                          ▼            ▼            ▼
-                        Forms       Models       Auth
-                                       │
-                                       ▼
-                                  PostgreSQL
-                                       │
-                                       ▼
-                                    Supabase
+o que fazemos
+        +
+por que fazemos
+        +
+como funciona
+        +
+como poderíamos fazer diferente
 ```
 
 ---
 
-# 35. Próximo marco
+# 44. Filosofia do projeto
 
-Antes de adicionar novas funcionalidades, a prioridade imediata é:
+O Job Tracker está sendo construído com duas metas simultâneas.
+
+## Produto
+
+Criar uma aplicação:
+
+* funcional
+* bonita
+* organizada
+* responsiva
+* apresentável
+* preparada para crescer
+
+## Aprendizado
+
+Utilizar o projeto para desenvolver conhecimento em:
+
+* Python
+* Django
+* PostgreSQL
+* Supabase
+* modelagem de banco
+* autenticação
+* HTTP
+* HTML
+* CSS
+* JavaScript futuramente
+* Git
+* GitHub
+* testes
+* automação
+* IA
+* deploy
+
+---
+
+# 45. Visão de arquitetura atual
 
 ```text
-1. Redesenhar /candidaturas/
-2. Criar dashboard
-3. Adicionar editar/excluir
-4. Criar filtros
-5. Melhorar experiência do usuário
+                         NAVEGADOR
+                             │
+                             ▼
+                        Django URLs
+                             │
+                  ┌──────────┴──────────┐
+                  ▼                     ▼
+               Landing                App
+                                        │
+                                        ▼
+                                      Views
+                                        │
+                              ┌─────────┼─────────┐
+                              ▼         ▼         ▼
+                           Forms    Services    Auth
+                              │         │
+                              └────┬────┘
+                                   ▼
+                                 Models
+                                   │
+                                   ▼
+                              PostgreSQL
+                                   │
+                                   ▼
+                                Supabase
 ```
 
-Esse será o momento em que o Job Tracker passa de uma aplicação funcional para uma aplicação com aparência de produto.
+Com o crescimento do projeto, a arquitetura está caminhando para uma separação cada vez mais clara entre:
+
+```text
+Interface
+    ↓
+Views
+    ↓
+Regras de negócio
+    ↓
+Models
+    ↓
+Banco
+```
+
+---
+
+# 46. Estado do projeto neste momento
+
+O Job Tracker já ultrapassou a fase de:
+
+```text
+"site Django básico"
+```
+
+e entrou na fase de:
+
+```text
+"produto em evolução"
+```
+
+A fundação já está pronta.
+
+A maior parte da estrutura necessária para empresas, cargos e candidaturas também já está implementada.
+
+O próximo foco é transformar essa estrutura em uma experiência de uso mais completa:
+
+```text
+CRUD
+   ↓
+Filtros
+   ↓
+Dashboard
+   ↓
+Automação
+   ↓
+IA
+   ↓
+Deploy
+```
 
 ---
 
 ## Observação
 
-Esta documentação representa o estado do projeto construído e discutido até o momento. Ela deve ser atualizada sempre que uma nova funcionalidade ou mudança arquitetural importante for adicionada.
+Esta documentação representa o estado conhecido do projeto após a evolução recente.
 
-✅ Base Django
-✅ Login / usuários
-✅ Candidaturas
-✅ Empresas
-✅ Catálogo global
-✅ Cargos
-✅ Normalização
-✅ Duplicidade
-✅ Interface consistente
+Ela deve ser atualizada sempre que uma mudança importante de arquitetura, banco de dados, interface ou funcionalidade for implementada.
 
-🔵 AGORA
-→ Finalizar empresas semelhantes + aliases
-
-🔵 DEPOIS
-→ Editar / excluir
-→ Catálogo de empresas
-→ Estruturar cargos
-→ FK real de Cargo
-→ Filtros
-→ Dashboardrw3
-→ Automação
-→ IA
-→ Deploy
+O roadmap deve sempre refletir o estado real do sistema, evitando manter como "pendente" uma funcionalidade que já tenha sido concluída.
