@@ -510,6 +510,97 @@ def atualizar_status_candidatura(
     )
 
 
+# =============================================================
+# EDITAR CANDIDATURA
+# =============================================================
+
+@login_required(login_url='login')
+def editar_candidatura(
+    request,
+    candidatura_id
+):
+
+    candidatura = get_object_or_404(
+        Candidatura.objects.select_related(
+            'empresa'
+        ),
+        id=candidatura_id,
+        usuario=request.user
+    )
+
+
+    if request.method == 'POST':
+
+        form = CandidaturaForm(
+            request.POST,
+            instance=candidatura
+        )
+
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect(
+                'detalhe_candidatura',
+                candidatura_id=candidatura.id
+            )
+
+    else:
+
+        form = CandidaturaForm(
+            instance=candidatura
+        )
+
+
+    return render(
+        request,
+        'cadastro/editar_candidatura.html',
+        {
+            'form': form,
+
+            'candidatura': candidatura,
+        }
+    )
+
+
+# =============================================================
+# EXCLUIR CANDIDATURA
+# =============================================================
+
+@login_required(login_url='login')
+def excluir_candidatura(
+    request,
+    candidatura_id
+):
+
+    candidatura = get_object_or_404(
+        Candidatura.objects.select_related(
+            'empresa'
+        ),
+        id=candidatura_id,
+        usuario=request.user
+    )
+
+
+    if request.method == 'POST':
+
+        candidatura.delete()
+
+        return redirect(
+            'candidaturas'
+        )
+
+
+    return render(
+        request,
+        'cadastro/excluir_candidatura.html',
+        {
+            'candidatura': candidatura,
+        }
+    )
+
+
 @login_required(login_url='login')
 def nova_candidatura(request):
 
@@ -853,7 +944,8 @@ def logout_usuario(request):
     return redirect(
         'login'
     )
-    
+
+
 from django.utils.http import url_has_allowed_host_and_scheme
 
 

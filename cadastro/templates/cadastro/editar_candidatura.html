@@ -1,0 +1,192 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="{% translate 'Editar candidatura.' %}"
+    >
+
+    <title>
+        Job Tracker | {% translate "Editar candidatura" %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/editar_candidatura.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="navbar">
+
+        <div class="navbar-inner">
+
+            <div class="brand-group">
+
+                <a
+                    href="{% url 'landing' %}"
+                    class="brand"
+                >
+                    JOB TRACKER
+                </a>
+
+                {% include 'cadastro/partials/language_selector.html' %}
+
+            </div>
+
+            <nav class="nav-links">
+
+                <a
+                    href="{% url 'candidaturas' %}"
+                    class="nav-link"
+                >
+                    {% translate "Minhas candidaturas" %}
+                </a>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="nav-link"
+                >
+                    {% translate "Sair" %}
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="edit-page">
+
+        <div class="edit-container">
+
+            <a
+                href="{% url 'detalhe_candidatura' candidatura.id %}"
+                class="back-link"
+            >
+                ← {% translate "Voltar para candidatura" %}
+            </a>
+
+
+            <section class="edit-header">
+
+                <span class="page-eyebrow">
+                    {% translate "EDITAR CANDIDATURA" %}
+                </span>
+
+                <h1>
+                    {% translate "Atualize os dados da sua candidatura." %}
+                </h1>
+
+                <p>
+                    {% blocktranslate with cargo=candidatura.cargo empresa=candidatura.empresa.name %}
+                        Edite as informações da vaga de {{ cargo }} na {{ empresa }}.
+                    {% endblocktranslate %}
+                </p>
+
+            </section>
+
+
+            <section class="form-card">
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+
+                        <div class="form-errors">
+
+                            {{ form.non_field_errors }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    {% for field in form %}
+
+                        <div class="form-group">
+
+                            <label
+                                for="{{ field.id_for_label }}"
+                            >
+                                {{ field.label }}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.help_text %}
+
+                                <span class="help-text">
+                                    {{ field.help_text }}
+                                </span>
+
+                            {% endif %}
+
+                            {% if field.errors %}
+
+                                <div class="field-errors">
+
+                                    {{ field.errors }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'detalhe_candidatura' candidatura.id %}"
+                            class="button button-secondary"
+                        >
+                            {% translate "Cancelar" %}
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="button button-primary"
+                        >
+                            {% translate "Salvar alterações" %}
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

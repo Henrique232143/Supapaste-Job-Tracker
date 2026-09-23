@@ -232,7 +232,34 @@ class CandidaturaForm(forms.ModelForm):
             "observacoes",
             "ultimo_contato",
         ])
+        
+        if (
+            self.instance
+            and self.instance.pk
+            and self.instance.cargo
+        ):
 
+            cargo_normalizado = normalizar_nome(
+                self.instance.cargo
+            )
+
+            cargo_catalogo = (
+                self.fields[
+                    "cargo_catalogo"
+                ].queryset
+                .filter(
+                    name_normalized=cargo_normalizado
+                )
+                .first()
+            )
+
+            if cargo_catalogo:
+
+                self.initial[
+                    "cargo_catalogo"
+                ] = cargo_catalogo
+            
+        
     def clean_salario(self):
 
         valor = self.cleaned_data.get(
