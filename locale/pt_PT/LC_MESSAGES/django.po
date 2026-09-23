@@ -1,0 +1,328 @@
+# Job Tracker - Tradução Português de Portugal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Job Tracker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:38-0300\n"
+"PO-Revision-Date: 2026-09-22 20:40-0300\n"
+"Last-Translator: Job Tracker\n"
+"Language-Team: Portuguese (Portugal)\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cadastro/forms.py
+msgid "Site"
+msgstr "Site"
+
+msgid "Empresa"
+msgstr "Empresa"
+
+msgid "Essa empresa já está cadastrada."
+msgstr "Esta empresa já está registada."
+
+msgid "Digite um endereço de site válido."
+msgstr "Introduza um endereço de site válido."
+
+msgid "Cargo"
+msgstr "Função"
+
+msgid "Esse cargo já está cadastrado."
+msgstr "Esta função já está registada."
+
+msgid "Selecione um cargo"
+msgstr "Selecione uma função"
+
+msgid "Salário"
+msgstr "Salário"
+
+msgid "Ex.: 3.500,00"
+msgstr "Ex.: 3.500,00"
+
+msgid "Data da candidatura"
+msgstr "Data da candidatura"
+
+msgid "Link da vaga"
+msgstr "Ligação da oferta"
+
+msgid "Modalidade"
+msgstr "Regime de trabalho"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Observações"
+msgstr "Observações"
+
+msgid "Último contato"
+msgstr "Último contacto"
+
+msgid "Local da vaga"
+msgstr "Local da oferta"
+
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr "Introduza um salário válido. Exemplo: 3.500,00"
+
+msgid "O salário não pode ser negativo."
+msgstr "O salário não pode ser negativo."
+
+msgid "Digite um salário dentro de um valor válido."
+msgstr "Introduza um valor salarial válido."
+
+msgid "Etapa do processo"
+msgstr "Etapa do processo"
+
+msgid "Senha"
+msgstr "Palavra-passe"
+
+msgid "Confirmar senha"
+msgstr "Confirmar palavra-passe"
+
+msgid "Nome"
+msgstr "Nome"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "As senhas não coincidem."
+msgstr "As palavras-passe não coincidem."
+
+msgid "Idioma"
+msgstr "Idioma"
+
+msgid "Ex.: Francês"
+msgstr "Ex.: Francês"
+
+#: cadastro/models.py
+msgid "Remoto"
+msgstr "Remoto"
+
+msgid "Híbrido"
+msgstr "Híbrido"
+
+msgid "Presencial"
+msgstr "Presencial"
+
+msgid "Aplicado"
+msgstr "Candidatura enviada"
+
+msgid "Triagem"
+msgstr "Triagem"
+
+msgid "Entrevista RH"
+msgstr "Entrevista de RH"
+
+msgid "Entrevista Gestor"
+msgstr "Entrevista com o responsável"
+
+msgid "Teste Técnico"
+msgstr "Teste técnico"
+
+msgid "Finalista"
+msgstr "Finalista"
+
+msgid "Aprovado"
+msgstr "Aprovado"
+
+msgid "Recusado"
+msgstr "Não selecionado"
+
+msgid "Desistiu"
+msgstr "Desistiu"
+
+#: candidaturas.html
+msgid "Job Tracker — seu painel de candidaturas."
+msgstr "Job Tracker — o seu painel de candidaturas."
+
+msgid "Minhas candidaturas"
+msgstr "As minhas candidaturas"
+
+msgid "Sair"
+msgstr "Terminar sessão"
+
+msgid "SEU PAINEL"
+msgstr "O SEU PAINEL"
+
+msgid "Olá, %(nome)s."
+msgstr "Olá, %(nome)s."
+
+msgid "Um retrato da sua busca por emprego, das oportunidades que você está buscando e dos caminhos profissionais que está explorando."
+msgstr "Uma visão geral da sua procura de emprego, das oportunidades que está a procurar e dos caminhos profissionais que está a explorar."
+
+msgid "candidatura"
+msgstr "candidatura"
+
+msgid "candidaturas"
+msgstr "candidaturas"
+
+msgid "em andamento"
+msgstr "em curso"
+
+msgid "entrevista"
+msgstr "entrevista"
+
+msgid "entrevistas"
+msgstr "entrevistas"
+
+msgid "finalista"
+msgstr "finalista"
+
+msgid "finalistas"
+msgstr "finalistas"
+
+msgid "PRÓXIMO PASSO"
+msgstr "PRÓXIMO PASSO"
+
+msgid "Registre uma nova oportunidade e mantenha seu histórico de candidaturas atualizado."
+msgstr "Registe uma nova oportunidade e mantenha o seu histórico de candidaturas atualizado."
+
+msgid "Nova candidatura"
+msgstr "Nova candidatura"
+
+msgid "PROCESSO"
+msgstr "PROCESSO DE CANDIDATURA"
+
+msgid "Progresso das candidaturas"
+msgstr "Progresso das candidaturas"
+
+msgid "Distribuição atual"
+msgstr "Distribuição atual"
+
+msgid "Suas etapas aparecerão aqui conforme você adicionar candidaturas."
+msgstr "As suas etapas aparecerão aqui à medida que adicionar candidaturas."
+
+msgid "FOCO PROFISSIONAL"
+msgstr "FOCO PROFISSIONAL"
+
+msgid "Para quais cargos você está se candidatando?"
+msgstr "A que funções se está a candidatar?"
+
+msgid "MAIOR CONCENTRAÇÃO"
+msgstr "PRINCIPAL FOCO"
+
+msgid "Representa %(percentual)s%% da sua busca por emprego atual."
+msgstr "Representa %(percentual)s%% da sua procura de emprego atual."
+
+msgid "Ainda não há dados suficientes."
+msgstr "Ainda não existem dados suficientes."
+
+msgid "FINANCEIRO"
+msgstr "ANÁLISE SALARIAL"
+
+msgid "O que o mercado está oferecendo?"
+msgstr "Que salários estão a ser oferecidos?"
+
+msgid "MÉDIA DAS VAGAS"
+msgstr "SALÁRIO MÉDIO"
+
+msgid "MENOR"
+msgstr "MAIS BAIXO"
+
+msgid "MAIOR"
+msgstr "MAIS ALTO"
+
+msgid "Baseado apenas nas candidaturas em que você informou o salário."
+msgstr "Com base apenas nas candidaturas em que indicou o salário."
+
+msgid "Ainda não há dados de salário."
+msgstr "Ainda não existem dados salariais."
+
+msgid "Informe salário"
+msgstr "Indicar salário"
+
+msgid "Informe o salário para acompanhar esta métrica."
+msgstr "Indique o salário para acompanhar esta métrica."
+
+msgid "FORMATO"
+msgstr "REGIME DE TRABALHO"
+
+msgid "Como estão distribuídas as vagas?"
+msgstr "Como estão distribuídas as candidaturas?"
+
+msgid "Ainda não há modalidades cadastradas."
+msgstr "Ainda não existem regimes de trabalho registados."
+
+msgid "EMPRESAS"
+msgstr "EMPRESAS"
+
+msgid "Onde você está se candidatando?"
+msgstr "Onde se está a candidatar?"
+
+msgid "%(percentual)s%% do total"
+msgstr "%(percentual)s%% do total"
+
+msgid "Ainda não há empresas cadastradas."
+msgstr "Ainda não existem empresas registadas."
+
+msgid "HISTÓRICO"
+msgstr "HISTÓRICO DE CANDIDATURAS"
+
+msgid "Candidaturas recentes"
+msgstr "Candidaturas recentes"
+
+msgid "As oportunidades que você adicionou mais recentemente."
+msgstr "As oportunidades que adicionou mais recentemente."
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Ação"
+msgstr "Ação"
+
+msgid "Não informado"
+msgstr "Não indicado"
+
+msgid "Ver detalhes"
+msgstr "Ver detalhes"
+
+msgid "Ainda não há candidaturas."
+msgstr "Ainda não existem candidaturas."
+
+msgid "Comece registrando uma oportunidade para preencher seu dashboard."
+msgstr "Comece por registar uma oportunidade para preencher o seu painel."
+
+msgid "Adicionar candidatura"
+msgstr "Adicionar candidatura"
+
+msgid "Organize sua busca por emprego. Acompanhe seu progresso."
+msgstr "Organize a sua procura de emprego. Acompanhe o seu progresso."
+
+#: nova_candidatura.html
+msgid "Job Tracker — cadastre uma nova candidatura."
+msgstr "Job Tracker — registe uma nova candidatura."
+
+msgid "Voltar para candidaturas"
+msgstr "Voltar às candidaturas"
+
+msgid "NOVA CANDIDATURA"
+msgstr "NOVA CANDIDATURA"
+
+msgid "Adicionar oportunidade"
+msgstr "Adicionar oportunidade"
+
+msgid "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker."
+msgstr "Registe uma nova oferta e acompanhe todo o processo de recrutamento através do Job Tracker."
+
+msgid "Adicionar empresa"
+msgstr "Adicionar empresa"
+
+msgid "Adicionar cargo"
+msgstr "Adicionar função"
+
+msgid "Cancelar"
+msgstr "Cancelar"
+
+msgid "Salvar candidatura"
+msgstr "Guardar candidatura"
+
+msgid "Organize sua busca. Acompanhe sua evolução."
+msgstr "Organize a sua procura. Acompanhe a sua evolução."
+
+msgid "Selecione uma empresa"
+msgstr "Selecione uma empresa"

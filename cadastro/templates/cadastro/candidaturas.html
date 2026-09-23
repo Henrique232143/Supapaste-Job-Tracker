@@ -1,7 +1,8 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
 
@@ -14,104 +15,1001 @@
 
     <meta
         name="description"
-        content="Job Tracker — cadastre uma nova candidatura."
+        content="{% translate 'Job Tracker — seu painel de candidaturas.' %}"
     >
 
-    <title>Job Tracker | Nova candidatura</title>
+    <title>
+        Job Tracker | {% translate "Minhas candidaturas" %}
+    </title>
+
 
     <link
         rel="stylesheet"
-        href="{% static 'cadastro/nova_candidatura.css' %}"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/candidaturas.css' %}"
     >
 
 </head>
 
+
 <body>
 
-    <main class="form-page">
 
-        <div class="form-container">
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
 
-            <!-- VOLTAR -->
-            <a
-                href="{% url 'candidaturas' %}"
-                class="back-link"
-            >
-                ← Voltar para candidaturas
-            </a>
+    <header class="navbar">
+
+        <div class="navbar-inner">
 
 
-            <!-- CARD -->
-            <section class="form-card">
+            <div class="brand-group">
 
-                <!-- CABEÇALHO -->
-                <div class="form-header">
+                <a
+                    href="{% url 'landing' %}"
+                    class="brand"
+                >
+                    JOB TRACKER
+                </a>
 
-                    <span class="page-eyebrow">
-                        NOVA CANDIDATURA
+
+                {% include 'cadastro/partials/language_selector.html' %}
+
+            </div>
+
+
+            <nav class="nav-links">
+
+                <a
+                    href="{% url 'candidaturas' %}"
+                    class="nav-link nav-active"
+                >
+                    {% translate "Minhas candidaturas" %}
+                </a>
+
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="nav-link"
+                >
+                    {% translate "Sair" %}
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         DASHBOARD
+         ===================================================== -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- =================================================
+                 HERO / RESUMO
+                 ================================================= -->
+
+            <section class="dashboard-hero">
+
+                <div class="hero-glow"></div>
+
+
+                <div class="hero-content">
+
+                    <span class="hero-eyebrow">
+                        {% translate "SEU PAINEL" %}
                     </span>
 
+
                     <h1>
-                        Adicionar oportunidade
+
+                        {% if request.user.first_name %}
+
+                            {% blocktranslate with nome=request.user.first_name %}
+                                Olá, {{ nome }}.
+                            {% endblocktranslate %}
+
+                        {% else %}
+
+                            {% translate "Minhas candidaturas" %}.
+
+                        {% endif %}
+
                     </h1>
 
+
                     <p>
-                        Registre uma nova vaga e acompanhe todo o
-                        processo seletivo pelo Job Tracker.
+                        {% translate "Um retrato da sua busca profissional, das oportunidades em andamento e dos caminhos que você está explorando." %}
                     </p>
+
+
+                    <div class="hero-stats">
+
+
+                        <div class="hero-stat">
+
+                            <strong>
+                                {{ total }}
+                            </strong>
+
+                            <span>
+                                {% blocktranslate count quantidade=total %}
+                                    candidatura
+                                {% plural %}
+                                    candidaturas
+                                {% endblocktranslate %}
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-stat">
+
+                            <strong>
+                                {{ em_andamento }}
+                            </strong>
+
+                            <span>
+                                {% translate "em andamento" %}
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-stat">
+
+                            <strong>
+                                {{ entrevistas }}
+                            </strong>
+
+                            <span>
+                                {% blocktranslate count quantidade=entrevistas %}
+                                    entrevista
+                                {% plural %}
+                                    entrevistas
+                                {% endblocktranslate %}
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-stat">
+
+                            <strong>
+                                {{ finalistas }}
+                            </strong>
+
+                            <span>
+                                {% blocktranslate count quantidade=finalistas %}
+                                    finalista
+                                {% plural %}
+                                    finalistas
+                                {% endblocktranslate %}
+                            </span>
+
+                        </div>
+
+
+                    </div>
 
                 </div>
 
 
-                <!-- FORMULÁRIO -->
-                <form
-                    method="post"
-                    class="candidatura-form"
-                >
 
-                    {% csrf_token %}
+                <div class="hero-action">
 
-
-                    <!-- CAMPOS -->
-                    <div class="form-fields">
-
-                        {{ form.as_p }}
-
-                    </div>
+                    <span class="hero-action-label">
+                        {% translate "PRÓXIMO PASSO" %}
+                    </span>
 
 
-                    <!-- AÇÕES -->
-                    <div class="form-actions">
+                    <p>
+                        {% translate "Registre uma nova oportunidade e mantenha seu histórico atualizado." %}
+                    </p>
 
-                        <a
-                            href="{% url 'candidaturas' %}"
-                            class="btn-secondary"
-                        >
-                            Cancelar
-                        </a>
 
-                        <button
-                            type="submit"
-                            class="btn-primary"
-                        >
-                            Salvar candidatura →
-                        </button>
+                    <a
+                        href="{% url 'nova_candidatura' %}"
+                        class="hero-button"
+                    >
+                        {% translate "Nova candidatura" %}
 
-                    </div>
+                        <span>
+                            ↗
+                        </span>
 
-                </form>
+                    </a>
+
+                </div>
 
             </section>
 
 
-            <!-- RODAPÉ -->
-            <p class="form-footer">
-                Job Tracker · Organize sua busca. Acompanhe sua evolução.
-            </p>
+
+            <!-- =================================================
+                 FUNIL
+                 ================================================= -->
+
+            <section class="pipeline-section">
+
+                <div class="section-intro">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            {% translate "PROCESSO" %}
+                        </span>
+
+
+                        <h2>
+                            {% translate "Progresso das candidaturas" %}
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-note">
+                        {% translate "Distribuição atual" %}
+                    </span>
+
+                </div>
+
+
+                {% if status_distribuicao %}
+
+                    <div class="pipeline">
+
+                        {% for item in status_distribuicao %}
+
+                            <div class="pipeline-stage">
+
+                                <div class="pipeline-number">
+                                    {{ forloop.counter|stringformat:"02d" }}
+                                </div>
+
+
+                                <div class="pipeline-info">
+
+                                    <span class="pipeline-name">
+                                        {{ item.label }}
+                                    </span>
+
+
+                                    <strong>
+                                        {{ item.total }}
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="pipeline-track">
+
+                                    <div
+                                        class="pipeline-fill"
+                                        style="width: {{ item.percentual }}%;"
+                                    ></div>
+
+                                </div>
+
+
+                                <span class="pipeline-percent">
+                                    {{ item.percentual }}%
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-inline">
+                        {% translate "Suas etapas aparecerão aqui conforme você cadastrar candidaturas." %}
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 BLOCO ANALÍTICO
+                 ================================================= -->
+
+            <section class="analytics-grid">
+
+
+                <!-- =============================================
+                     CARGOS
+                     ============================================= -->
+
+                <article class="feature-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                {% translate "FOCO PROFISSIONAL" %}
+                            </span>
+
+
+                            <h2>
+                                {% translate "Para quais cargos você está mirando?" %}
+                            </h2>
+
+                        </div>
+
+
+                        <span class="card-index">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    {% if cargo_distribuicao %}
+
+                        <div class="focus-list">
+
+                            {% for item in cargo_distribuicao %}
+
+                                <div class="focus-item">
+
+                                    <div class="focus-main">
+
+                                        <div class="focus-number">
+                                            {{ forloop.counter }}
+                                        </div>
+
+
+                                        <div>
+
+                                            <strong>
+                                                {{ item.label }}
+                                            </strong>
+
+
+                                            <span>
+
+                                                {% blocktranslate count quantidade=item.total %}
+
+                                                    candidatura
+
+                                                {% plural %}
+
+                                                    candidaturas
+
+                                                {% endblocktranslate %}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="focus-percentage">
+                                        {{ item.percentual }}%
+                                    </div>
+
+                                </div>
+
+
+                                {% if not forloop.last %}
+
+                                    <div class="focus-divider"></div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        {% if cargo_principal %}
+
+                            <div class="focus-highlight">
+
+                                <span>
+                                    {% translate "MAIOR CONCENTRAÇÃO" %}
+                                </span>
+
+
+                                <strong>
+                                    {{ cargo_principal.nome }}
+                                </strong>
+
+
+                                <p>
+
+                                    {% blocktranslate with percentual=cargo_principal.percentual %}
+                                        Representa {{ percentual }}% da sua busca atual.
+                                    {% endblocktranslate %}
+
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <div class="empty-box">
+                            {% translate "Ainda não há dados suficientes." %}
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+
+
+                <!-- =============================================
+                     SALÁRIO
+                     ============================================= -->
+
+                <article class="feature-card salary-feature">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                {% translate "FINANCEIRO" %}
+                            </span>
+
+
+                            <h2>
+                                {% translate "O que o mercado está oferecendo?" %}
+                            </h2>
+
+                        </div>
+
+
+                        <span class="card-index">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    {% if salario_medio %}
+
+                        <div class="salary-big">
+
+                            <span>
+                                {% translate "MÉDIA DAS VAGAS" %}
+                            </span>
+
+
+                            <strong>
+                                R$ {{ salario_medio|floatformat:2 }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="salary-range">
+
+                            <div>
+
+                                <span>
+                                    {% translate "MENOR" %}
+                                </span>
+
+
+                                <strong>
+                                    R$ {{ salario_menor|floatformat:2 }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="salary-range-line">
+
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="salary-range-right">
+
+                                <span>
+                                    {% translate "MAIOR" %}
+                                </span>
+
+
+                                <strong>
+                                    R$ {{ salario_maior|floatformat:2 }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <p class="salary-note">
+                            {% translate "Valores baseados apenas nas candidaturas em que você informou uma faixa salarial." %}
+                        </p>
+
+                    {% else %}
+
+                        <div class="salary-empty">
+
+                            <strong>
+                                {% translate "Ainda não há dados salariais." %}
+                            </strong>
+
+
+                            <span>
+                                {% translate "Informe o salário das vagas para acompanhar essa métrica." %}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SEGUNDO BLOCO ANALÍTICO
+                 ================================================= -->
+
+            <section class="secondary-grid">
+
+
+                <!-- =============================================
+                     MODALIDADE
+                     ============================================= -->
+
+                <article class="compact-card">
+
+                    <div class="compact-heading">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                {% translate "FORMATO" %}
+                            </span>
+
+
+                            <h2>
+                                {% translate "Como estão distribuídas as vagas?" %}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if modalidade_distribuicao %}
+
+                        <div class="mode-list">
+
+                            {% for item in modalidade_distribuicao %}
+
+                                <div class="mode-item">
+
+                                    <div class="mode-label">
+
+                                        <span>
+                                            {{ item.label }}
+                                        </span>
+
+
+                                        <strong>
+                                            {{ item.percentual }}%
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="mode-bar">
+
+                                        <div
+                                            class="mode-bar-fill"
+                                            style="width: {{ item.percentual }}%;"
+                                        ></div>
+
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="empty-box">
+                            {% translate "Ainda não há modalidades registradas." %}
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+
+
+                <!-- =============================================
+                     EMPRESAS
+                     ============================================= -->
+
+                <article class="compact-card">
+
+                    <div class="compact-heading">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                {% translate "EMPRESAS" %}
+                            </span>
+
+
+                            <h2>
+                                {% translate "Onde você está se candidatando?" %}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if empresa_distribuicao %}
+
+                        <div class="company-list">
+
+                            {% for item in empresa_distribuicao %}
+
+                                <div class="company-item">
+
+                                    <div class="company-avatar">
+                                        {{ item.label|first|upper }}
+                                    </div>
+
+
+                                    <div class="company-info">
+
+                                        <strong>
+                                            {{ item.label }}
+                                        </strong>
+
+
+                                        <span>
+
+                                            {% blocktranslate with percentual=item.percentual %}
+                                                {{ percentual }}% do total
+                                            {% endblocktranslate %}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <strong class="company-total">
+                                        {{ item.total }}
+                                    </strong>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="empty-box">
+                            {% translate "Ainda não há empresas registradas." %}
+                        </div>
+
+                    {% endif %}
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CANDIDATURAS RECENTES
+                 ================================================= -->
+
+            <section class="applications-section">
+
+                <div class="applications-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            {% translate "HISTÓRICO" %}
+                        </span>
+
+
+                        <h2>
+                            {% translate "Candidaturas recentes" %}
+                        </h2>
+
+
+                        <p>
+                            {% translate "As oportunidades que você adicionou mais recentemente." %}
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'nova_candidatura' %}"
+                        class="text-action"
+                    >
+                        + {% translate "Nova candidatura" %}
+                    </a>
+
+                </div>
+
+
+                {% if recentes %}
+
+                    <div class="table-shell">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "Empresa" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Cargo" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Local" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Data" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Salário" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Status" %}
+                                    </th>
+
+
+                                    <th>
+                                        {% translate "Ação" %}
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for candidatura in recentes %}
+
+                                    <tr>
+
+
+                                        <!-- EMPRESA -->
+
+                                        <td>
+
+                                            <div class="table-company">
+
+                                                <div class="company-avatar">
+                                                    {{ candidatura.empresa.name|first|upper }}
+                                                </div>
+
+
+                                                <strong>
+                                                    {{ candidatura.empresa.name }}
+                                                </strong>
+
+                                            </div>
+
+                                        </td>
+
+
+
+                                        <!-- CARGO -->
+
+                                        <td>
+
+                                            <a
+                                                href="{% url 'detalhe_candidatura' candidatura.id %}"
+                                                class="table-job-link"
+                                            >
+
+                                                <span class="table-job">
+                                                    {{ candidatura.cargo }}
+                                                </span>
+
+                                            </a>
+
+                                        </td>
+
+
+
+                                        <!-- LOCAL -->
+
+                                        <td>
+
+                                            <span class="table-muted">
+                                                {{ candidatura.local_vaga|default:_("Não informado") }}
+                                            </span>
+
+                                        </td>
+
+
+
+                                        <!-- DATA -->
+
+                                        <td>
+
+                                            <span class="table-muted">
+                                                {{ candidatura.data_candidatura|date:"d/m/Y" }}
+                                            </span>
+
+                                        </td>
+
+
+
+                                        <!-- SALÁRIO -->
+
+                                        <td>
+
+                                            <span class="table-muted">
+
+                                                {% if candidatura.salario %}
+
+                                                    R$
+                                                    {{ candidatura.salario|floatformat:2 }}
+
+                                                {% else %}
+
+                                                    —
+
+                                                {% endif %}
+
+                                            </span>
+
+                                        </td>
+
+
+
+                                        <!-- STATUS -->
+
+                                        <td>
+
+                                            <span class="status-pill">
+                                                {{ candidatura.status }}
+                                            </span>
+
+                                        </td>
+
+
+
+                                        <!-- AÇÃO -->
+
+                                        <td>
+
+                                            <a
+                                                href="{% url 'detalhe_candidatura' candidatura.id %}"
+                                                class="details-link"
+                                            >
+                                                {% translate "Ver detalhes" %} ↗
+                                            </a>
+
+                                        </td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-symbol">
+                            +
+                        </div>
+
+
+                        <h3>
+                            {% translate "Ainda não há candidaturas." %}
+                        </h3>
+
+
+                        <p>
+                            {% translate "Comece registrando uma oportunidade para alimentar seu painel." %}
+                        </p>
+
+
+                        <a
+                            href="{% url 'nova_candidatura' %}"
+                            class="hero-button empty-button"
+                        >
+
+                            {% translate "Adicionar candidatura" %}
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="dashboard-footer">
+
+                <span>
+                    JOB TRACKER
+                </span>
+
+
+                <span>
+                    {% translate "Organize sua busca. Acompanhe sua evolução." %}
+                </span>
+
+            </footer>
+
 
         </div>
 
     </main>
+
 
 </body>
 

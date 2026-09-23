@@ -1362,4 +1362,26 @@ Esse será o momento em que o Job Tracker passa de uma aplicação funcional par
 
 Esta documentação representa o estado do projeto construído e discutido até o momento. Ela deve ser atualizada sempre que uma nova funcionalidade ou mudança arquitetural importante for adicionada.
 
-Teste de integração com GitHub.
+✅ Base Django
+✅ Login / usuários
+✅ Candidaturas
+✅ Empresas
+✅ Catálogo global
+✅ Cargos
+✅ Normalização
+✅ Duplicidade
+✅ Interface consistente
+
+🔵 AGORA
+→ Finalizar empresas semelhantes + aliases
+
+🔵 DEPOIS
+→ Editar / excluir
+→ Catálogo de empresas
+→ Estruturar cargos
+→ FK real de Cargo
+→ Filtros
+→ Dashboardrw3
+→ Automação
+→ IA
+→ Deploy

@@ -72,7 +72,7 @@ body {
 
 
 /* =========================================================
-   LINK VOLTAR
+   VOLTAR
    ========================================================= */
 
 .back-link {
@@ -106,11 +106,13 @@ body {
 
 
 /* =========================================================
-   CARD PRINCIPAL
+   CARD
    ========================================================= */
 
 .form-card {
     width: 100%;
+
+    max-width: 900px;
 
     background: rgba(255, 255, 255, 0.97);
 
@@ -180,7 +182,7 @@ body {
    FORMULÁRIO
    ========================================================= */
 
-.candidatura-form {
+.cargo-form {
     width: 100%;
 }
 
@@ -191,17 +193,9 @@ body {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    column-gap: 24px;
-
-    row-gap: 18px;
-
-    padding-top: 2px;
+    gap: 18px;
 }
 
-
-/* =========================================================
-   CADA CAMPO
-   ========================================================= */
 
 .form-field {
     display: flex;
@@ -214,15 +208,6 @@ body {
 }
 
 
-.form-field-full {
-    grid-column: 1 / -1;
-}
-
-
-/* =========================================================
-   LABEL
-   ========================================================= */
-
 .form-field label {
     color: #374151;
 
@@ -232,13 +217,7 @@ body {
 }
 
 
-/* =========================================================
-   INPUT / SELECT / TEXTAREA
-   ========================================================= */
-
-.form-field input,
-.form-field select,
-.form-field textarea {
+.form-field input {
     width: 100%;
 
     height: 44px;
@@ -261,29 +240,16 @@ body {
 
     transition:
         border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        box-shadow 0.2s ease;
 }
 
 
-/* =========================================================
-   HOVER DOS CAMPOS
-   ========================================================= */
-
-.form-field input:hover,
-.form-field select:hover,
-.form-field textarea:hover {
+.form-field input:hover {
     border-color: #c7cad3;
 }
 
 
-/* =========================================================
-   FOCO DOS CAMPOS
-   ========================================================= */
-
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
+.form-field input:focus {
     border-color: #6366f1;
 
     box-shadow:
@@ -292,204 +258,35 @@ body {
 
 
 /* =========================================================
-   TEXTAREA
+   ERRO
    ========================================================= */
 
-.form-field textarea {
-    height: auto;
+.form-field.field-has-error input {
+    border-color: #ef4444;
 
-    min-height: 110px;
-
-    padding: 12px 14px;
-
-    resize: vertical;
+    background: #fffafa;
 }
 
 
-/* =========================================================
-   EMPRESA / CARGO
-   ========================================================= */
+.form-field.field-has-error input:focus {
+    border-color: #dc2626;
 
-.field-with-action {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    width: 100%;
+    box-shadow:
+        0 0 0 3px rgba(220, 38, 38, 0.08);
 }
 
 
-.field-with-action select,
-.field-with-action input {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-/* =========================================================
-   AÇÕES DOS CAMPOS
-   ========================================================= */
-
-/* =========================================================
-   BOTÕES DE ADICIONAR EMPRESA / CARGO
-   ========================================================= */
-
-.field-with-action {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    width: 100%;
-}
-
-
-.field-with-action select {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-.add-field-link {
-    flex-shrink: 0;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    min-height: 42px;
-
-    padding: 0 14px;
-
-    border: 1px solid #e0e4f7;
-
-    border-radius: 10px;
-
-    background: #fafaff;
-
-    color: #4f46e5;
-
-    font-family: inherit;
+.field-error {
+    color: #dc2626;
 
     font-size: 12px;
 
-    font-weight: 700;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 2px 6px rgba(79, 70, 229, 0.04);
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Ícone + */
-
-.add-field-link::before {
-    content: "+";
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 20px;
-
-    height: 20px;
-
-    border-radius: 6px;
-
-    background: #eef2ff;
-
-    color: #4f46e5;
-
-    font-size: 14px;
-
-    font-weight: 800;
-
-    line-height: 1;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-
-.add-field-link:hover {
-    background: #f5f3ff;
-
-    border-color: #c7d2fe;
-
-    color: #4338ca;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 14px rgba(79, 70, 229, 0.09);
-}
-
-
-.add-field-link:hover::before {
-    background: #e0e7ff;
-
-    color: #4338ca;
-}
-
-
-.add-field-link:active {
-    transform: translateY(0);
-
-    box-shadow:
-        0 2px 6px rgba(79, 70, 229, 0.05);
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .field-with-action {
-        align-items: stretch;
-
-        flex-direction: column;
-
-        gap: 8px;
-    }
-
-
-    .add-field-link {
-        width: fit-content;
-
-        min-height: 40px;
-    }
-
-}
-
-
-/* =========================================================
-   ÁREA DOS BOTÕES
+   BOTÕES
    ========================================================= */
 
 .form-actions {
@@ -509,11 +306,8 @@ body {
 }
 
 
-/* =========================================================
-   BOTÃO CANCELAR
-   ========================================================= */
-
-.btn-secondary {
+.btn-secondary,
+.btn-primary {
     display: inline-flex;
 
     align-items: center;
@@ -522,31 +316,37 @@ body {
 
     height: 44px;
 
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.btn-secondary {
     min-width: 110px;
 
     padding: 0 18px;
 
     border: 1px solid #e5e7eb;
 
-    border-radius: 10px;
-
     background: #ffffff;
 
     color: #374151;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    text-decoration: none;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
 }
 
 
@@ -561,50 +361,20 @@ body {
 }
 
 
-/* =========================================================
-   BOTÃO SALVAR
-   ========================================================= */
-
-.form-actions .btn-primary {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    height: 44px;
-
-    min-width: 170px;
+.btn-primary {
+    min-width: 160px;
 
     padding: 0 20px;
 
     border: 1px solid #111827;
 
-    border-radius: 10px;
-
     background: #111827;
 
     color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow: none;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 
-.form-actions .btn-primary:hover {
+.btn-primary:hover {
     background: #374151;
 
     border-color: #374151;
@@ -613,12 +383,6 @@ body {
 
     box-shadow:
         0 7px 18px rgba(17, 24, 39, 0.12);
-}
-
-
-.form-actions .btn-primary:active,
-.btn-secondary:active {
-    transform: translateY(0);
 }
 
 
@@ -655,46 +419,8 @@ body {
     }
 
 
-    .form-header {
-        margin-bottom: 30px;
-    }
-
-
-    .form-header h1 {
-        font-size: 30px;
-    }
-
-
-    .form-header p {
-        font-size: 14px;
-    }
-
-
     .form-fields {
         grid-template-columns: 1fr;
-
-        column-gap: 0;
-
-        row-gap: 18px;
-    }
-
-
-    .form-field-full {
-        grid-column: auto;
-    }
-
-
-    .field-with-action {
-        align-items: stretch;
-
-        flex-direction: column;
-
-        gap: 7px;
-    }
-
-
-    .add-field-link {
-        padding-left: 2px;
     }
 
 
@@ -709,4 +435,5 @@ body {
     .btn-secondary {
         width: 100%;
     }
+
 }

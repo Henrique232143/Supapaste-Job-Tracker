@@ -1,0 +1,485 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:35-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: .\cadastro\templates\cadastro\candidaturas.html:18
+msgid "Job Tracker — seu painel de candidaturas."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:22
+#: .\cadastro\templates\cadastro\candidaturas.html:73
+#: .\cadastro\templates\cadastro\candidaturas.html:127
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:70
+msgid "Minhas candidaturas"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:81
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:77
+msgid "Sair"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:113
+msgid "SEU PAINEL"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:121
+#, python-format
+msgid ""
+"\n"
+"                                Olá, %(nome)s.\n"
+"                            "
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:135
+msgid ""
+"Um retrato da sua busca profissional, das oportunidades em andamento e dos "
+"caminhos que você está explorando."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:149
+msgid ""
+"\n"
+"                                    candidatura\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    candidaturas\n"
+"                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:166
+msgid "em andamento"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:179
+msgid ""
+"\n"
+"                                    entrevista\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    entrevistas\n"
+"                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:196
+msgid ""
+"\n"
+"                                    finalista\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    finalistas\n"
+"                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:215
+msgid "PRÓXIMO PASSO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:220
+msgid "Registre uma nova oportunidade e mantenha seu histórico atualizado."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:228
+#: .\cadastro\templates\cadastro\candidaturas.html:766
+#: .\cadastro\templates\cadastro\nova_candidatura.html:22
+msgid "Nova candidatura"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:253
+msgid "PROCESSO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:258
+msgid "Progresso das candidaturas"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:265
+msgid "Distribuição atual"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:321
+msgid "Suas etapas aparecerão aqui conforme você cadastrar candidaturas."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:348
+msgid "FOCO PROFISSIONAL"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:353
+msgid "Para quais cargos você está mirando?"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:390
+msgid ""
+"\n"
+"\n"
+"                                                    candidatura\n"
+"\n"
+"                                                "
+msgid_plural ""
+"\n"
+"\n"
+"                                                    candidaturas\n"
+"\n"
+"                                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:430
+msgid "MAIOR CONCENTRAÇÃO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:441
+#, python-format
+msgid ""
+"\n"
+"                                        Representa %(percentual)s%% da sua "
+"busca atual.\n"
+"                                    "
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:454
+msgid "Ainda não há dados suficientes."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:474
+msgid "FINANCEIRO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:479
+msgid "O que o mercado está oferecendo?"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:497
+msgid "MÉDIA DAS VAGAS"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:513
+msgid "MENOR"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:534
+msgid "MAIOR"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:548
+msgid ""
+"Valores baseados apenas nas candidaturas em que você informou uma faixa "
+"salarial."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:556
+msgid "Ainda não há dados salariais."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:561
+msgid "Informe o salário das vagas para acompanhar essa métrica."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:593
+msgid "FORMATO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:598
+msgid "Como estão distribuídas as vagas?"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:646
+msgid "Ainda não há modalidades registradas."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:666
+msgid "EMPRESAS"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:671
+msgid "Onde você está se candidatando?"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:701
+#, python-format
+msgid ""
+"\n"
+"                                                %(percentual)s%% do total\n"
+"                                            "
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:723
+msgid "Ainda não há empresas registradas."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:746
+msgid "HISTÓRICO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:751
+msgid "Candidaturas recentes"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:756
+msgid "As oportunidades que você adicionou mais recentemente."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:783
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:373
+#: .\cadastro\templates\cadastro\nova_candidatura.html:96
+msgid "Empresa"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:788
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:386
+#: .\cadastro\templates\cadastro\nova_candidatura.html:130
+msgid "Cargo"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:793
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:399
+msgid "Local"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:798
+msgid "Data"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:803
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:435
+#: .\cadastro\templates\cadastro\nova_candidatura.html:210
+msgid "Salário"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:808
+#: .\cadastro\templates\cadastro\nova_candidatura.html:279
+msgid "Status"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:813
+msgid "Ação"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:873
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:410
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:447
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:516
+msgid "Não informado"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:935
+msgid "Ver detalhes"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:961
+msgid "Ainda não há candidaturas."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:966
+msgid "Comece registrando uma oportunidade para alimentar seu painel."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:975
+msgid "Adicionar candidatura"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\candidaturas.html:1003
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:634
+#: .\cadastro\templates\cadastro\nova_candidatura.html:371
+msgid "Organize sua busca. Acompanhe sua evolução."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:23
+msgid "Job Tracker — detalhes da candidatura."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:27
+msgid "Detalhes da candidatura"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:105
+#: .\cadastro\templates\cadastro\nova_candidatura.html:54
+msgid "Voltar para candidaturas"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:119
+msgid "DETALHES DA CANDIDATURA"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:149
+msgid "Local não informado"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:165
+msgid "STATUS ATUAL"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:190
+msgid "PROCESSO SELETIVO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:194
+msgid "Etapa atual"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:214
+msgid "Processo encerrado"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:218
+#, python-format
+msgid ""
+"\n"
+"                                    Esta candidatura está marcada como "
+"%(status)s.\n"
+"                                "
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:293
+msgid "ATUALIZAR ETAPA"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:298
+msgid "O processo avançou?"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:303
+msgid "Atualize a etapa para manter esta candidatura sempre atualizada."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:325
+msgid "Atualizar status"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:355
+msgid "INFORMAÇÕES"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:359
+msgid "Dados da vaga"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:422
+#: .\cadastro\templates\cadastro\nova_candidatura.html:256
+msgid "Modalidade"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:473
+msgid "ACOMPANHAMENTO"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:477
+msgid "Datas importantes"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:488
+msgid "CANDIDATURA ENVIADA"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:505
+#: .\cadastro\templates\cadastro\nova_candidatura.html:302
+msgid "Último contato"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:528
+msgid "Registrada no sistema"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:549
+msgid "Abrir vaga original"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:573
+msgid "ANOTAÇÕES"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:577
+#: .\cadastro\templates\cadastro\nova_candidatura.html:325
+msgid "Observações"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:605
+msgid "Nenhuma observação registrada."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\detalhe_candidatura.html:609
+msgid "Quando você adicionar anotações à candidatura, elas aparecerão aqui."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:18
+msgid "Job Tracker — cadastre uma nova candidatura."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:63
+msgid "NOVA CANDIDATURA"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:67
+msgid "Adicionar oportunidade"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:71
+msgid ""
+"Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker."
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:107
+msgid "Adicionar empresa"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:141
+msgid "Adicionar cargo"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:164
+msgid "Local da vaga"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:187
+msgid "Data da candidatura"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:233
+msgid "Link da vaga"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:353
+msgid "Cancelar"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\nova_candidatura.html:360
+msgid "Salvar candidatura"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\partials\language_selector.html:31
+msgid "Idioma"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\partials\language_selector.html:146
+msgid "Sugerir outro idioma"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\partials\language_selector.html:165
+msgid "Ex.: Francês"
+msgstr ""
+
+#: .\cadastro\templates\cadastro\partials\language_selector.html:171
+msgid "Enviar"
+msgstr ""

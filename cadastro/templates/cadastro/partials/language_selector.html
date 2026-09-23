@@ -1,0 +1,180 @@
+{% load i18n %}
+
+<details class="language-switcher">
+
+    <summary class="language-switcher-trigger">
+
+        {% get_current_language as CURRENT_LANGUAGE %}
+
+        {% if CURRENT_LANGUAGE == 'pt-br' %}
+            <span class="language-flag">🇧🇷</span>
+        {% elif CURRENT_LANGUAGE == 'pt-pt' or CURRENT_LANGUAGE == 'pt_PT' %}
+            <span class="language-flag">🇵🇹</span>
+        {% elif CURRENT_LANGUAGE == 'en' %}
+            <span class="language-flag">🇺🇸</span>
+        {% elif CURRENT_LANGUAGE == 'ja' %}
+            <span class="language-flag">🇯🇵</span>
+        {% elif CURRENT_LANGUAGE == 'de' %}
+            <span class="language-flag">🇩🇪</span>
+        {% else %}
+            <span class="language-flag">🌐</span>
+        {% endif %}
+
+        <span class="language-chevron">▾</span>
+
+    </summary>
+
+
+    <div class="language-menu">
+
+        <div class="language-menu-title">
+            {% translate "Idioma" %}
+        </div>
+
+
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+            >
+
+            <button
+                type="submit"
+                name="language"
+                value="pt-br"
+                class="language-option"
+            >
+                🇧🇷 Português (Brasil)
+            </button>
+
+        </form>
+
+
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+            >
+
+            <button
+                type="submit"
+                name="language"
+                value="pt-pt"
+                class="language-option"
+            >
+                🇵🇹 Português (Portugal)
+            </button>
+
+        </form>
+
+
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+            >
+
+            <button
+                type="submit"
+                name="language"
+                value="en"
+                class="language-option"
+            >
+                🇺🇸 English
+            </button>
+
+        </form>
+
+
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+            >
+
+            <button
+                type="submit"
+                name="language"
+                value="ja"
+                class="language-option"
+            >
+                🇯🇵 日本語
+            </button>
+
+        </form>
+
+
+        <form method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+            >
+
+            <button
+                type="submit"
+                name="language"
+                value="de"
+                class="language-option"
+            >
+                🇩🇪 Deutsch
+            </button>
+
+        </form>
+
+
+        <div class="language-divider"></div>
+
+
+        <div class="language-suggestion">
+
+            <span class="language-suggestion-title">
+                + {% translate "Sugerir outro idioma" %}
+            </span>
+
+            <form
+                method="post"
+                action="{% url 'sugerir_idioma' %}"
+                class="language-suggestion-form"
+            >
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.get_full_path }}"
+                >
+
+                <input
+                    type="text"
+                    name="idioma"
+                    placeholder="{% translate 'Ex.: Francês' %}"
+                    maxlength="100"
+                    required
+                >
+
+                <button type="submit">
+                    {% translate "Enviar" %}
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</details>

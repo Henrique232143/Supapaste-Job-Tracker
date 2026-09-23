@@ -1,0 +1,647 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="{% translate 'Job Tracker — detalhes da candidatura.' %}"
+    >
+
+    <title>
+        Job Tracker | {% translate "Detalhes da candidatura" %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/detalhe_candidatura.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="navbar-inner">
+
+            <div class="brand-group">
+
+                <a
+                    href="{% url 'landing' %}"
+                    class="brand"
+                >
+                    JOB TRACKER
+                </a>
+
+
+                {% include 'cadastro/partials/language_selector.html' %}
+
+            </div>
+
+
+            <nav class="nav-links">
+
+                <a
+                    href="{% url 'candidaturas' %}"
+                    class="nav-link nav-active"
+                >
+                    {% translate "Minhas candidaturas" %}
+                </a>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="nav-link"
+                >
+                    {% translate "Sair" %}
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PÁGINA
+         ===================================================== -->
+
+    <main class="detail-page">
+
+        <div class="detail-container">
+
+
+            <!-- =================================================
+                 VOLTAR
+                 ================================================= -->
+
+            <a
+                href="{% url 'candidaturas' %}"
+                class="back-link"
+            >
+                ← {% translate "Voltar para candidaturas" %}
+            </a>
+
+
+
+            <!-- =================================================
+                 CABEÇALHO
+                 ================================================= -->
+
+            <section class="detail-hero">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        {% translate "DETALHES DA CANDIDATURA" %}
+                    </span>
+
+
+                    <h1>
+                        {{ candidatura.cargo }}
+                    </h1>
+
+
+                    <div class="company-heading">
+
+                        <div class="company-avatar large">
+                            {{ candidatura.empresa.name|first|upper }}
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                {{ candidatura.empresa.name }}
+                            </strong>
+
+                            <span>
+
+                                {% if candidatura.local_vaga %}
+
+                                    {{ candidatura.local_vaga }}
+
+                                {% else %}
+
+                                    {% translate "Local não informado" %}
+
+                                {% endif %}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-area">
+
+                    <span class="status-label">
+                        {% translate "STATUS ATUAL" %}
+                    </span>
+
+
+                    <span class="status-pill">
+                        {{ candidatura.get_status_display }}
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PROCESSO SELETIVO
+                 ================================================= -->
+
+            <section class="process-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="card-eyebrow">
+                            {% translate "PROCESSO SELETIVO" %}
+                        </span>
+
+                        <h2>
+                            {% translate "Etapa atual" %}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if status_encerrado %}
+
+                    <div class="closed-process">
+
+                        <div class="closed-icon">
+                            ×
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                {% translate "Processo encerrado" %}
+                            </strong>
+
+                            <span>
+                                {% blocktranslate with status=candidatura.status|lower %}
+                                    Esta candidatura está marcada como {{ status }}.
+                                {% endblocktranslate %}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="process-track">
+
+                        {% for etapa in etapas %}
+
+                            <div class="
+                                process-stage
+                                {% if forloop.counter0 < etapa_atual %}
+                                    stage-done
+                                {% elif forloop.counter0 == etapa_atual %}
+                                    stage-current
+                                {% endif %}
+                            ">
+
+                                <div class="stage-dot">
+
+                                    {% if forloop.counter0 < etapa_atual %}
+
+                                        ✓
+
+                                    {% else %}
+
+                                        {{ forloop.counter }}
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <span>
+                                    {% translate etapa %}
+                                </span>
+
+                            </div>
+
+
+                            {% if not forloop.last %}
+
+                                <div class="
+                                    stage-connector
+                                    {% if forloop.counter0 < etapa_atual %}
+                                        connector-done
+                                    {% endif %}
+                                ">
+                                </div>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                     ATUALIZAR STATUS
+                     ================================================= -->
+
+                <div class="status-update">
+
+                    <div class="status-update-info">
+
+                        <span>
+                            {% translate "ATUALIZAR ETAPA" %}
+                        </span>
+
+
+                        <strong>
+                            {% translate "O processo avançou?" %}
+                        </strong>
+
+
+                        <p>
+                            {% translate "Atualize a etapa para manter esta candidatura sempre atualizada." %}
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        method="post"
+                        action="{% url 'atualizar_status_candidatura' candidatura.id %}"
+                        class="status-update-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        {{ status_form.status }}
+
+
+                        <button
+                            type="submit"
+                            class="status-update-button"
+                        >
+                            {% translate "Atualizar status" %}
+                            <span>→</span>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 GRID DE INFORMAÇÕES
+                 ================================================= -->
+
+            <section class="detail-grid">
+
+
+                <!-- =============================================
+                     INFORMAÇÕES DA VAGA
+                     ============================================= -->
+
+                <article class="info-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                {% translate "INFORMAÇÕES" %}
+                            </span>
+
+                            <h2>
+                                {% translate "Dados da vaga" %}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-list">
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Empresa" %}
+                            </span>
+
+                            <strong>
+                                {{ candidatura.empresa.name }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Cargo" %}
+                            </span>
+
+                            <strong>
+                                {{ candidatura.cargo }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Local" %}
+                            </span>
+
+                            <strong>
+
+                                {% if candidatura.local_vaga %}
+
+                                    {{ candidatura.local_vaga }}
+
+                                {% else %}
+
+                                    {% translate "Não informado" %}
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Modalidade" %}
+                            </span>
+
+                            <strong>
+                                {{ candidatura.get_modalidade_display }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Salário" %}
+                            </span>
+
+                            <strong>
+
+                                {% if candidatura.salario %}
+
+                                    R$
+                                    {{ candidatura.salario|floatformat:2 }}
+
+                                {% else %}
+
+                                    {% translate "Não informado" %}
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =============================================
+                     DATAS
+                     ============================================= -->
+
+                <article class="info-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                {% translate "ACOMPANHAMENTO" %}
+                            </span>
+
+                            <h2>
+                                {% translate "Datas importantes" %}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="date-highlight">
+
+                        <span>
+                            {% translate "CANDIDATURA ENVIADA" %}
+                        </span>
+
+
+                        <strong>
+                            {{ candidatura.data_candidatura|date:"d/m/Y" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-list">
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Último contato" %}
+                            </span>
+
+                            <strong>
+
+                                {% if candidatura.ultimo_contato %}
+
+                                    {{ candidatura.ultimo_contato|date:"d/m/Y" }}
+
+                                {% else %}
+
+                                    {% translate "Não informado" %}
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                {% translate "Registrada no sistema" %}
+                            </span>
+
+                            <strong>
+                                {{ candidatura.created_at|date:"d/m/Y" }}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    {% if candidatura.link_vaga %}
+
+                        <a
+                            href="{{ candidatura.link_vaga }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="external-link"
+                        >
+                            {% translate "Abrir vaga original" %}
+                            <span>↗</span>
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 OBSERVAÇÕES
+                 ================================================= -->
+
+            <section class="observations-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="card-eyebrow">
+                            {% translate "ANOTAÇÕES" %}
+                        </span>
+
+                        <h2>
+                            {% translate "Observações" %}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                {% if candidatura.observacoes %}
+
+                    <div class="observation-content">
+
+                        {{ candidatura.observacoes|linebreaksbr }}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="observation-empty">
+
+                        <div class="empty-note-icon">
+                            +
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                {% translate "Nenhuma observação registrada." %}
+                            </strong>
+
+                            <span>
+                                {% translate "Quando você adicionar anotações à candidatura, elas aparecerão aqui." %}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="detail-footer">
+
+                <span>
+                    JOB TRACKER
+                </span>
+
+
+                <span>
+                    {% translate "Organize sua busca. Acompanhe sua evolução." %}
+                </span>
+
+            </footer>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

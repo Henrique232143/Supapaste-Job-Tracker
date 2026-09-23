@@ -1,0 +1,328 @@
+# Job Tracker - Deutsche Übersetzung
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Job Tracker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:38-0300\n"
+"PO-Revision-Date: 2026-09-22 20:40-0300\n"
+"Last-Translator: Job Tracker\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cadastro/forms.py
+msgid "Site"
+msgstr "Website"
+
+msgid "Empresa"
+msgstr "Unternehmen"
+
+msgid "Essa empresa já está cadastrada."
+msgstr "Dieses Unternehmen ist bereits registriert."
+
+msgid "Digite um endereço de site válido."
+msgstr "Gib eine gültige Website-Adresse ein."
+
+msgid "Cargo"
+msgstr "Jobtitel"
+
+msgid "Esse cargo já está cadastrado."
+msgstr "Dieser Jobtitel ist bereits registriert."
+
+msgid "Selecione um cargo"
+msgstr "Jobtitel auswählen"
+
+msgid "Salário"
+msgstr "Gehalt"
+
+msgid "Ex.: 3.500,00"
+msgstr "z. B. 3.500,00"
+
+msgid "Data da candidatura"
+msgstr "Bewerbungsdatum"
+
+msgid "Link da vaga"
+msgstr "Link zur Stellenanzeige"
+
+msgid "Modalidade"
+msgstr "Arbeitsmodell"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Observações"
+msgstr "Notizen"
+
+msgid "Último contato"
+msgstr "Letzter Kontakt"
+
+msgid "Local da vaga"
+msgstr "Arbeitsort"
+
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr "Gib ein gültiges Gehalt ein. Beispiel: 3.500,00"
+
+msgid "O salário não pode ser negativo."
+msgstr "Das Gehalt darf nicht negativ sein."
+
+msgid "Digite um salário dentro de um valor válido."
+msgstr "Gib einen gültigen Gehaltsbetrag ein."
+
+msgid "Etapa do processo"
+msgstr "Bewerbungsphase"
+
+msgid "Senha"
+msgstr "Passwort"
+
+msgid "Confirmar senha"
+msgstr "Passwort bestätigen"
+
+msgid "Nome"
+msgstr "Name"
+
+msgid "E-mail"
+msgstr "E-Mail"
+
+msgid "As senhas não coincidem."
+msgstr "Die Passwörter stimmen nicht überein."
+
+msgid "Idioma"
+msgstr "Sprache"
+
+msgid "Ex.: Francês"
+msgstr "z. B. Französisch"
+
+#: cadastro/models.py
+msgid "Remoto"
+msgstr "Remote"
+
+msgid "Híbrido"
+msgstr "Hybrid"
+
+msgid "Presencial"
+msgstr "Vor Ort"
+
+msgid "Aplicado"
+msgstr "Beworben"
+
+msgid "Triagem"
+msgstr "Auswahlverfahren"
+
+msgid "Entrevista RH"
+msgstr "Vorstellungsgespräch mit HR"
+
+msgid "Entrevista Gestor"
+msgstr "Vorstellungsgespräch mit dem Hiring Manager"
+
+msgid "Teste Técnico"
+msgstr "Technischer Test"
+
+msgid "Finalista"
+msgstr "Finalist"
+
+msgid "Aprovado"
+msgstr "Angenommen"
+
+msgid "Recusado"
+msgstr "Abgelehnt"
+
+msgid "Desistiu"
+msgstr "Zurückgezogen"
+
+#: candidaturas.html
+msgid "Job Tracker — seu painel de candidaturas."
+msgstr "Job Tracker — dein Dashboard für die Jobsuche."
+
+msgid "Minhas candidaturas"
+msgstr "Meine Bewerbungen"
+
+msgid "Sair"
+msgstr "Abmelden"
+
+msgid "SEU PAINEL"
+msgstr "DEIN DASHBOARD"
+
+msgid "Olá, %(nome)s."
+msgstr "Hallo, %(nome)s."
+
+msgid "Um retrato da sua busca por emprego, das oportunidades que você está buscando e dos caminhos profissionais que está explorando."
+msgstr "Ein Überblick über deine Jobsuche, die Möglichkeiten, die du verfolgst, und die beruflichen Wege, die du erkundest."
+
+msgid "candidatura"
+msgstr "Bewerbung"
+
+msgid "candidaturas"
+msgstr "Bewerbungen"
+
+msgid "em andamento"
+msgstr "in Bearbeitung"
+
+msgid "entrevista"
+msgstr "Vorstellungsgespräch"
+
+msgid "entrevistas"
+msgstr "Vorstellungsgespräche"
+
+msgid "finalista"
+msgstr "Finalist"
+
+msgid "finalistas"
+msgstr "Finalisten"
+
+msgid "PRÓXIMO PASSO"
+msgstr "NÄCHSTER SCHRITT"
+
+msgid "Registre uma nova oportunidade e mantenha seu histórico de candidaturas atualizado."
+msgstr "Füge eine neue Stelle hinzu und halte deinen Bewerbungsverlauf auf dem neuesten Stand."
+
+msgid "Nova candidatura"
+msgstr "Neue Bewerbung"
+
+msgid "PROCESSO"
+msgstr "BEWERBUNGSPROZESS"
+
+msgid "Progresso das candidaturas"
+msgstr "Fortschritt deiner Bewerbungen"
+
+msgid "Distribuição atual"
+msgstr "Aktuelle Verteilung"
+
+msgid "Suas etapas aparecerão aqui conforme você adicionar candidaturas."
+msgstr "Deine Bewerbungsphasen werden hier angezeigt, sobald du Bewerbungen hinzufügst."
+
+msgid "FOCO PROFISSIONAL"
+msgstr "BERUFLICHER FOKUS"
+
+msgid "Para quais cargos você está se candidatando?"
+msgstr "Auf welche Positionen bewirbst du dich?"
+
+msgid "MAIOR CONCENTRAÇÃO"
+msgstr "HAUPTFOKUS"
+
+msgid "Representa %(percentual)s%% da sua busca por emprego atual."
+msgstr "Das entspricht %(percentual)s%% deiner aktuellen Jobsuche."
+
+msgid "Ainda não há dados suficientes."
+msgstr "Noch sind nicht genügend Daten vorhanden."
+
+msgid "FINANCEIRO"
+msgstr "GEHALTSANALYSE"
+
+msgid "O que o mercado está oferecendo?"
+msgstr "Welche Gehälter werden auf dem Markt angeboten?"
+
+msgid "MÉDIA DAS VAGAS"
+msgstr "DURCHSCHNITTSGEHALT"
+
+msgid "MENOR"
+msgstr "NIEDRIGSTES"
+
+msgid "MAIOR"
+msgstr "HÖCHSTES"
+
+msgid "Baseado apenas nas candidaturas em que você informou o salário."
+msgstr "Basiert nur auf Bewerbungen, bei denen du ein Gehalt angegeben hast."
+
+msgid "Ainda não há dados de salário."
+msgstr "Noch sind keine Gehaltsdaten vorhanden."
+
+msgid "Informe salário"
+msgstr "Gehalt eingeben"
+
+msgid "Informe o salário para acompanhar esta métrica."
+msgstr "Gib ein Gehalt ein, um diese Kennzahl zu verfolgen."
+
+msgid "FORMATO"
+msgstr "ARBEITSMODELL"
+
+msgid "Como estão distribuídas as vagas?"
+msgstr "Wie verteilen sich deine Bewerbungen?"
+
+msgid "Ainda não há modalidades cadastradas."
+msgstr "Noch wurden keine Arbeitsmodelle hinzugefügt."
+
+msgid "EMPRESAS"
+msgstr "UNTERNEHMEN"
+
+msgid "Onde você está se candidatando?"
+msgstr "Bei welchen Unternehmen bewirbst du dich?"
+
+msgid "%(percentual)s%% do total"
+msgstr "%(percentual)s%% der Gesamtzahl"
+
+msgid "Ainda não há empresas cadastradas."
+msgstr "Noch wurden keine Unternehmen hinzugefügt."
+
+msgid "HISTÓRICO"
+msgstr "BEWERBUNGSVERLAUF"
+
+msgid "Candidaturas recentes"
+msgstr "Letzte Bewerbungen"
+
+msgid "As oportunidades que você adicionou mais recentemente."
+msgstr "Die zuletzt hinzugefügten Stellen."
+
+msgid "Local"
+msgstr "Ort"
+
+msgid "Data"
+msgstr "Datum"
+
+msgid "Ação"
+msgstr "Aktion"
+
+msgid "Não informado"
+msgstr "Nicht angegeben"
+
+msgid "Ver detalhes"
+msgstr "Details anzeigen"
+
+msgid "Ainda não há candidaturas."
+msgstr "Noch gibt es keine Bewerbungen."
+
+msgid "Comece registrando uma oportunidade para preencher seu dashboard."
+msgstr "Füge eine Stelle hinzu, um dein Dashboard zu füllen."
+
+msgid "Adicionar candidatura"
+msgstr "Bewerbung hinzufügen"
+
+msgid "Organize sua busca por emprego. Acompanhe seu progresso."
+msgstr "Organisiere deine Jobsuche. Verfolge deinen Fortschritt."
+
+#: nova_candidatura.html
+msgid "Job Tracker — cadastre uma nova candidatura."
+msgstr "Job Tracker — füge eine neue Bewerbung hinzu."
+
+msgid "Voltar para candidaturas"
+msgstr "Zurück zu den Bewerbungen"
+
+msgid "NOVA CANDIDATURA"
+msgstr "NEUE BEWERBUNG"
+
+msgid "Adicionar oportunidade"
+msgstr "Stelle hinzufügen"
+
+msgid "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker."
+msgstr "Füge eine neue Stelle hinzu und verfolge den gesamten Bewerbungsprozess mit Job Tracker."
+
+msgid "Adicionar empresa"
+msgstr "Unternehmen hinzufügen"
+
+msgid "Adicionar cargo"
+msgstr "Jobtitel hinzufügen"
+
+msgid "Cancelar"
+msgstr "Abbrechen"
+
+msgid "Salvar candidatura"
+msgstr "Bewerbung speichern"
+
+msgid "Organize sua busca. Acompanhe sua evolução."
+msgstr "Organisiere deine Jobsuche. Verfolge deinen Fortschritt."
+
+msgid "Selecione uma empresa"
+msgstr "Unternehmen auswählen"

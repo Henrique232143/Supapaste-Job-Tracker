@@ -1,13 +1,37 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ LANGUAGE_CODE }}">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Job Tracker | Nova candidatura</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="{% static 'cadastro/nova_candidatura.css' %}">
+    <meta
+        name="description"
+        content="{% translate 'Job Tracker — cadastre uma nova candidatura.' %}"
+    >
+
+    <title>
+        Job Tracker | {% translate "Nova candidatura" %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/nova_candidatura.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
 </head>
 
 <body>
@@ -16,35 +40,309 @@
 
         <div class="form-container">
 
-            <a class="back-link" href="{% url 'candidaturas' %}">
-                ← Voltar para candidaturas
+            <div class="language-page-control">
+
+                {% include 'cadastro/partials/language_selector.html' %}
+
+            </div>
+
+
+            <a
+                href="{% url 'candidaturas' %}"
+                class="back-link"
+            >
+                ← {% translate "Voltar para candidaturas" %}
             </a>
+
 
             <section class="form-card">
 
                 <div class="form-header">
 
                     <span class="page-eyebrow">
-                        NOVA CANDIDATURA
+                        {% translate "NOVA CANDIDATURA" %}
                     </span>
 
                     <h1>
-                        Adicionar oportunidade
+                        {% translate "Adicionar oportunidade" %}
                     </h1>
 
                     <p>
-                        Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker.
+                        {% translate "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker." %}
                     </p>
 
                 </div>
 
-                <form method="post" class="candidatura-form">
+
+                <form
+                    method="post"
+                    action="{% url 'nova_candidatura' %}"
+                    class="candidatura-form"
+                >
 
                     {% csrf_token %}
 
+
                     <div class="form-fields">
-                        {{ form.as_p }}
+
+
+                        <!-- =================================================
+                             EMPRESA
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.empresa.id_for_label }}">
+                                {% translate "Empresa" %}
+                            </label>
+
+                            <div class="field-with-action">
+
+                                {{ form.empresa }}
+
+                                <a
+                                    href="{% url 'nova_empresa' %}"
+                                    class="add-field-link"
+                                >
+                                    {% translate "Adicionar empresa" %}
+                                </a>
+
+                            </div>
+
+                            {% for error in form.empresa.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             CARGO
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.cargo_catalogo.id_for_label }}">
+                                {% translate "Cargo" %}
+                            </label>
+
+                            <div class="field-with-action">
+
+                                {{ form.cargo_catalogo }}
+
+                                <a
+                                    href="{% url 'novo_cargo' %}"
+                                    class="add-field-link"
+                                >
+                                    {% translate "Adicionar cargo" %}
+                                </a>
+
+                            </div>
+
+                            {% for error in form.cargo_catalogo.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             LOCAL DA VAGA
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.local_vaga.id_for_label }}">
+                                {% translate "Local da vaga" %}
+                            </label>
+
+                            {{ form.local_vaga }}
+
+                            {% for error in form.local_vaga.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             DATA DA CANDIDATURA
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.data_candidatura.id_for_label }}">
+                                {% translate "Data da candidatura" %}
+                            </label>
+
+                            {{ form.data_candidatura }}
+
+                            {% for error in form.data_candidatura.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SALÁRIO
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.salario.id_for_label }}">
+                                {% translate "Salário" %}
+                            </label>
+
+                            {{ form.salario }}
+
+                            {% for error in form.salario.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             LINK DA VAGA
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.link_vaga.id_for_label }}">
+                                {% translate "Link da vaga" %}
+                            </label>
+
+                            {{ form.link_vaga }}
+
+                            {% for error in form.link_vaga.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             MODALIDADE
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.modalidade.id_for_label }}">
+                                {% translate "Modalidade" %}
+                            </label>
+
+                            {{ form.modalidade }}
+
+                            {% for error in form.modalidade.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             STATUS
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.status.id_for_label }}">
+                                {% translate "Status" %}
+                            </label>
+
+                            {{ form.status }}
+
+                            {% for error in form.status.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             ÚLTIMO CONTATO
+                             ================================================= -->
+
+                        <div class="form-field">
+
+                            <label for="{{ form.ultimo_contato.id_for_label }}">
+                                {% translate "Último contato" %}
+                            </label>
+
+                            {{ form.ultimo_contato }}
+
+                            {% for error in form.ultimo_contato.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             OBSERVAÇÕES
+                             ================================================= -->
+
+                        <div class="form-field form-field-full">
+
+                            <label for="{{ form.observacoes.id_for_label }}">
+                                {% translate "Observações" %}
+                            </label>
+
+                            {{ form.observacoes }}
+
+                            {% for error in form.observacoes.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
                     </div>
+
+
+                    <!-- =====================================================
+                         BOTÕES
+                         ===================================================== -->
 
                     <div class="form-actions">
 
@@ -52,14 +350,14 @@
                             href="{% url 'candidaturas' %}"
                             class="btn-secondary"
                         >
-                            Cancelar
+                            {% translate "Cancelar" %}
                         </a>
 
                         <button
                             type="submit"
                             class="btn-primary"
                         >
-                            Salvar candidatura
+                            {% translate "Salvar candidatura" %} →
                         </button>
 
                     </div>
@@ -68,8 +366,9 @@
 
             </section>
 
+
             <p class="form-footer">
-                Job Tracker · Organize sua busca. Acompanhe sua evolução.
+                Job Tracker · {% translate "Organize sua busca. Acompanhe sua evolução." %}
             </p>
 
         </div>
@@ -77,4 +376,5 @@
     </main>
 
 </body>
+
 </html>

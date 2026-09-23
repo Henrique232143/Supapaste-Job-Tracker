@@ -72,7 +72,7 @@ body {
 
 
 /* =========================================================
-   LINK VOLTAR
+   VOLTAR
    ========================================================= */
 
 .back-link {
@@ -106,7 +106,7 @@ body {
 
 
 /* =========================================================
-   CARD PRINCIPAL
+   CARD
    ========================================================= */
 
 .form-card {
@@ -180,7 +180,7 @@ body {
    FORMULÁRIO
    ========================================================= */
 
-.candidatura-form {
+.empresa-form {
     width: 100%;
 }
 
@@ -194,14 +194,8 @@ body {
     column-gap: 24px;
 
     row-gap: 18px;
-
-    padding-top: 2px;
 }
 
-
-/* =========================================================
-   CADA CAMPO
-   ========================================================= */
 
 .form-field {
     display: flex;
@@ -214,13 +208,8 @@ body {
 }
 
 
-.form-field-full {
-    grid-column: 1 / -1;
-}
-
-
 /* =========================================================
-   LABEL
+   LABELS
    ========================================================= */
 
 .form-field label {
@@ -233,7 +222,7 @@ body {
 
 
 /* =========================================================
-   INPUT / SELECT / TEXTAREA
+   INPUTS
    ========================================================= */
 
 .form-field input,
@@ -267,7 +256,7 @@ body {
 
 
 /* =========================================================
-   HOVER DOS CAMPOS
+   HOVER
    ========================================================= */
 
 .form-field input:hover,
@@ -278,7 +267,7 @@ body {
 
 
 /* =========================================================
-   FOCO DOS CAMPOS
+   FOCO
    ========================================================= */
 
 .form-field input:focus,
@@ -292,91 +281,232 @@ body {
 
 
 /* =========================================================
-   TEXTAREA
+   CAMPO COM ERRO
    ========================================================= */
 
-.form-field textarea {
-    height: auto;
+.form-field.field-has-error input,
+.form-field.field-has-error select,
+.form-field.field-has-error textarea {
+    border-color: #ef4444;
 
-    min-height: 110px;
+    background: #fffafa;
+}
 
-    padding: 12px 14px;
 
-    resize: vertical;
+.form-field.field-has-error input:focus,
+.form-field.field-has-error select:focus,
+.form-field.field-has-error textarea:focus {
+    border-color: #dc2626;
+
+    box-shadow:
+        0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+
+.field-error {
+    display: block;
+
+    margin-top: 1px;
+
+    color: #dc2626;
+
+    font-size: 12px;
+
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   EMPRESA / CARGO
+   EMPRESAS SEMELHANTES
    ========================================================= */
 
-.field-with-action {
+.similarity-box {
+    margin-bottom: 30px;
+
+    padding: 20px;
+
+    border: 1px solid #e0e7ff;
+
+    border-radius: 16px;
+
+    background: #f8f9ff;
+}
+
+
+.similarity-header {
     display: flex;
 
-    align-items: center;
+    gap: 14px;
 
-    gap: 10px;
-
-    width: 100%;
+    margin-bottom: 18px;
 }
 
 
-.field-with-action select,
-.field-with-action input {
-    flex: 1;
+.similarity-icon {
+    width: 34px;
 
-    min-width: 0;
-}
+    height: 34px;
 
-
-/* =========================================================
-   AÇÕES DOS CAMPOS
-   ========================================================= */
-
-/* =========================================================
-   BOTÕES DE ADICIONAR EMPRESA / CARGO
-   ========================================================= */
-
-.field-with-action {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    width: 100%;
-}
-
-
-.field-with-action select {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-.add-field-link {
     flex-shrink: 0;
 
-    display: inline-flex;
+    display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    gap: 7px;
+    border-radius: 10px;
 
-    min-height: 42px;
+    background: #eef2ff;
 
-    padding: 0 14px;
+    color: #4f46e5;
 
-    border: 1px solid #e0e4f7;
+    font-weight: 800;
+}
+
+
+.similarity-header strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #111827;
+
+    font-size: 14px;
+}
+
+
+.similarity-header p {
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LISTA DE EMPRESAS SEMELHANTES
+   ========================================================= */
+
+.similarity-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.similarity-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+}
+
+
+.similarity-company {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 0;
+}
+
+
+.company-avatar {
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     border-radius: 10px;
 
-    background: #fafaff;
+    background: #f1f3f9;
 
     color: #4f46e5;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.similarity-company strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #111827;
+
+    font-size: 14px;
+}
+
+
+.similarity-company span {
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   AÇÕES DA SUGESTÃO
+   ========================================================= */
+
+.similarity-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.similarity-score {
+    color: #6366f1;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.btn-use {
+    height: 38px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #374151;
 
     font-family: inherit;
 
@@ -384,112 +514,54 @@ body {
 
     font-weight: 700;
 
-    text-decoration: none;
-
-    white-space: nowrap;
-
     cursor: pointer;
-
-    box-shadow:
-        0 2px 6px rgba(79, 70, 229, 0.04);
 
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Ícone + */
-
-.add-field-link::before {
-    content: "+";
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 20px;
-
-    height: 20px;
-
-    border-radius: 6px;
-
-    background: #eef2ff;
-
-    color: #4f46e5;
-
-    font-size: 14px;
-
-    font-weight: 800;
-
-    line-height: 1;
-
-    transition:
-        background 0.2s ease,
         color 0.2s ease;
 }
 
 
-.add-field-link:hover {
-    background: #f5f3ff;
+.btn-use:hover {
+    background: #f9fafb;
 
-    border-color: #c7d2fe;
+    border-color: #6366f1;
 
-    color: #4338ca;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 14px rgba(79, 70, 229, 0.09);
+    color: #4f46e5;
 }
 
 
-.add-field-link:hover::before {
-    background: #e0e7ff;
+.similarity-footer {
+    display: flex;
 
-    color: #4338ca;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-top: 16px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #e5e7eb;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    line-height: 1.5;
 }
 
 
-.add-field-link:active {
-    transform: translateY(0);
+.similarity-footer strong {
+    color: #6b7280;
 
-    box-shadow:
-        0 2px 6px rgba(79, 70, 229, 0.05);
-}
-
-
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-    .field-with-action {
-        align-items: stretch;
-
-        flex-direction: column;
-
-        gap: 8px;
-    }
-
-
-    .add-field-link {
-        width: fit-content;
-
-        min-height: 40px;
-    }
-
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   ÁREA DOS BOTÕES
+   BOTÕES
    ========================================================= */
 
 .form-actions {
@@ -509,11 +581,8 @@ body {
 }
 
 
-/* =========================================================
-   BOTÃO CANCELAR
-   ========================================================= */
-
-.btn-secondary {
+.btn-secondary,
+.btn-primary {
     display: inline-flex;
 
     align-items: center;
@@ -522,31 +591,37 @@ body {
 
     height: 44px;
 
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.btn-secondary {
     min-width: 110px;
 
     padding: 0 18px;
 
     border: 1px solid #e5e7eb;
 
-    border-radius: 10px;
-
     background: #ffffff;
 
     color: #374151;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    text-decoration: none;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
 }
 
 
@@ -561,50 +636,20 @@ body {
 }
 
 
-/* =========================================================
-   BOTÃO SALVAR
-   ========================================================= */
-
-.form-actions .btn-primary {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    height: 44px;
-
+.btn-primary {
     min-width: 170px;
 
     padding: 0 20px;
 
     border: 1px solid #111827;
 
-    border-radius: 10px;
-
     background: #111827;
 
     color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow: none;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 
-.form-actions .btn-primary:hover {
+.btn-primary:hover {
     background: #374151;
 
     border-color: #374151;
@@ -613,12 +658,6 @@ body {
 
     box-shadow:
         0 7px 18px rgba(17, 24, 39, 0.12);
-}
-
-
-.form-actions .btn-primary:active,
-.btn-secondary:active {
-    transform: translateY(0);
 }
 
 
@@ -655,46 +694,24 @@ body {
     }
 
 
-    .form-header {
-        margin-bottom: 30px;
-    }
-
-
-    .form-header h1 {
-        font-size: 30px;
-    }
-
-
-    .form-header p {
-        font-size: 14px;
-    }
-
-
     .form-fields {
         grid-template-columns: 1fr;
-
-        column-gap: 0;
 
         row-gap: 18px;
     }
 
 
-    .form-field-full {
-        grid-column: auto;
-    }
-
-
-    .field-with-action {
-        align-items: stretch;
+    .similarity-item {
+        align-items: flex-start;
 
         flex-direction: column;
-
-        gap: 7px;
     }
 
 
-    .add-field-link {
-        padding-left: 2px;
+    .similarity-actions {
+        width: 100%;
+
+        justify-content: space-between;
     }
 
 
@@ -709,4 +726,5 @@ body {
     .btn-secondary {
         width: 100%;
     }
+
 }

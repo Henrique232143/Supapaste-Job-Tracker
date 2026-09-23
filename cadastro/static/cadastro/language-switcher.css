@@ -1,0 +1,325 @@
+/* =========================================================
+   GRUPO DA MARCA
+   ========================================================= */
+
+.brand-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   SELETOR
+   ========================================================= */
+
+.language-switcher {
+    position: relative;
+}
+
+
+.language-switcher-trigger {
+    list-style: none;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    min-width: 44px;
+
+    height: 36px;
+
+    padding: 0 9px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.language-switcher-trigger::-webkit-details-marker {
+    display: none;
+}
+
+
+.language-switcher-trigger:hover {
+    border-color: #d5d9e1;
+
+    background: #fbfbfd;
+}
+
+
+.language-switcher[open]
+.language-switcher-trigger {
+    border-color: #d8dcf7;
+
+    background: #fafaff;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.07);
+}
+
+
+.language-flag {
+    font-size: 17px;
+
+    line-height: 1;
+}
+
+
+.language-chevron {
+    color: #9aa2af;
+
+    font-size: 10px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.language-switcher[open]
+.language-chevron {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.language-menu {
+    position: absolute;
+
+    top: calc(100% + 9px);
+
+    left: 0;
+
+    width: 265px;
+
+    padding: 9px;
+
+    border: 1px solid #e4e7ed;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.10);
+
+    z-index: 100;
+}
+
+
+.language-menu-title {
+    padding: 7px 9px 8px;
+
+    color: #9ba3af;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   OPÇÕES
+   ========================================================= */
+
+.language-option {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 39px;
+
+    padding: 0 9px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+.language-option:hover {
+    background: #f5f5ff;
+
+    color: #4f46e5;
+}
+
+
+.language-option-flag {
+    width: 23px;
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   DIVISOR
+   ========================================================= */
+
+.language-divider {
+    height: 1px;
+
+    margin: 8px 4px;
+
+    background: #eef0f4;
+}
+
+
+/* =========================================================
+   SUGESTÃO
+   ========================================================= */
+
+.language-suggestion {
+    padding: 7px 5px 4px;
+}
+
+
+.language-suggestion-title {
+    display: block;
+
+    padding: 0 4px 8px;
+
+    color: #6366f1;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.language-suggestion-form {
+    display: flex;
+
+    gap: 6px;
+}
+
+
+.language-suggestion-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 35px;
+
+    padding: 0 9px;
+
+    border: 1px solid #dfe3ea;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    outline: none;
+}
+
+
+.language-suggestion-form input:focus {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+
+.language-suggestion-form button {
+    height: 35px;
+
+    padding: 0 10px;
+
+    border: 1px solid #111827;
+
+    border-radius: 8px;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.language-suggestion-form button:hover {
+    background: #374151;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .language-menu {
+        left: auto;
+
+        right: 0;
+    }
+
+
+    .language-switcher-trigger {
+        min-width: 40px;
+    }
+
+}

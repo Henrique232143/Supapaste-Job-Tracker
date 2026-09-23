@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Job Tracker — adicione um novo cargo."
+    >
+
+    <title>Job Tracker | Novo cargo</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/novo_cargo.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <main class="form-page">
+
+        <div class="form-container">
+
+            <a
+                href="{% url 'nova_candidatura' %}"
+                class="back-link"
+            >
+                ← Voltar para candidatura
+            </a>
+
+
+            <section class="form-card">
+
+                <div class="form-header">
+
+                    <span class="page-eyebrow">
+                        NOVO CARGO
+                    </span>
+
+                    <h1>
+                        Adicionar cargo
+                    </h1>
+
+                    <p>
+                        Cadastre um cargo para utilizá-lo nas
+                        suas candidaturas e disponibilizá-lo
+                        no catálogo do Job Tracker.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="post"
+                    class="cargo-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="form-fields">
+
+                        <div class="
+                            form-field
+                            {% if form.name.errors %}
+                                field-has-error
+                            {% endif %}
+                        ">
+
+                            {{ form.name.label_tag }}
+
+                            {{ form.name }}
+
+                            {% for error in form.name.errors %}
+
+                                <span class="field-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'nova_candidatura' %}"
+                            class="btn-secondary"
+                        >
+                            Cancelar
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                        >
+                            Cadastrar cargo →
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <p class="form-footer">
+                Job Tracker · Cargos cadastrados ficam disponíveis
+                para todos os usuários.
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

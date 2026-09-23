@@ -1,0 +1,328 @@
+# Job Tracker - English Translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Job Tracker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:38-0300\n"
+"PO-Revision-Date: 2026-09-22 20:40-0300\n"
+"Last-Translator: Job Tracker\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cadastro/forms.py
+msgid "Site"
+msgstr "Website"
+
+msgid "Empresa"
+msgstr "Company"
+
+msgid "Essa empresa já está cadastrada."
+msgstr "This company is already registered."
+
+msgid "Digite um endereço de site válido."
+msgstr "Enter a valid website address."
+
+msgid "Cargo"
+msgstr "Job title"
+
+msgid "Esse cargo já está cadastrado."
+msgstr "This job title is already registered."
+
+msgid "Selecione um cargo"
+msgstr "Select a job title"
+
+msgid "Salário"
+msgstr "Salary"
+
+msgid "Ex.: 3.500,00"
+msgstr "E.g.: 3,500.00"
+
+msgid "Data da candidatura"
+msgstr "Application date"
+
+msgid "Link da vaga"
+msgstr "Job listing link"
+
+msgid "Modalidade"
+msgstr "Work mode"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Observações"
+msgstr "Notes"
+
+msgid "Último contato"
+msgstr "Last contact"
+
+msgid "Local da vaga"
+msgstr "Job location"
+
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr "Enter a valid salary. Example: 3,500.00"
+
+msgid "O salário não pode ser negativo."
+msgstr "Salary cannot be negative."
+
+msgid "Digite um salário dentro de um valor válido."
+msgstr "Enter a valid salary amount."
+
+msgid "Etapa do processo"
+msgstr "Application stage"
+
+msgid "Senha"
+msgstr "Password"
+
+msgid "Confirmar senha"
+msgstr "Confirm password"
+
+msgid "Nome"
+msgstr "Name"
+
+msgid "E-mail"
+msgstr "Email"
+
+msgid "As senhas não coincidem."
+msgstr "The passwords do not match."
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Ex.: Francês"
+msgstr "E.g.: French"
+
+#: cadastro/models.py
+msgid "Remoto"
+msgstr "Remote"
+
+msgid "Híbrido"
+msgstr "Hybrid"
+
+msgid "Presencial"
+msgstr "On-site"
+
+msgid "Aplicado"
+msgstr "Applied"
+
+msgid "Triagem"
+msgstr "Screening"
+
+msgid "Entrevista RH"
+msgstr "HR Interview"
+
+msgid "Entrevista Gestor"
+msgstr "Hiring Manager Interview"
+
+msgid "Teste Técnico"
+msgstr "Technical Test"
+
+msgid "Finalista"
+msgstr "Finalist"
+
+msgid "Aprovado"
+msgstr "Accepted"
+
+msgid "Recusado"
+msgstr "Rejected"
+
+msgid "Desistiu"
+msgstr "Withdrawn"
+
+#: candidaturas.html
+msgid "Job Tracker — seu painel de candidaturas."
+msgstr "Job Tracker — your job search dashboard."
+
+msgid "Minhas candidaturas"
+msgstr "My applications"
+
+msgid "Sair"
+msgstr "Log out"
+
+msgid "SEU PAINEL"
+msgstr "YOUR DASHBOARD"
+
+msgid "Olá, %(nome)s."
+msgstr "Hello, %(nome)s."
+
+msgid "Um retrato da sua busca por emprego, das oportunidades que você está buscando e dos caminhos profissionais que está explorando."
+msgstr "A snapshot of your job search, the opportunities you're pursuing, and the career paths you're exploring."
+
+msgid "candidatura"
+msgstr "application"
+
+msgid "candidaturas"
+msgstr "applications"
+
+msgid "em andamento"
+msgstr "in progress"
+
+msgid "entrevista"
+msgstr "interview"
+
+msgid "entrevistas"
+msgstr "interviews"
+
+msgid "finalista"
+msgstr "finalist"
+
+msgid "finalistas"
+msgstr "finalists"
+
+msgid "PRÓXIMO PASSO"
+msgstr "NEXT STEP"
+
+msgid "Registre uma nova oportunidade e mantenha seu histórico de candidaturas atualizado."
+msgstr "Add a new opportunity and keep your application history up to date."
+
+msgid "Nova candidatura"
+msgstr "New application"
+
+msgid "PROCESSO"
+msgstr "APPLICATION PROCESS"
+
+msgid "Progresso das candidaturas"
+msgstr "Your application progress"
+
+msgid "Distribuição atual"
+msgstr "Current breakdown"
+
+msgid "Suas etapas aparecerão aqui conforme você adicionar candidaturas."
+msgstr "Your application stages will appear here as you add applications."
+
+msgid "FOCO PROFISSIONAL"
+msgstr "CAREER FOCUS"
+
+msgid "Para quais cargos você está se candidatando?"
+msgstr "Which roles are you targeting?"
+
+msgid "MAIOR CONCENTRAÇÃO"
+msgstr "MAIN FOCUS"
+
+msgid "Representa %(percentual)s%% da sua busca por emprego atual."
+msgstr "Represents %(percentual)s%% of your current job search."
+
+msgid "Ainda não há dados suficientes."
+msgstr "There isn't enough data yet."
+
+msgid "FINANCEIRO"
+msgstr "SALARY INSIGHTS"
+
+msgid "O que o mercado está oferecendo?"
+msgstr "What salaries are employers offering?"
+
+msgid "MÉDIA DAS VAGAS"
+msgstr "AVERAGE SALARY"
+
+msgid "MENOR"
+msgstr "LOWEST"
+
+msgid "MAIOR"
+msgstr "HIGHEST"
+
+msgid "Baseado apenas nas candidaturas em que você informou o salário."
+msgstr "Based only on applications where you provided salary information."
+
+msgid "Ainda não há dados de salário."
+msgstr "There is no salary data yet."
+
+msgid "Informe salário"
+msgstr "Enter salary information"
+
+msgid "Informe o salário para acompanhar esta métrica."
+msgstr "Enter salary information to track this metric."
+
+msgid "FORMATO"
+msgstr "WORK MODE"
+
+msgid "Como estão distribuídas as vagas?"
+msgstr "How are your applications distributed?"
+
+msgid "Ainda não há modalidades cadastradas."
+msgstr "No work modes have been added yet."
+
+msgid "EMPRESAS"
+msgstr "COMPANIES"
+
+msgid "Onde você está se candidatando?"
+msgstr "Where are you applying?"
+
+msgid "%(percentual)s%% do total"
+msgstr "%(percentual)s%% of total"
+
+msgid "Ainda não há empresas cadastradas."
+msgstr "No companies have been added yet."
+
+msgid "HISTÓRICO"
+msgstr "APPLICATION HISTORY"
+
+msgid "Candidaturas recentes"
+msgstr "Recent applications"
+
+msgid "As oportunidades que você adicionou mais recentemente."
+msgstr "The opportunities you've added most recently."
+
+msgid "Local"
+msgstr "Location"
+
+msgid "Data"
+msgstr "Date"
+
+msgid "Ação"
+msgstr "Action"
+
+msgid "Não informado"
+msgstr "Not specified"
+
+msgid "Ver detalhes"
+msgstr "View details"
+
+msgid "Ainda não há candidaturas."
+msgstr "There are no applications yet."
+
+msgid "Comece registrando uma oportunidade para preencher seu dashboard."
+msgstr "Start by adding an opportunity to populate your dashboard."
+
+msgid "Adicionar candidatura"
+msgstr "Add application"
+
+msgid "Organize sua busca por emprego. Acompanhe seu progresso."
+msgstr "Organize your job search. Track your progress."
+
+#: nova_candidatura.html
+msgid "Job Tracker — cadastre uma nova candidatura."
+msgstr "Job Tracker — add a new application."
+
+msgid "Voltar para candidaturas"
+msgstr "Back to applications"
+
+msgid "NOVA CANDIDATURA"
+msgstr "NEW APPLICATION"
+
+msgid "Adicionar oportunidade"
+msgstr "Add opportunity"
+
+msgid "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker."
+msgstr "Add a new job opportunity and track the entire hiring process with Job Tracker."
+
+msgid "Adicionar empresa"
+msgstr "Add company"
+
+msgid "Adicionar cargo"
+msgstr "Add job title"
+
+msgid "Cancelar"
+msgstr "Cancel"
+
+msgid "Salvar candidatura"
+msgstr "Save application"
+
+msgid "Organize sua busca. Acompanhe sua evolução."
+msgstr "Organize your job search. Track your progress."
+
+msgid "Selecione uma empresa"
+msgstr "Select a company"

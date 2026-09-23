@@ -1,0 +1,328 @@
+# Job Tracker - Tradução Japonesa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Job Tracker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:38-0300\n"
+"PO-Revision-Date: 2026-09-22 20:40-0300\n"
+"Last-Translator: Job Tracker\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: cadastro/forms.py
+msgid "Site"
+msgstr "ウェブサイト"
+
+msgid "Empresa"
+msgstr "企業"
+
+msgid "Essa empresa já está cadastrada."
+msgstr "この企業はすでに登録されています。"
+
+msgid "Digite um endereço de site válido."
+msgstr "有効なウェブサイトのアドレスを入力してください。"
+
+msgid "Cargo"
+msgstr "職種"
+
+msgid "Esse cargo já está cadastrado."
+msgstr "この職種はすでに登録されています。"
+
+msgid "Selecione um cargo"
+msgstr "職種を選択してください"
+
+msgid "Salário"
+msgstr "給与"
+
+msgid "Ex.: 3.500,00"
+msgstr "例：350,000"
+
+msgid "Data da candidatura"
+msgstr "応募日"
+
+msgid "Link da vaga"
+msgstr "求人ページのリンク"
+
+msgid "Modalidade"
+msgstr "勤務形態"
+
+msgid "Status"
+msgstr "ステータス"
+
+msgid "Observações"
+msgstr "メモ"
+
+msgid "Último contato"
+msgstr "最終連絡日"
+
+msgid "Local da vaga"
+msgstr "勤務地"
+
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr "有効な給与額を入力してください。例：350,000"
+
+msgid "O salário não pode ser negativo."
+msgstr "給与は0未満にできません。"
+
+msgid "Digite um salário dentro de um valor válido."
+msgstr "有効な給与額を入力してください。"
+
+msgid "Etapa do processo"
+msgstr "応募ステージ"
+
+msgid "Senha"
+msgstr "パスワード"
+
+msgid "Confirmar senha"
+msgstr "パスワードを確認"
+
+msgid "Nome"
+msgstr "名前"
+
+msgid "E-mail"
+msgstr "メールアドレス"
+
+msgid "As senhas não coincidem."
+msgstr "パスワードが一致しません。"
+
+msgid "Idioma"
+msgstr "言語"
+
+msgid "Ex.: Francês"
+msgstr "例：フランス語"
+
+#: cadastro/models.py
+msgid "Remoto"
+msgstr "リモート"
+
+msgid "Híbrido"
+msgstr "ハイブリッド"
+
+msgid "Presencial"
+msgstr "出社"
+
+msgid "Aplicado"
+msgstr "応募済み"
+
+msgid "Triagem"
+msgstr "書類選考"
+
+msgid "Entrevista RH"
+msgstr "人事面接"
+
+msgid "Entrevista Gestor"
+msgstr "採用担当者面接"
+
+msgid "Teste Técnico"
+msgstr "技術テスト"
+
+msgid "Finalista"
+msgstr "最終候補"
+
+msgid "Aprovado"
+msgstr "採用"
+
+msgid "Recusado"
+msgstr "不採用"
+
+msgid "Desistiu"
+msgstr "辞退"
+
+#: candidaturas.html
+msgid "Job Tracker — seu painel de candidaturas."
+msgstr "Job Tracker — あなたの応募管理ダッシュボード。"
+
+msgid "Minhas candidaturas"
+msgstr "応募一覧"
+
+msgid "Sair"
+msgstr "ログアウト"
+
+msgid "SEU PAINEL"
+msgstr "あなたのダッシュボード"
+
+msgid "Olá, %(nome)s."
+msgstr "こんにちは、%(nome)s。"
+
+msgid "Um retrato da sua busca por emprego, das oportunidades que você está buscando e dos caminhos profissionais que está explorando."
+msgstr "就職活動、応募中の求人、そしてあなたが検討しているキャリアの方向性を確認できます。"
+
+msgid "candidatura"
+msgstr "応募"
+
+msgid "candidaturas"
+msgstr "応募"
+
+msgid "em andamento"
+msgstr "進行中"
+
+msgid "entrevista"
+msgstr "面接"
+
+msgid "entrevistas"
+msgstr "面接"
+
+msgid "finalista"
+msgstr "最終候補"
+
+msgid "finalistas"
+msgstr "最終候補"
+
+msgid "PRÓXIMO PASSO"
+msgstr "次のステップ"
+
+msgid "Registre uma nova oportunidade e mantenha seu histórico de candidaturas atualizado."
+msgstr "新しい求人への応募を登録し、応募履歴を最新の状態に保ちましょう。"
+
+msgid "Nova candidatura"
+msgstr "新しい応募"
+
+msgid "PROCESSO"
+msgstr "応募プロセス"
+
+msgid "Progresso das candidaturas"
+msgstr "応募の進捗"
+
+msgid "Distribuição atual"
+msgstr "現在の内訳"
+
+msgid "Suas etapas aparecerão aqui conforme você adicionar candidaturas."
+msgstr "応募を追加すると、応募ステージがここに表示されます。"
+
+msgid "FOCO PROFISSIONAL"
+msgstr "キャリアの方向性"
+
+msgid "Para quais cargos você está se candidatando?"
+msgstr "どのような職種に応募していますか？"
+
+msgid "MAIOR CONCENTRAÇÃO"
+msgstr "主な集中分野"
+
+msgid "Representa %(percentual)s%% da sua busca por emprego atual."
+msgstr "現在の就職活動の%(percentual)s%%を占めています。"
+
+msgid "Ainda não há dados suficientes."
+msgstr "まだ十分なデータがありません。"
+
+msgid "FINANCEIRO"
+msgstr "給与分析"
+
+msgid "O que o mercado está oferecendo?"
+msgstr "企業はどのくらいの給与を提示していますか？"
+
+msgid "MÉDIA DAS VAGAS"
+msgstr "平均給与"
+
+msgid "MENOR"
+msgstr "最低"
+
+msgid "MAIOR"
+msgstr "最高"
+
+msgid "Baseado apenas nas candidaturas em que você informou o salário."
+msgstr "給与情報を入力した応募のみを対象としています。"
+
+msgid "Ainda não há dados de salário."
+msgstr "まだ給与データがありません。"
+
+msgid "Informe salário"
+msgstr "給与情報を入力"
+
+msgid "Informe o salário para acompanhar esta métrica."
+msgstr "給与情報を入力して、この指標を追跡しましょう。"
+
+msgid "FORMATO"
+msgstr "勤務形態"
+
+msgid "Como estão distribuídas as vagas?"
+msgstr "応募はどのように分布していますか？"
+
+msgid "Ainda não há modalidades cadastradas."
+msgstr "まだ勤務形態のデータがありません。"
+
+msgid "EMPRESAS"
+msgstr "企業"
+
+msgid "Onde você está se candidatando?"
+msgstr "どの企業に応募していますか？"
+
+msgid "%(percentual)s%% do total"
+msgstr "全体の%(percentual)s%%"
+
+msgid "Ainda não há empresas cadastradas."
+msgstr "まだ企業が登録されていません。"
+
+msgid "HISTÓRICO"
+msgstr "応募履歴"
+
+msgid "Candidaturas recentes"
+msgstr "最近の応募"
+
+msgid "As oportunidades que você adicionou mais recentemente."
+msgstr "最近追加した求人です。"
+
+msgid "Local"
+msgstr "勤務地"
+
+msgid "Data"
+msgstr "日付"
+
+msgid "Ação"
+msgstr "操作"
+
+msgid "Não informado"
+msgstr "未入力"
+
+msgid "Ver detalhes"
+msgstr "詳細を見る"
+
+msgid "Ainda não há candidaturas."
+msgstr "まだ応募はありません。"
+
+msgid "Comece registrando uma oportunidade para preencher seu dashboard."
+msgstr "応募を追加してダッシュボードを作成しましょう。"
+
+msgid "Adicionar candidatura"
+msgstr "応募を追加"
+
+msgid "Organize sua busca por emprego. Acompanhe seu progresso."
+msgstr "就職活動を整理して、進捗を管理しましょう。"
+
+#: nova_candidatura.html
+msgid "Job Tracker — cadastre uma nova candidatura."
+msgstr "Job Tracker — 新しい応募を登録しましょう。"
+
+msgid "Voltar para candidaturas"
+msgstr "応募一覧に戻る"
+
+msgid "NOVA CANDIDATURA"
+msgstr "新規応募"
+
+msgid "Adicionar oportunidade"
+msgstr "求人を追加"
+
+msgid "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker."
+msgstr "新しい求人を登録し、Job Trackerで選考プロセス全体を追跡しましょう。"
+
+msgid "Adicionar empresa"
+msgstr "企業を追加"
+
+msgid "Adicionar cargo"
+msgstr "職種を追加"
+
+msgid "Cancelar"
+msgstr "キャンセル"
+
+msgid "Salvar candidatura"
+msgstr "応募を保存"
+
+msgid "Organize sua busca. Acompanhe sua evolução."
+msgstr "就職活動を整理して、進捗を管理しましょう。"
+
+msgid "Selecione uma empresa"
+msgstr "企業を選択してください"
