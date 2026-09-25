@@ -50,6 +50,10 @@
 
                 {% if request.user.is_authenticated %}
 
+                    <a href="{% url 'lista_empresas' %}">
+                        Empresas
+                    </a>    
+
                     <a
                         href="{% url 'candidaturas' %}"
                         class="nav-button"

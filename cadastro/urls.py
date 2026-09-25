@@ -17,10 +17,26 @@ urlpatterns = [
         name='lista_empresas'
     ),
 
+    # =============================================================
+    # DETALHE DA EMPRESA
+    # =============================================================
+
+    path(
+        'empresas/<int:empresa_id>/',
+        views.detalhe_empresa,
+        name='detalhe_empresa'
+    ),
+
     path(
         'empresas/nova/',
         views.nova_empresa,
         name='nova_empresa'
+    ),
+
+    path(
+        'empresas/<int:empresa_id>/editar/',
+        views.editar_empresa,
+        name='editar_empresa'
     ),
 
     path(
@@ -82,4 +98,17 @@ urlpatterns = [
         views.logout_usuario,
         name='logout'
     ),
+
+    path(
+        'candidaturas/<int:candidatura_id>/editar/',
+        views.editar_candidatura,
+        name='editar_candidatura'
+    ),
+
+    path(
+        'candidaturas/<int:candidatura_id>/excluir/',
+        views.excluir_candidatura,
+        name='excluir_candidatura'
+    ),
+
 ]

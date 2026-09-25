@@ -1,0 +1,166 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="{% translate 'Excluir candidatura.' %}"
+    >
+
+    <title>
+        Job Tracker | {% translate "Excluir candidatura" %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/excluir_candidatura.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="navbar">
+
+        <div class="navbar-inner">
+
+            <div class="brand-group">
+
+                <a
+                    href="{% url 'landing' %}"
+                    class="brand"
+                >
+                    JOB TRACKER
+                </a>
+
+                {% include 'cadastro/partials/language_selector.html' %}
+
+            </div>
+
+            <nav class="nav-links">
+
+                <a
+                    href="{% url 'candidaturas' %}"
+                    class="nav-link"
+                >
+                    {% translate "Minhas candidaturas" %}
+                </a>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="nav-link"
+                >
+                    {% translate "Sair" %}
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="delete-page">
+
+        <div class="delete-container">
+
+            <section class="delete-card">
+
+                <div class="delete-icon">
+                    !
+                </div>
+
+                <span class="page-eyebrow">
+                    {% translate "EXCLUIR CANDIDATURA" %}
+                </span>
+
+                <h1>
+                    {% translate "Tem certeza que deseja excluir esta candidatura?" %}
+                </h1>
+
+                <p class="delete-description">
+
+                    {% blocktranslate with cargo=candidatura.cargo empresa=candidatura.empresa.name %}
+                        Você está prestes a excluir a candidatura de {{ cargo }} na {{ empresa }}.
+                    {% endblocktranslate %}
+
+                    {% translate "Essa ação não poderá ser desfeita." %}
+
+                </p>
+
+                <div class="candidate-summary">
+
+                    <strong>
+                        {{ candidatura.cargo }}
+                    </strong>
+
+                    <span>
+                        {{ candidatura.empresa.name }}
+                    </span>
+
+                    <span>
+
+                        {% if candidatura.local_vaga %}
+
+                            {{ candidatura.local_vaga }}
+
+                        {% else %}
+
+                            {% translate "Local não informado" %}
+
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    <div class="delete-actions">
+
+                        <a
+                            href="{% url 'detalhe_candidatura' candidatura.id %}"
+                            class="button button-secondary"
+                        >
+                            {% translate "Cancelar" %}
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="button button-danger"
+                        >
+                            {% translate "Excluir candidatura" %}
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

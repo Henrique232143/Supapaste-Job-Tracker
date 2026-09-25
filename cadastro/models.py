@@ -76,10 +76,11 @@ STATUS_CHOICES = [
     ("Desistiu", _("Desistiu")),
 ]
 
-
 class Empresa(models.Model):
-
-    name = models.CharField(max_length=200)
+    
+    name = models.CharField(
+        max_length=200
+    )
 
     name_normalized = models.CharField(
         max_length=200,
@@ -89,19 +90,33 @@ class Empresa(models.Model):
         blank=True
     )
 
-    city = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
-
-    state = models.CharField(
-        max_length=2,
-        blank=True,
-        null=True
-    )
-
     website = models.URLField(
+        blank=True
+    )
+
+    descricao = models.TextField(
+        blank=True
+    )
+
+    setor = models.CharField(
+        max_length=150,
+        blank=True
+    )
+
+    localizacao = models.CharField(
+        max_length=200,
+        blank=True
+    )
+
+    linkedin = models.URLField(
+        blank=True
+    )
+
+    pagina_carreiras = models.URLField(
+        blank=True
+    )
+
+    logo = models.URLField(
         blank=True
     )
 
@@ -135,42 +150,26 @@ class Empresa(models.Model):
 
 
 class EmpresaAlias(models.Model):
-
+    name = models.CharField(max_length=200)
+    name_normalized = models.CharField(
+        max_length=200,
+        unique=True,
+        editable=False
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
     empresa = models.ForeignKey(
         Empresa,
         on_delete=models.CASCADE,
         related_name="aliases"
     )
 
-    name = models.CharField(
-        max_length=200
-    )
-
-    name_normalized = models.CharField(
-        max_length=200,
-        unique=True,
-        editable=False
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
     def save(self, *args, **kwargs):
-
-        self.name = " ".join(
-            self.name.strip().split()
-        )
-
-        self.name_normalized = normalizar_nome(
-            self.name
-        )
-
+        self.name = " ".join(self.name.strip().split())
+        self.name_normalized = normalizar_nome(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} → {self.empresa.name}"
-
+        return f"{self.name} ({self.empresa.name})"
 
 class Cargo(models.Model):
 

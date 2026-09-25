@@ -161,16 +161,36 @@
 
                 <div class="status-area">
 
-                    <span class="status-label">
-                        {% translate "STATUS ATUAL" %}
-                    </span>
+    <span class="status-label">
+        {% translate "STATUS ATUAL" %}
+    </span>
 
 
-                    <span class="status-pill">
-                        {{ candidatura.get_status_display }}
-                    </span>
+    <span class="status-pill">
+        {{ candidatura.get_status_display }}
+    </span>
 
-                </div>
+
+    <div class="hero-actions">
+
+        <a
+            href="{% url 'editar_candidatura' candidatura.id %}"
+            class="hero-action hero-action-edit"
+        >
+            {% translate "Editar" %}
+        </a>
+
+
+        <a
+            href="{% url 'excluir_candidatura' candidatura.id %}"
+            class="hero-action hero-action-delete"
+        >
+            {% translate "Excluir" %}
+        </a>
+
+    </div>
+
+</div>
 
             </section>
 
@@ -396,7 +416,7 @@
                         <div class="info-row">
 
                             <span>
-                                {% translate "Local" %}
+                                {% translate "Local da vaga" %}
                             </span>
 
                             <strong>
@@ -616,8 +636,6 @@
                 {% endif %}
 
             </section>
-
-
 
             <!-- =================================================
                  FOOTER

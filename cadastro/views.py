@@ -5,6 +5,7 @@ from django.shortcuts import (
     redirect,
     get_object_or_404
 )
+from django.db import IntegrityError
 
 from django.urls import reverse
 
@@ -22,11 +23,12 @@ from django.contrib.auth import (
 )
 
 from django.contrib.auth.decorators import login_required
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 
 from .models import (
     Empresa,
     EmpresaAlias,
-    Cargo,
     Candidatura,
     normalizar_nome
 )
@@ -61,6 +63,72 @@ def lista_empresas(request):
         'cadastro/lista_empresas.html',
         {
             'empresas': empresas
+        }
+    )
+
+# =============================================================
+# DETALHE DA EMPRESA
+# =============================================================
+
+@login_required(login_url='login')
+def detalhe_empresa(
+    request,
+    empresa_id
+):
+
+    empresa = get_object_or_404(
+        Empresa,
+        id=empresa_id
+    )
+
+    return render(
+        request,
+        'cadastro/detalhe_empresa.html',
+        {
+            'empresa': empresa,
+        }
+    )
+
+
+@login_required(login_url='login')
+def editar_empresa(
+    request,
+    empresa_id
+):
+
+    empresa = get_object_or_404(
+        Empresa,
+        id=empresa_id
+    )
+
+    if request.method == 'POST':
+
+        form = EmpresaForm(
+            request.POST,
+            instance=empresa
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect(
+                'lista_empresas'
+            )
+
+    else:
+
+        form = EmpresaForm(
+            instance=empresa
+        )
+
+    return render(
+        request,
+        'cadastro/editar_empresa.html',
+        {
+            'form': form,
+
+            'empresa': empresa,
         }
     )
 
@@ -268,21 +336,37 @@ def candidaturas(request):
     # EMPRESAS
     # =========================================================
 
-    empresa_lista = list(
+    empresa_contagem = Counter(
         candidaturas_queryset.values_list(
-            'empresa__name',
+            'empresa_id',
             flat=True
         )
     )
 
-    empresa_contagem = Counter(
-        empresa_lista
-    )
+    empresas_por_id = Empresa.objects.in_bulk(empresa_contagem.keys())
+    empresa_distribuicao = []
 
-    empresa_distribuicao = montar_distribuicao(
-        empresa_contagem,
-        limite=5
-    )
+    for empresa_id, quantidade in empresa_contagem.most_common(5):
+
+        empresa = empresas_por_id.get(empresa_id)
+
+        if empresa is None:
+            continue
+
+        percentual = 0
+
+        if total > 0:
+
+            percentual = round(
+                quantidade / total * 100
+            )
+
+        empresa_distribuicao.append({
+            'empresa_id': empresa.id,
+            'label': empresa.name,
+            'total': quantidade,
+            'percentual': percentual,
+        })
 
 
     # =========================================================
@@ -290,6 +374,7 @@ def candidaturas(request):
     # =========================================================
 
     local_lista = []
+    locais_por_chave = {}
 
     for candidatura in candidaturas_queryset:
 
@@ -302,9 +387,9 @@ def candidaturas(request):
 
             local = 'Não informado'
 
-        local_lista.append(
-            local
-        )
+        chave_local = normalizar_nome(local)
+        locais_por_chave.setdefault(chave_local, local)
+        local_lista.append(chave_local)
 
 
     local_contagem = Counter(
@@ -315,6 +400,9 @@ def candidaturas(request):
         local_contagem,
         limite=5
     )
+
+    for item in local_distribuicao:
+        item['label'] = locais_por_chave[item['label']]
 
 
     # =========================================================
@@ -329,7 +417,9 @@ def candidaturas(request):
 
 
     salario_medio = salarios['media']
+
     salario_maior = salarios['maior']
+
     salario_menor = salarios['menor']
 
 
@@ -619,6 +709,7 @@ def nova_candidatura(request):
             request.POST
         )
 
+
         if form.is_valid():
 
             candidatura = form.save(
@@ -637,13 +728,16 @@ def nova_candidatura(request):
 
         initial = {}
 
+
         if empresa_id:
 
             initial['empresa'] = empresa_id
 
+
         if cargo_id:
 
             initial['cargo_catalogo'] = cargo_id
+
 
         form = CandidaturaForm(
             initial=initial
@@ -807,13 +901,19 @@ def nova_cargo(request):
 
         if form.is_valid():
 
-            cargo = form.save()
+            try:
+                cargo = form.save()
+            except IntegrityError:
+                form.add_error(
+                    'name',
+                    _('Esse cargo já está cadastrado.')
+                )
+            else:
+                return redirect(
+                    f"{reverse('nova_candidatura')}"
+                    f"?cargo={cargo.id}"
+                )
 
-
-            return redirect(
-                f"{reverse('nova_candidatura')}"
-                f"?cargo={cargo.id}"
-            )
 
 
     else:
@@ -845,32 +945,30 @@ def cadastro(request):
                 'first_name'
             ]
 
-            email = form.cleaned_data[
-                'email'
-            ]
+            email = (form.cleaned_data.get('email') or '').strip().lower()
 
             senha = form.cleaned_data[
                 'senha'
             ]
 
+            if not email:
+                form.add_error('email', _('Informe um e-mail.'))
+            elif User.objects.filter(username__iexact=email).exists():
+                form.add_error(
+                    'email',
+                    _('Já existe uma conta com este e-mail.')
+                )
+            else:
+                usuario = User.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=senha,
+                    first_name=nome
+                )
 
-            usuario = User.objects.create_user(
-                username=email,
-                email=email,
-                password=senha,
-                first_name=nome
-            )
+                login(request, usuario)
 
-
-            login(
-                request,
-                usuario
-            )
-
-
-            return redirect(
-                'candidaturas'
-            )
+                return redirect('candidaturas')
 
 
     else:
@@ -891,9 +989,7 @@ def login_usuario(request):
 
     if request.method == 'POST':
 
-        email = request.POST.get(
-            'email'
-        )
+        email = (request.POST.get('email') or '').strip().lower()
 
         senha = request.POST.get(
             'senha'
@@ -944,9 +1040,6 @@ def logout_usuario(request):
     return redirect(
         'login'
     )
-
-
-from django.utils.http import url_has_allowed_host_and_scheme
 
 
 def sugerir_idioma(request):

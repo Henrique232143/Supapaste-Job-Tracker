@@ -359,6 +359,96 @@ a {
 
 
 /* =========================================================
+   AÇÕES DO CABEÇALHO
+   ========================================================= */
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 5px;
+}
+
+
+.hero-action {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.hero-action:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EDITAR
+   ========================================================= */
+
+.hero-action-edit {
+    border: 1px solid #e1e4ec;
+
+    background: #ffffff;
+
+    color: #374151;
+}
+
+
+.hero-action-edit:hover {
+    border-color: #d4d6ff;
+
+    background: #fafaff;
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   EXCLUIR
+   ========================================================= */
+
+.hero-action-delete {
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    color: #9aa1ad;
+}
+
+
+.hero-action-delete:hover {
+    border-color: #fee2e2;
+
+    background: #fff7f7;
+
+    color: #b91c1c;
+}
+
+/* =========================================================
    PROCESSO
    ========================================================= */
 
@@ -1013,6 +1103,125 @@ a {
 
 
 /* =========================================================
+   AÇÕES DA CANDIDATURA
+   ========================================================= */
+
+.detail-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    padding: 10px 4px;
+}
+
+
+.detail-action {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 38px;
+
+    padding: 0 13px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.01em;
+
+    text-decoration: none;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.detail-action:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EDITAR
+   ========================================================= */
+
+.detail-action-edit {
+    gap: 7px;
+
+    border: 1px solid #e1e4ec;
+
+    background: #ffffff;
+
+    color: #374151;
+}
+
+
+.detail-action-edit::before {
+    content: "↗";
+
+    font-size: 12px;
+
+    color: #6366f1;
+}
+
+
+.detail-action-edit:hover {
+    border-color: #d4d6ff;
+
+    background: #fafaff;
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   EXCLUIR
+   ========================================================= */
+
+.detail-action-delete {
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    color: #9aa1ad;
+}
+
+
+.detail-action-delete::before {
+    content: "×";
+
+    margin-right: 6px;
+
+    font-size: 15px;
+
+    line-height: 1;
+}
+
+
+.detail-action-delete:hover {
+    border-color: #fee2e2;
+
+    background: #fff7f7;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
    FOOTER
    ========================================================= */
 
@@ -1167,6 +1376,20 @@ a {
         text-align: left;
 
         white-space: normal;
+    }
+
+
+    .detail-actions {
+        justify-content: stretch;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .detail-action {
+        width: 100%;
     }
 
 

@@ -1,0 +1,536 @@
+# Job Tracker - English translations
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Job Tracker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:37-0300\n"
+"PO-Revision-Date: 2026-09-22 20:20-0300\n"
+"Last-Translator: Job Tracker\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\cadastro\forms.py:26 .\cadastro\forms.py:39
+msgid "Site"
+msgstr ""
+
+#: .\cadastro\forms.py:38 .\cadastro\forms.py:165
+msgid "Empresa"
+msgstr "Company"
+
+#: .\cadastro\forms.py:59
+msgid "Essa empresa já está cadastrada."
+msgstr ""
+
+#: .\cadastro\forms.py:88
+msgid "Digite um endereço de site válido."
+msgstr ""
+
+#: .\cadastro\forms.py:104 .\cadastro\forms.py:134
+msgid "Cargo"
+msgstr "Job title"
+
+#: .\cadastro\forms.py:124
+msgid "Esse cargo já está cadastrado."
+msgstr ""
+
+#: .\cadastro\forms.py:135
+msgid "Selecione um cargo"
+msgstr ""
+
+#: .\cadastro\forms.py:140
+msgid "Salário"
+msgstr "Salary"
+
+#: .\cadastro\forms.py:144
+msgid "Ex.: 3.500,00"
+msgstr ""
+
+#: .\cadastro\forms.py:166
+#, fuzzy
+#| msgid "Nova candidatura"
+msgid "Data da candidatura"
+msgstr "New application"
+
+#: .\cadastro\forms.py:167
+msgid "Link da vaga"
+msgstr ""
+
+#: .\cadastro\forms.py:168
+msgid "Modalidade"
+msgstr ""
+
+#: .\cadastro\forms.py:169
+msgid "Status"
+msgstr "Status"
+
+#: .\cadastro\forms.py:170
+msgid "Observações"
+msgstr ""
+
+#: .\cadastro\forms.py:171
+msgid "Último contato"
+msgstr ""
+
+#: .\cadastro\forms.py:172
+msgid "Local da vaga"
+msgstr ""
+
+#: .\cadastro\forms.py:336
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr ""
+
+#: .\cadastro\forms.py:344
+msgid "O salário não pode ser negativo."
+msgstr ""
+
+#: .\cadastro\forms.py:353
+msgid "Digite um salário dentro de um valor válido."
+msgstr ""
+
+#: .\cadastro\forms.py:399
+msgid "Etapa do processo"
+msgstr ""
+
+#: .\cadastro\forms.py:415
+msgid "Senha"
+msgstr ""
+
+#: .\cadastro\forms.py:420
+msgid "Confirmar senha"
+msgstr ""
+
+#: .\cadastro\forms.py:432
+msgid "Nome"
+msgstr ""
+
+#: .\cadastro\forms.py:433
+msgid "E-mail"
+msgstr ""
+
+#: .\cadastro\forms.py:455
+msgid "As senhas não coincidem."
+msgstr ""
+
+#: .\cadastro\forms.py:473
+msgid "Idioma"
+msgstr "Language"
+
+#: .\cadastro\forms.py:479
+msgid "Ex.: Francês"
+msgstr "E.g.: French"
+
+#: .\cadastro\models.py:57
+msgid "Remoto"
+msgstr ""
+
+#: .\cadastro\models.py:58
+msgid "Híbrido"
+msgstr ""
+
+#: .\cadastro\models.py:59
+msgid "Presencial"
+msgstr ""
+
+#: .\cadastro\models.py:68
+msgid "Aplicado"
+msgstr ""
+
+#: .\cadastro\models.py:69
+msgid "Triagem"
+msgstr ""
+
+#: .\cadastro\models.py:70
+msgid "Entrevista RH"
+msgstr ""
+
+#: .\cadastro\models.py:71
+msgid "Entrevista Gestor"
+msgstr ""
+
+#: .\cadastro\models.py:72
+msgid "Teste Técnico"
+msgstr ""
+
+#: .\cadastro\models.py:73
+msgid "Finalista"
+msgstr ""
+
+#: .\cadastro\models.py:74
+msgid "Aprovado"
+msgstr ""
+
+#: .\cadastro\models.py:75
+msgid "Recusado"
+msgstr ""
+
+#: .\cadastro\models.py:76
+msgid "Desistiu"
+msgstr ""
+
+#~ msgid "Job Tracker — seu painel de candidaturas."
+#~ msgstr "Job Tracker — your job search dashboard."
+
+#~ msgid "Minhas candidaturas"
+#~ msgstr "My applications"
+
+#~ msgid "Sair"
+#~ msgstr "Log out"
+
+#~ msgid "SEU PAINEL"
+#~ msgstr "YOUR DASHBOARD"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                Olá, %(nome)s.\n"
+#~ "                            "
+#~ msgstr ""
+#~ "\n"
+#~ "                                Hello, %(nome)s.\n"
+#~ "                            "
+
+#~ msgid ""
+#~ "Um retrato da sua busca profissional, das oportunidades em andamento e "
+#~ "dos caminhos que você está explorando."
+#~ msgstr ""
+#~ "A snapshot of your job search, the opportunities you're pursuing, and the "
+#~ "career paths you're exploring."
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    candidatura\n"
+#~ "                                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                                    candidaturas\n"
+#~ "                                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                                    application\n"
+#~ "                                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                                    applications\n"
+#~ "                                "
+
+#~ msgid "em andamento"
+#~ msgstr "in progress"
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    entrevista\n"
+#~ "                                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                                    entrevistas\n"
+#~ "                                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                                    interview\n"
+#~ "                                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                                    interviews\n"
+#~ "                                "
+
+#~ msgid ""
+#~ "\n"
+#~ "                                    finalista\n"
+#~ "                                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                                    finalistas\n"
+#~ "                                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                                    finalist\n"
+#~ "                                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                                    finalists\n"
+#~ "                                "
+
+#~ msgid "PRÓXIMO PASSO"
+#~ msgstr "NEXT STEP"
+
+#~ msgid "Registre uma nova oportunidade e mantenha seu histórico atualizado."
+#~ msgstr "Add a new opportunity and keep your application history up to date."
+
+#~ msgid "PROCESSO"
+#~ msgstr "APPLICATION PROCESS"
+
+#~ msgid "Progresso das candidaturas"
+#~ msgstr "Your application progress"
+
+#~ msgid "Distribuição atual"
+#~ msgstr "Current breakdown"
+
+#~ msgid "Suas etapas aparecerão aqui conforme você cadastrar candidaturas."
+#~ msgstr "Your application stages will appear here as you add applications."
+
+#~ msgid "FOCO PROFISSIONAL"
+#~ msgstr "CAREER FOCUS"
+
+#~ msgid "Para quais cargos você está mirando?"
+#~ msgstr "Which roles are you targeting?"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "                                                    candidatura\n"
+#~ "\n"
+#~ "                                                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "\n"
+#~ "                                                    candidaturas\n"
+#~ "\n"
+#~ "                                                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "\n"
+#~ "                                                    application\n"
+#~ "\n"
+#~ "                                                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "\n"
+#~ "                                                    applications\n"
+#~ "\n"
+#~ "                                                "
+
+#~ msgid "MAIOR CONCENTRAÇÃO"
+#~ msgstr "MAIN FOCUS"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                        Representa %(percentual)s%% da "
+#~ "sua busca atual.\n"
+#~ "                                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                                        Represents %(percentual)s%% of "
+#~ "your current job search.\n"
+#~ "                                    "
+
+#~ msgid "Ainda não há dados suficientes."
+#~ msgstr "There isn't enough data yet."
+
+#~ msgid "FINANCEIRO"
+#~ msgstr "SALARY INSIGHTS"
+
+#~ msgid "O que o mercado está oferecendo?"
+#~ msgstr "What salaries are employers offering?"
+
+#~ msgid "MÉDIA DAS VAGAS"
+#~ msgstr "AVERAGE SALARY"
+
+#~ msgid "MENOR"
+#~ msgstr "LOWEST"
+
+#~ msgid "MAIOR"
+#~ msgstr "HIGHEST"
+
+#~ msgid ""
+#~ "Valores baseados apenas nas candidaturas em que você informou uma faixa "
+#~ "salarial."
+#~ msgstr "Based only on applications where you provided salary information."
+
+#~ msgid "Ainda não há dados salariais."
+#~ msgstr "There is no salary data yet."
+
+#~ msgid "Informe o salário das vagas para acompanhar essa métrica."
+#~ msgstr "Enter salary information to track this metric."
+
+#~ msgid "FORMATO"
+#~ msgstr "WORK MODE"
+
+#~ msgid "Como estão distribuídas as vagas?"
+#~ msgstr "How are your applications distributed?"
+
+#~ msgid "Ainda não há modalidades registradas."
+#~ msgstr "No work modes have been added yet."
+
+#~ msgid "EMPRESAS"
+#~ msgstr "COMPANIES"
+
+#~ msgid "Onde você está se candidatando?"
+#~ msgstr "Where are you applying?"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                                %(percentual)s%% do "
+#~ "total\n"
+#~ "                                            "
+#~ msgstr ""
+#~ "\n"
+#~ "                                                %(percentual)s%% of "
+#~ "total\n"
+#~ "                                            "
+
+#~ msgid "Ainda não há empresas registradas."
+#~ msgstr "No companies have been added yet."
+
+#~ msgid "HISTÓRICO"
+#~ msgstr "APPLICATION HISTORY"
+
+#~ msgid "Candidaturas recentes"
+#~ msgstr "Recent applications"
+
+#~ msgid "As oportunidades que você adicionou mais recentemente."
+#~ msgstr "The opportunities you've added most recently."
+
+#~ msgid "Local"
+#~ msgstr "Location"
+
+#~ msgid "Data"
+#~ msgstr "Date"
+
+#~ msgid "Ação"
+#~ msgstr "Action"
+
+#~ msgid "Não informado"
+#~ msgstr "Not specified"
+
+#~ msgid "Ver detalhes"
+#~ msgstr "View details"
+
+#~ msgid "Ainda não há candidaturas."
+#~ msgstr "There are no applications yet."
+
+#~ msgid "Comece registrando uma oportunidade para alimentar seu painel."
+#~ msgstr "Start by adding an opportunity to populate your dashboard."
+
+#~ msgid "Adicionar candidatura"
+#~ msgstr "Add application"
+
+#~ msgid "Organize sua busca. Acompanhe sua evolução."
+#~ msgstr "Organize your job search. Track your progress."
+
+#~ msgid "Sugerir outro idioma"
+#~ msgstr "Suggest another language"
+
+#~ msgid "Enviar"
+#~ msgstr "Submit"
+
+msgid "Site"
+msgstr "Website"
+
+msgid "Empresa"
+msgstr "Company"
+
+msgid "Essa empresa já está cadastrada."
+msgstr "This company is already registered."
+
+msgid "Digite um endereço de site válido."
+msgstr "Enter a valid website address."
+
+msgid "Cargo"
+msgstr "Job title"
+
+msgid "Esse cargo já está cadastrado."
+msgstr "This job title is already registered."
+
+msgid "Selecione um cargo"
+msgstr "Select a job title"
+
+msgid "Salário"
+msgstr "Salary"
+
+msgid "Ex.: 3.500,00"
+msgstr "E.g.: 3,500.00"
+
+msgid "Data da candidatura"
+msgstr "Application date"
+
+msgid "Link da vaga"
+msgstr "Job listing link"
+
+msgid "Modalidade"
+msgstr "Work mode"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Observações"
+msgstr "Notes"
+
+msgid "Último contato"
+msgstr "Last contact"
+
+msgid "Local da vaga"
+msgstr "Job location"
+
+msgid "Digite um salário válido. Exemplo: 3.500,00"
+msgstr "Enter a valid salary. Example: 3,500.00"
+
+msgid "O salário não pode ser negativo."
+msgstr "Salary cannot be negative."
+
+msgid "Digite um salário dentro de um valor válido."
+msgstr "Enter a valid salary amount."
+
+msgid "Etapa do processo"
+msgstr "Application stage"
+
+msgid "Senha"
+msgstr "Password"
+
+msgid "Confirmar senha"
+msgstr "Confirm password"
+
+msgid "Nome"
+msgstr "Name"
+
+msgid "E-mail"
+msgstr "Email"
+
+msgid "As senhas não coincidem."
+msgstr "The passwords do not match."
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Remoto"
+msgstr "Remote"
+
+msgid "Híbrido"
+msgstr "Hybrid"
+
+msgid "Presencial"
+msgstr "On-site"
+
+msgid "Aplicado"
+msgstr "Applied"
+
+msgid "Triagem"
+msgstr "Screening"
+
+msgid "Entrevista RH"
+msgstr "HR Interview"
+
+msgid "Entrevista Gestor"
+msgstr "Hiring Manager Interview"
+
+msgid "Teste Técnico"
+msgstr "Technical Test"
+
+msgid "Finalista"
+msgstr "Finalist"
+
+msgid "Aprovado"
+msgstr "Accepted"
+
+msgid "Recusado"
+msgstr "Rejected"
+
+msgid "Desistiu"
+msgstr "Withdrawn"
+

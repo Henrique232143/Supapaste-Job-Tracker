@@ -40,7 +40,7 @@ class EmpresaForm(forms.ModelForm):
         }
 
     def clean_name(self):
-
+        
         nome = self.cleaned_data["name"]
 
         nome = " ".join(
@@ -60,7 +60,7 @@ class EmpresaForm(forms.ModelForm):
             )
 
         return nome
-
+    
     def clean_website(self):
 
         website = self.cleaned_data.get(
@@ -104,27 +104,35 @@ class CargoForm(forms.ModelForm):
             "name": _("Cargo"),
         }
 
-    def clean_name(self):
+def clean_name(self):
+    
+    nome = self.cleaned_data["name"]
 
-        nome = self.cleaned_data["name"]
+    nome = " ".join(
+        nome.strip().split()
+    )
 
-        nome = " ".join(
-            nome.strip().split()
+    nome_normalizado = normalizar_nome(
+        nome
+    )
+
+    consulta = Empresa.objects.filter(
+        name_normalized=nome_normalizado
+    )
+
+    if self.instance.pk:
+
+        consulta = consulta.exclude(
+            pk=self.instance.pk
         )
 
-        nome_normalizado = normalizar_nome(
-            nome
+    if consulta.exists():
+
+        raise forms.ValidationError(
+            _("Essa empresa já está cadastrada.")
         )
 
-        if Cargo.objects.filter(
-            name_normalized=nome_normalizado
-        ).exists():
-
-            raise forms.ValidationError(
-                _("Esse cargo já está cadastrado.")
-            )
-
-        return nome
+    return nome   
 
 class CandidaturaForm(forms.ModelForm):
 
