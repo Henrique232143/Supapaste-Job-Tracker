@@ -34,12 +34,6 @@ urlpatterns = [
     ),
 
     path(
-        'empresas/<int:empresa_id>/editar/',
-        views.editar_empresa,
-        name='editar_empresa'
-    ),
-
-    path(
         'empresas/<int:empresa_id>/usar/',
         views.usar_empresa_existente,
         name='usar_empresa_existente'

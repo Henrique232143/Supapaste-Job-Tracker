@@ -1,0 +1,1797 @@
+/* =========================================================
+   JOB TRACKER — DARK MODE
+   Tema global da aplicação
+   ========================================================= */
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --primary: #8b8eea;
+    --primary-hover: #a0a2f1;
+    --primary-light: #27294d;
+    --blue: #72a7ff;
+    --blue-light: #182743;
+    --purple: #ad8cff;
+    --purple-light: #2b2147;
+    --success: #55d982;
+    --warning: #f4c95d;
+    --danger: #ff7676;
+    --background: #0d1017;
+    --surface: #151922;
+    --surface-alt: #10141c;
+    --text: #f3f5f9;
+    --text-secondary: #aab1c0;
+    --text-muted: #98a2b3;
+    --border: #292f3b;
+    --border-light: #202530;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.22);
+    background: var(--background);
+}
+
+html[data-theme="dark"] body {
+    background: var(--background) !important;
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .page-content {
+    background: var(--background);
+}
+
+html[data-theme="dark"] ::selection {
+    background: rgba(139, 142, 234, 0.30);
+    color: #ffffff;
+}
+
+/* =========================================================
+   NAVBAR GLOBAL
+   ========================================================= */
+
+html[data-theme="dark"] .navbar {
+    background: rgba(15, 18, 26, 0.94) !important;
+    border-bottom-color: var(--border) !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+html[data-theme="dark"] .navbar-brand,
+html[data-theme="dark"] .brand-name {
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .navbar-links a:not(.navbar-signup-link) {
+    color: var(--text-secondary) !important;
+}
+
+html[data-theme="dark"] .navbar-links a:not(.navbar-signup-link):hover {
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .navbar-links .active {
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .navbar-login-link {
+    color: var(--text) !important;
+}
+
+/* =========================================================
+   BOTÃO DO TEMA
+   ========================================================= */
+
+html[data-theme="dark"] .theme-toggle {
+    border-color: var(--border) !important;
+    background: #181d27 !important;
+    color: #dfe3ec !important;
+}
+
+html[data-theme="dark"] .theme-toggle:hover {
+    background: var(--primary-light) !important;
+    border-color: #5558c7 !important;
+    color: #ffffff !important;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+html[data-theme="dark"] .site-footer {
+    background: #10141c !important;
+    border-top-color: var(--border) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+html[data-theme="dark"] .loading-screen {
+    background: rgba(5, 8, 13, 0.72) !important;
+}
+
+html[data-theme="dark"] .loading-content {
+    background: rgba(21, 25, 34, 0.97) !important;
+    border-color: var(--border) !important;
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .loading-spinner {
+    border-color: #303746 !important;
+    border-top-color: var(--primary) !important;
+}
+
+/* =========================================================
+   =========================================================
+   AUTH — LOGIN / CADASTRO
+   ========================================================= */
+
+html[data-theme="dark"] .form-page {
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(99, 102, 241, 0.09),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59, 130, 246, 0.07),
+            transparent 30%
+        ),
+        var(--background) !important;
+}
+
+html[data-theme="dark"] .form-field label {
+    color: #d8dce5 !important;
+}
+
+html[data-theme="dark"] .form-field input,
+html[data-theme="dark"] .form-field textarea,
+html[data-theme="dark"] .form-field select {
+    border-color: var(--border) !important;
+    background-color: #10141c !important;
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .form-field input::placeholder,
+html[data-theme="dark"] .form-field textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .form-field input:hover,
+html[data-theme="dark"] .form-field textarea:hover,
+html[data-theme="dark"] .form-field select:hover {
+    border-color: #3a4251 !important;
+}
+
+html[data-theme="dark"] .form-field input:focus,
+html[data-theme="dark"] .form-field textarea:focus,
+html[data-theme="dark"] .form-field select:focus {
+    border-color: #7578df !important;
+    box-shadow:
+        0 0 0 3px rgba(117, 120, 223, 0.14) !important;
+}
+
+html[data-theme="dark"] .field-error,
+html[data-theme="dark"] .field-errors {
+    color: #ff8080 !important;
+}
+
+html[data-theme="dark"] .form-errors {
+    border-color: #652b32 !important;
+    background: #281719 !important;
+    color: #ff9696 !important;
+}
+
+html[data-theme="dark"] .form-actions {
+    border-top-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .form-footer {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .button-secondary {
+    border-color: var(--border) !important;
+    background: #181d27 !important;
+    color: #d9dde6 !important;
+}
+
+html[data-theme="dark"] .btn-secondary:hover,
+html[data-theme="dark"] .button-secondary:hover {
+    border-color: #424a5b !important;
+    background: #202632 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .button-primary {
+    border-color: #777adb !important;
+    background: #5558c7 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .btn-primary:hover,
+html[data-theme="dark"] .button-primary:hover {
+    border-color: #8588e5 !important;
+    background: #6265ce !important;
+}
+
+/* =========================================================
+   LOGIN / AUTH — ELEMENTOS ESPECÍFICOS
+   ========================================================= */
+
+html[data-theme="dark"] .auth-page {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .auth-card {
+    background: var(--surface) !important;
+    border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .auth-title,
+html[data-theme="dark"] .auth-card h1,
+html[data-theme="dark"] .auth-card h2 {
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .auth-subtitle,
+html[data-theme="dark"] .auth-card p {
+    color: var(--text-secondary) !important;
+}
+
+html[data-theme="dark"] .auth-card input {
+    background-color: #10141c !important;
+    border-color: var(--border) !important;
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .auth-card input::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* =========================================================
+   =========================================================
+   LANDING
+   ========================================================= */
+
+html[data-theme="dark"] .navbar-signup-link {
+    background: #5558c7 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .navbar-signup-link:hover {
+    background: #5558c7 !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 8px 22px rgba(85, 88, 199, 0.24) !important;
+}
+
+html[data-theme="dark"] .landing-hero {
+    background:
+        radial-gradient(
+            circle at 16% 18%,
+            rgba(91, 86, 220, 0.16),
+            transparent 33%
+        ),
+        radial-gradient(
+            circle at 83% 72%,
+            rgba(58, 123, 255, 0.09),
+            transparent 32%
+        ),
+        var(--background) !important;
+}
+
+html[data-theme="dark"] .landing-hero::before {
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        ) !important;
+}
+
+html[data-theme="dark"] .landing-kicker {
+    color: #9b9df0 !important;
+}
+
+html[data-theme="dark"] .landing-kicker-line {
+    background: #5558c7 !important;
+}
+
+html[data-theme="dark"] .landing-hero h1 {
+    color: #f7f8fc !important;
+}
+
+html[data-theme="dark"] .landing-hero h1 span {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .landing-hero-description {
+    color: #aeb5c5 !important;
+}
+
+html[data-theme="dark"] .landing-button-primary {
+    background: #5558c7 !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 10px 26px rgba(102, 105, 215, 0.20) !important;
+}
+
+html[data-theme="dark"] .landing-button-primary:hover {
+    background: #6265ce !important;
+    box-shadow:
+        0 14px 32px rgba(102, 105, 215, 0.28) !important;
+}
+
+html[data-theme="dark"] .landing-button-secondary {
+    border-color: var(--border) !important;
+    background: #171c25 !important;
+    color: #dfe3eb !important;
+}
+
+html[data-theme="dark"] .landing-button-secondary:hover {
+    border-color: #444c5b !important;
+    background: #202630 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .landing-hero-note {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .landing-note-check {
+    color: #69dc91 !important;
+}
+
+html[data-theme="dark"] .landing-product {
+    background: transparent !important;
+}
+
+html[data-theme="dark"] .product-glow {
+    background:
+        radial-gradient(
+            circle,
+            rgba(96, 93, 231, 0.19),
+            transparent 66%
+        ) !important;
+}
+
+html[data-theme="dark"] .product-window {
+    border-color: #303746 !important;
+    background: #131821 !important;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.34) !important;
+}
+
+html[data-theme="dark"] .landing-product:hover .product-window {
+    box-shadow:
+        0 34px 92px rgba(0, 0, 0, 0.42) !important;
+}
+
+html[data-theme="dark"] .product-window-header {
+    background: #171d27 !important;
+}
+
+html[data-theme="dark"] .product-window-brand {
+    color: #eef0f6 !important;
+}
+
+html[data-theme="dark"] .product-mini-mark {
+    background: #6266d1 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .product-window-user {
+    color: #8d96a8 !important;
+}
+
+html[data-theme="dark"] .product-content {
+    background: #10151d !important;
+}
+
+html[data-theme="dark"] .product-heading span {
+    color: #8c95a7 !important;
+}
+
+html[data-theme="dark"] .product-heading strong {
+    color: #f0f2f7 !important;
+}
+
+html[data-theme="dark"] .product-heading-button {
+    background: #232936 !important;
+    color: #d9deea !important;
+}
+
+html[data-theme="dark"] .product-metric {
+    border-color: #2b313d !important;
+    background: #171c25 !important;
+}
+
+html[data-theme="dark"] .product-metric span {
+    color: #8c95a7 !important;
+}
+
+html[data-theme="dark"] .product-metric strong {
+    color: #f1f3f7 !important;
+}
+
+html[data-theme="dark"] .product-section {
+    border-color: #2b313d !important;
+    background: #151a22 !important;
+}
+
+html[data-theme="dark"] .product-section-heading strong {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .product-section-heading span {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .product-pipeline-label {
+    color: #8e97a8 !important;
+}
+
+html[data-theme="dark"] .product-pipeline-label strong {
+    color: #e8ebf2 !important;
+}
+
+html[data-theme="dark"] .product-pipeline-track {
+    background: #292f3b !important;
+}
+
+html[data-theme="dark"] .product-pipeline-track span {
+    background: #5558c7 !important;
+}
+
+html[data-theme="dark"] .product-application {
+    background: #171c25 !important;
+    border-color: #2a303b !important;
+}
+
+html[data-theme="dark"] .product-company-mark {
+    background: #242936 !important;
+    color: #dfe4ee !important;
+}
+
+html[data-theme="dark"] .company-purple {
+    background: #2c2245 !important;
+    color: #bd9cff !important;
+}
+
+html[data-theme="dark"] .company-green {
+    background: #183629 !important;
+    color: #70df98 !important;
+}
+
+html[data-theme="dark"] .product-application-info strong {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .product-application-info span {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .status-blue {
+    background: #1b304c !important;
+    color: #79b0ff !important;
+}
+
+html[data-theme="dark"] .status-purple {
+    background: #2b2147 !important;
+    color: #bd9cff !important;
+}
+
+html[data-theme="dark"] .status-green {
+    background: #183629 !important;
+    color: #70df98 !important;
+}
+
+html[data-theme="dark"] .product-floating-stat {
+    border-color: #313846 !important;
+    background: rgba(21, 25, 34, 0.96) !important;
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.28) !important;
+}
+
+html[data-theme="dark"] .floating-stat-icon {
+    background: #28284d !important;
+    color: #9ea0f2 !important;
+}
+
+html[data-theme="dark"] .product-floating-stat strong {
+    color: #f0f2f7 !important;
+}
+
+html[data-theme="dark"] .product-floating-stat span {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .landing-numbers {
+    background: #10141c !important;
+}
+
+html[data-theme="dark"] .landing-number strong {
+    color: #f2f4f8 !important;
+}
+
+html[data-theme="dark"] .landing-number span {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .landing-number-separator {
+    background: #2b313c !important;
+}
+
+html[data-theme="dark"] .landing-intro {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .landing-label {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .landing-intro h2 {
+    color: #f1f3f7 !important;
+}
+
+html[data-theme="dark"] .landing-intro-copy p {
+    color: #a4adbd !important;
+}
+
+html[data-theme="dark"] .landing-features {
+    background: #10141c !important;
+}
+
+html[data-theme="dark"] .landing-section-header h2 {
+    color: #f0f2f7 !important;
+}
+
+html[data-theme="dark"] .landing-feature {
+    border-color: #2b313d !important;
+    background: #151a22 !important;
+}
+
+html[data-theme="dark"] .landing-feature:hover {
+    border-color: #454c5d !important;
+    box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.20) !important;
+}
+
+html[data-theme="dark"] .landing-feature-number {
+    color: #7c85a0 !important;
+}
+
+html[data-theme="dark"] .landing-feature-icon {
+    background: #27294d !important;
+    color: #a2a4f2 !important;
+}
+
+html[data-theme="dark"] .feature-purple {
+    background: #2c2245 !important;
+    color: #bd9cff !important;
+}
+
+html[data-theme="dark"] .feature-blue {
+    background: #1c2e49 !important;
+    color: #79b0ff !important;
+}
+
+html[data-theme="dark"] .landing-feature h3 {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .landing-feature p {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .feature-line {
+    background: #2b313d !important;
+}
+
+html[data-theme="dark"] .landing-final {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .landing-final-inner {
+    border-color: #313746 !important;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(98, 99, 211, 0.15),
+            transparent 34%
+        ),
+        #171b25 !important;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme="dark"] .landing-final-inner h2 {
+    color: #f3f5f8 !important;
+}
+
+html[data-theme="dark"] .landing-final-inner p {
+    color: #a6afbf !important;
+}
+
+html[data-theme="dark"] .landing-button-final {
+    background: #5558c7 !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 10px 26px rgba(102, 105, 215, 0.18) !important;
+}
+
+html[data-theme="dark"] .landing-button-final:hover {
+    background: #6265ce !important;
+    box-shadow:
+        0 14px 32px rgba(102, 105, 215, 0.28) !important;
+}
+
+html[data-theme="dark"] .landing-final-login {
+    color: #adb4c3 !important;
+}
+
+html[data-theme="dark"] .landing-final-login:hover {
+    color: #ffffff !important;
+}
+
+/* =========================================================
+   =========================================================
+   CANDIDATURAS — DASHBOARD
+   ========================================================= */
+
+html[data-theme="dark"] .dashboard-container {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .dashboard-header h1 {
+    color: #f3f5f9 !important;
+}
+
+html[data-theme="dark"] .dashboard-header p {
+    color: #a5adbc !important;
+}
+
+html[data-theme="dark"] .section-eyebrow {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .dashboard-button {
+    background: #5558c7 !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 9px 24px rgba(102, 105, 215, 0.20) !important;
+}
+
+html[data-theme="dark"] .dashboard-button:hover {
+    background: #6265ce !important;
+    box-shadow:
+        0 13px 30px rgba(102, 105, 215, 0.26) !important;
+}
+
+html[data-theme="dark"] .metric-card {
+    background: #151a22 !important;
+    border-color: #2b313d !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.16) !important;
+}
+
+html[data-theme="dark"] .metric-card:hover {
+    border-color: #434b5c !important;
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.21) !important;
+}
+
+html[data-theme="dark"] .metric-label {
+    color: #8f98aa !important;
+}
+
+html[data-theme="dark"] .metric-icon-primary {
+    background: #29294d !important;
+    color: #9da0ef !important;
+}
+
+html[data-theme="dark"] .metric-icon-blue {
+    background: #1b304c !important;
+    color: #78afff !important;
+}
+
+html[data-theme="dark"] .metric-icon-purple {
+    background: #2b2147 !important;
+    color: #bd9cff !important;
+}
+
+html[data-theme="dark"] .metric-icon-success {
+    background: #183629 !important;
+    color: #70df98 !important;
+}
+
+html[data-theme="dark"] .metric-value {
+    color: #f1f4f8 !important;
+}
+
+html[data-theme="dark"] .metric-description {
+    color: #838d9f !important;
+}
+
+html[data-theme="dark"] .section-heading h2 {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .section-heading p {
+    color: #8f98a9 !important;
+}
+
+html[data-theme="dark"] .section-link {
+    color: #979af0 !important;
+}
+
+html[data-theme="dark"] .section-link:hover {
+    color: #b1b3f7 !important;
+}
+
+html[data-theme="dark"] .pipeline {
+    background: #151a22 !important;
+    border-color: #2b313d !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.16) !important;
+}
+
+html[data-theme="dark"] .pipeline-info {
+    color: #929bac !important;
+}
+
+html[data-theme="dark"] .pipeline-info strong {
+    color: #e9ecf2 !important;
+}
+
+html[data-theme="dark"] .pipeline-track {
+    background: #292f3b !important;
+}
+
+html[data-theme="dark"] .pipeline-bar {
+    background: #5558c7 !important;
+}
+
+html[data-theme="dark"] .applications-table-wrapper {
+    background: #151a22 !important;
+    border-color: #2b313d !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.16) !important;
+}
+
+html[data-theme="dark"] .applications-table thead {
+    background: #11161e !important;
+}
+
+html[data-theme="dark"] .applications-table th {
+    color: #8d96a8 !important;
+    border-bottom-color: #2b313d !important;
+}
+
+html[data-theme="dark"] .applications-table td {
+    color: #dfe3ea !important;
+    border-bottom-color: #252b35 !important;
+}
+
+html[data-theme="dark"] .application-row:hover {
+    background: #1a202a !important;
+}
+
+html[data-theme="dark"] .company-info strong,
+html[data-theme="dark"] .job-name {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .date-text {
+    color: #8f98a9 !important;
+}
+
+html[data-theme="dark"] .modality-badge {
+    background: #202735 !important;
+    color: #aeb7c7 !important;
+}
+
+html[data-theme="dark"] .status-badge {
+    background: #202735 !important;
+    color: #bbc3d1 !important;
+}
+
+html[data-theme="dark"] .status-aprovada,
+html[data-theme="dark"] .status-aprovado {
+    background: #183629 !important;
+    color: #70df98 !important;
+}
+
+html[data-theme="dark"] .status-recusada,
+html[data-theme="dark"] .status-recusado {
+    background: #351b20 !important;
+    color: #ff8585 !important;
+}
+
+html[data-theme="dark"] .empty-state {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .empty-state-icon {
+    background: #25294b !important;
+    color: #a0a3ed !important;
+}
+
+html[data-theme="dark"] .empty-state h3 {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .empty-state p {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .table-empty {
+    border-color: #2b313d !important;
+}
+
+html[data-theme="dark"] .analytics-card {
+    background: #151a22 !important;
+    border-color: #2b313d !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.16) !important;
+}
+
+html[data-theme="dark"] .analytics-card:hover {
+    border-color: #434b5c !important;
+}
+
+html[data-theme="dark"] .analytics-card-header h3 {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .analytics-row {
+    border-bottom-color: #252b35 !important;
+}
+
+html[data-theme="dark"] .analytics-row-label {
+    color: #9aa3b4 !important;
+}
+
+html[data-theme="dark"] .analytics-row-value {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .analytics-empty {
+    color: #7f899b !important;
+}
+
+html[data-theme="dark"] .company-analytics-row {
+    border-bottom-color: #252b35 !important;
+}
+
+html[data-theme="dark"] .company-analytics-row:hover {
+    background: #1a202a !important;
+}
+
+html[data-theme="dark"] .company-analytics-main {
+    color: #e6eaf1 !important;
+}
+
+html[data-theme="dark"] .company-mini-avatar {
+    background: #252a37 !important;
+    color: #a8abf0 !important;
+}
+
+html[data-theme="dark"] .company-analytics-data span {
+    color: #838d9f !important;
+}
+
+html[data-theme="dark"] .company-analytics-data strong {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .salary-highlight {
+    background: #1c2130 !important;
+}
+
+html[data-theme="dark"] .salary-highlight span {
+    color: #8e98aa !important;
+}
+
+html[data-theme="dark"] .salary-highlight strong {
+    color: #f0f2f7 !important;
+}
+
+html[data-theme="dark"] .salary-range span {
+    color: #8e98aa !important;
+}
+
+html[data-theme="dark"] .salary-range strong {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .analytics-card-highlight {
+    background: #1a1d39 !important;
+}
+
+html[data-theme="dark"] .focus-content strong {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .focus-content span {
+    color: #8d96a8 !important;
+}
+
+/* =========================================================
+   =========================================================
+   DETALHE DA CANDIDATURA
+   ========================================================= */
+
+html[data-theme="dark"] .detail-page {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .detail-hero,
+html[data-theme="dark"] .observations-card,
+html[data-theme="dark"] .process-card,
+html[data-theme="dark"] .info-card {
+    border-color: #2b313d !important;
+    background: #151a22 !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.15) !important;
+}
+
+html[data-theme="dark"] .detail-hero h1,
+html[data-theme="dark"] .card-heading h2 {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .card-eyebrow {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .company-heading strong,
+html[data-theme="dark"] .status-update-info strong,
+html[data-theme="dark"] .closed-process strong,
+html[data-theme="dark"] .observation-empty strong {
+    color: #e9edf3 !important;
+}
+
+html[data-theme="dark"] .company-heading span,
+html[data-theme="dark"] .status-label,
+html[data-theme="dark"] .closed-process span,
+html[data-theme="dark"] .detail-footer,
+html[data-theme="dark"] .detail-footer span:first-child {
+    color: #858fa1 !important;
+}
+
+html[data-theme="dark"] .status-pill {
+    border-color: #3a3d6e !important;
+    background: #202340 !important;
+    color: #aeb1f1 !important;
+}
+
+html[data-theme="dark"] .hero-action-edit,
+html[data-theme="dark"] .detail-action-edit {
+    border-color: #303745 !important;
+    background: #191e27 !important;
+    color: #d5dae4 !important;
+}
+
+html[data-theme="dark"] .hero-action-edit:hover,
+html[data-theme="dark"] .detail-action-edit:hover {
+    border-color: #454c60 !important;
+    background: #202631 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .hero-action-delete,
+html[data-theme="dark"] .detail-action-delete {
+    color: #8e97a8 !important;
+}
+
+html[data-theme="dark"] .hero-action-delete:hover,
+html[data-theme="dark"] .detail-action-delete:hover {
+    border-color: #5a292f !important;
+    background: #2c181b !important;
+    color: #ff8585 !important;
+}
+
+html[data-theme="dark"] .process-stage .stage-dot {
+    border-color: #343b49 !important;
+    background: #1a2029 !important;
+    color: #7c8697 !important;
+}
+
+html[data-theme="dark"] .process-stage span:last-child {
+    color: #7f899a !important;
+}
+
+html[data-theme="dark"] .stage-connector {
+    background: #2b313d !important;
+}
+
+html[data-theme="dark"] .stage-done .stage-dot {
+    border-color: #434776 !important;
+    background: #27294d !important;
+    color: #a3a6ef !important;
+}
+
+html[data-theme="dark"] .stage-done span:last-child {
+    color: #9ca5b5 !important;
+}
+
+html[data-theme="dark"] .stage-current .stage-dot {
+    border-color: #7074d5 !important;
+    background: #7074d5 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .stage-current span:last-child {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .closed-process {
+    border-color: #2b313d !important;
+    background: #11161e !important;
+}
+
+html[data-theme="dark"] .closed-icon {
+    background: #222832 !important;
+    color: #9ba4b5 !important;
+}
+
+html[data-theme="dark"] .status-update-info span {
+    color: #9296ed !important;
+}
+
+html[data-theme="dark"] .status-update-info p {
+    color: #858fa0 !important;
+}
+
+html[data-theme="dark"] .status-select {
+    border-color: var(--border) !important;
+    background: #10141c !important;
+    color: #e3e7ef !important;
+}
+
+html[data-theme="dark"] .status-select:hover {
+    border-color: #424a59 !important;
+}
+
+html[data-theme="dark"] .status-update-button {
+    border-color: #7074d5 !important;
+    background: #7074d5 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .status-update-button:hover {
+    background: #8084df !important;
+}
+
+html[data-theme="dark"] .info-row {
+    border-bottom-color: #252b35 !important;
+}
+
+html[data-theme="dark"] .info-row span {
+    color: #838d9f !important;
+}
+
+html[data-theme="dark"] .info-row strong {
+    color: #e4e8ef !important;
+}
+
+html[data-theme="dark"] .date-highlight {
+    border-color: #343962 !important;
+    background: #1b1e34 !important;
+}
+
+html[data-theme="dark"] .date-highlight span {
+    color: #8e96ac !important;
+}
+
+html[data-theme="dark"] .date-highlight strong {
+    color: #e8ebf2 !important;
+}
+
+html[data-theme="dark"] .external-link {
+    color: #9296ed !important;
+}
+
+html[data-theme="dark"] .external-link:hover {
+    color: #b0b2f4 !important;
+}
+
+html[data-theme="dark"] .observation-content {
+    border-color: #2b313d !important;
+    background: #11161e !important;
+    color: #b6bfcd !important;
+}
+
+html[data-theme="dark"] .observation-empty {
+    background: #11161e !important;
+}
+
+html[data-theme="dark"] .empty-note-icon {
+    background: #27294d !important;
+    color: #9ca0ef !important;
+}
+
+html[data-theme="dark"] .observation-empty span {
+    color: #858fa0 !important;
+}
+
+html[data-theme="dark"] .detail-action-edit::before {
+    color: #9ca0ef !important;
+}
+
+/* =========================================================
+   =========================================================
+   EDITAR CANDIDATURA
+   ========================================================= */
+
+html[data-theme="dark"] .edit-page {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .edit-header h1 {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .edit-header p {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .form-group label {
+    color: #dbe0e8 !important;
+}
+
+html[data-theme="dark"] .form-group textarea {
+    border-color: var(--border) !important;
+    background-color: #10141c !important;
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .form-group textarea:focus {
+    border-color: #8084df !important;
+    box-shadow:
+        0 0 0 4px rgba(128, 132, 223, 0.14) !important;
+}
+
+html[data-theme="dark"] .help-text {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .field-errors {
+    color: #ff8080 !important;
+}
+
+html[data-theme="dark"] .form-card {
+    background: #151a22 !important;
+    border-color: #2b313d !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22),
+        0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* =========================================================
+   =========================================================
+   EXCLUIR CANDIDATURA
+   ========================================================= */
+
+html[data-theme="dark"] .delete-page {
+    background: var(--background) !important;
+}
+
+html[data-theme="dark"] .delete-card {
+    border-color: #2b313d !important;
+    background: #151a22 !important;
+    box-shadow:
+        0 14px 36px rgba(0, 0, 0, 0.20) !important;
+}
+
+html[data-theme="dark"] .delete-icon {
+    border-color: #583035 !important;
+    background: #2b181b !important;
+    color: #ff8585 !important;
+}
+
+html[data-theme="dark"] .delete-card h1 {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .delete-description {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .candidate-summary {
+    border-color: #2b313d !important;
+    background: #11161e !important;
+}
+
+html[data-theme="dark"] .candidate-summary strong {
+    color: #e8ebf1 !important;
+}
+
+html[data-theme="dark"] .candidate-summary span {
+    color: #858fa1 !important;
+}
+
+html[data-theme="dark"] .button-secondary {
+    border-color: #303745 !important;
+    background: #191e27 !important;
+    color: #d9dee8 !important;
+}
+
+html[data-theme="dark"] .button-secondary:hover {
+    border-color: #444b5b !important;
+    background: #202630 !important;
+}
+
+html[data-theme="dark"] .button-danger {
+    border-color: #b95159 !important;
+    background: #a83f49 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .button-danger:hover {
+    background: #bb4c55 !important;
+    border-color: #c35a62 !important;
+}
+
+/* =========================================================
+   =========================================================
+   NOVA EMPRESA
+   ========================================================= */
+
+html[data-theme="dark"] .similarity-box {
+    border-color: #343b66 !important;
+    background: #181c30 !important;
+}
+
+html[data-theme="dark"] .similarity-icon {
+    background: #27294d !important;
+    color: #a2a5f2 !important;
+}
+
+html[data-theme="dark"] .similarity-header strong {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .similarity-header p {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .similarity-item {
+    border-color: #2b313d !important;
+    background: #151a22 !important;
+}
+
+html[data-theme="dark"] .similarity-company strong {
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .similarity-company span {
+    color: #858fa1 !important;
+}
+
+html[data-theme="dark"] .company-avatar {
+    background: #252a37 !important;
+    color: #a4a7f0 !important;
+}
+
+html[data-theme="dark"] .similarity-score {
+    color: #9b9eef !important;
+}
+
+html[data-theme="dark"] .btn-use {
+    border-color: #303745 !important;
+    background: #191e27 !important;
+    color: #d5dae4 !important;
+}
+
+html[data-theme="dark"] .btn-use:hover {
+    background: #202630 !important;
+    border-color: #676bd2 !important;
+    color: #a8aaf2 !important;
+}
+
+html[data-theme="dark"] .similarity-footer {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .similarity-footer strong {
+    color: #9aa3b3 !important;
+}
+
+/* =========================================================
+   =========================================================
+   NOVO CARGO / FORMULÁRIOS DE EMPRESA
+   ========================================================= */
+
+html[data-theme="dark"] .back-link {
+    color: #979bf0 !important;
+}
+
+html[data-theme="dark"] .back-link:hover {
+    color: #b0b2f4 !important;
+}
+
+html[data-theme="dark"] .page-eyebrow {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .form-header h1 {
+    color: #eef1f6 !important;
+}
+
+html[data-theme="dark"] .form-header p {
+    color: #929bab !important;
+}
+
+html[data-theme="dark"] .form-page .form-card {
+    background: rgba(21, 25, 34, 0.97) !important;
+}
+
+html[data-theme="dark"] .form-page .form-field input,
+html[data-theme="dark"] .form-page .form-field textarea,
+html[data-theme="dark"] .form-page .form-field select {
+    border-color: var(--border) !important;
+    background-color: #10141c !important;
+    color: #edf0f5 !important;
+}
+
+html[data-theme="dark"] .form-page .form-field input:hover,
+html[data-theme="dark"] .form-page .form-field textarea:hover,
+html[data-theme="dark"] .form-page .form-field select:hover {
+    border-color: #414958 !important;
+}
+
+html[data-theme="dark"] .form-page .form-field input:focus,
+html[data-theme="dark"] .form-page .form-field textarea:focus,
+html[data-theme="dark"] .form-page .form-field select:focus {
+    border-color: #777be0 !important;
+}
+
+html[data-theme="dark"] .form-page .form-field.field-has-error input,
+html[data-theme="dark"] .form-page .form-field.field-has-error textarea {
+    border-color: #b84f59 !important;
+    background-color: #281719 !important;
+}
+
+/* =========================================================
+   =========================================================
+   NOVA CANDIDATURA — NEWAPP
+   ========================================================= */
+
+html[data-theme="dark"] .newapp-page {
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(108, 92, 231, 0.11),
+            transparent 34%
+        ),
+        var(--background) !important;
+}
+
+html[data-theme="dark"] .newapp-form-card,
+html[data-theme="dark"] .newapp-side-card {
+    background: var(--surface) !important;
+    border-color: var(--border) !important;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.18) !important;
+}
+
+html[data-theme="dark"] .newapp-header h1,
+html[data-theme="dark"] .newapp-card-top h2,
+html[data-theme="dark"] .newapp-guide h3 {
+    color: #f0f3f7 !important;
+}
+
+html[data-theme="dark"] .newapp-header p,
+html[data-theme="dark"] .newapp-card-description,
+html[data-theme="dark"] .newapp-guide p {
+    color: #98a2b3 !important;
+}
+
+html[data-theme="dark"] .newapp-eyebrow,
+html[data-theme="dark"] .newapp-section-label,
+html[data-theme="dark"] .newapp-side-heading span {
+    color: #9a9def !important;
+}
+
+html[data-theme="dark"] .newapp-back {
+    color: #9ca5b5 !important;
+}
+
+html[data-theme="dark"] .newapp-back:hover {
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .newapp-header-badge {
+    border-color: #363b48 !important;
+    background: #1b2029 !important;
+    color: #dce1ea !important;
+}
+
+html[data-theme="dark"] .newapp-input-wrap input,
+html[data-theme="dark"] .newapp-input-wrap textarea,
+html[data-theme="dark"] .newapp-input-wrap select {
+    background-color: #10141c !important;
+    color: #edf0f5 !important;
+    border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .newapp-input-wrap input::placeholder,
+html[data-theme="dark"] .newapp-input-wrap textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .newapp-field label {
+    color: #dbe0e8 !important;
+}
+
+html[data-theme="dark"] .newapp-help {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .newapp-form-footer {
+    border-top-color: var(--border) !important;
+    background: #10141c !important;
+}
+
+html[data-theme="dark"] .newapp-save-icon {
+    background: #183629 !important;
+    color: #70df98 !important;
+}
+
+html[data-theme="dark"] .newapp-save-info strong {
+    color: #dfe3eb !important;
+}
+
+html[data-theme="dark"] .newapp-save-info span:not(.newapp-save-icon) {
+    color: #8992a4 !important;
+}
+
+html[data-theme="dark"] .newapp-cancel {
+    border-color: var(--border) !important;
+    background: #181d27 !important;
+    color: #b0b7c4 !important;
+}
+
+html[data-theme="dark"] .newapp-cancel:hover {
+    border-color: #424a5b !important;
+    background: #202632 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .newapp-save-info {
+    color: #9ca5b5 !important;
+}
+
+html[data-theme="dark"] .newapp-submit {
+    background: #5558c7 !important;
+    border-color: #777be0 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .newapp-submit:hover {
+    background: #6265ce !important;
+}
+
+html[data-theme="dark"] .newapp-guide {
+    background:
+        linear-gradient(
+            135deg,
+            #1d2040,
+            #171a23
+        ) !important;
+    border-color: #34384b !important;
+}
+
+html[data-theme="dark"] .newapp-side-heading small,
+html[data-theme="dark"] .newapp-side-link-text small {
+    color: #7f899b !important;
+}
+
+html[data-theme="dark"] .newapp-side-link {
+    border-color: #2d333f !important;
+}
+
+html[data-theme="dark"] .newapp-side-link:hover {
+    background: #1c2130 !important;
+}
+
+html[data-theme="dark"] .newapp-side-link-text strong {
+    color: #e9ecf2 !important;
+}
+
+html[data-theme="dark"] .newapp-side-link-symbol {
+    background: #242936 !important;
+    color: #a8abf0 !important;
+}
+
+html[data-theme="dark"] .newapp-side-link-symbol.purple {
+    background: #2c2245 !important;
+    color: #bd9cff !important;
+}
+
+html[data-theme="dark"] .newapp-side-arrow {
+    color: #7e889a !important;
+}
+
+html[data-theme="dark"] .newapp-process-item strong {
+    color: #e7ebf2 !important;
+}
+
+html[data-theme="dark"] .newapp-process-item small {
+    color: #7f899b !important;
+}
+
+html[data-theme="dark"] .newapp-process-marker {
+    border-color: #343a48 !important;
+    background: #1a2029 !important;
+    color: #7f899b !important;
+}
+
+html[data-theme="dark"] .newapp-process-item.active .newapp-process-marker {
+    border-color: #7377d8 !important;
+    background: #7377d8 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .newapp-process-line {
+    background: #2b313d !important;
+}
+
+html[data-theme="dark"] .newapp-side-note {
+    border-color: #2b313d !important;
+    background: rgba(21, 25, 34, 0.68) !important;
+}
+
+html[data-theme="dark"] .newapp-side-note span {
+    color: #8f96ed !important;
+}
+
+html[data-theme="dark"] .newapp-side-note p {
+    color: #8992a4 !important;
+}
+
+/* =========================================================
+   =========================================================
+   LANGUAGE SWITCHER
+   ========================================================= */
+
+html[data-theme="dark"] .language-switcher-trigger {
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+    background: #181d27 !important;
+}
+
+html[data-theme="dark"] .language-switcher-trigger:hover {
+    border-color: #3f4755 !important;
+    background: #202630 !important;
+}
+
+html[data-theme="dark"] .language-switcher[open] .language-switcher-trigger {
+    border-color: #454878 !important;
+    background: #1d2037 !important;
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.10) !important;
+}
+
+html[data-theme="dark"] .language-chevron {
+    color: #7d8798 !important;
+}
+
+html[data-theme="dark"] .language-menu {
+    border-color: #2c333e !important;
+    background: #151a22 !important;
+    box-shadow:
+        0 20px 44px rgba(0, 0, 0, 0.30) !important;
+}
+
+html[data-theme="dark"] .language-menu-title {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .language-option {
+    background: transparent !important;
+    color: #d2d7e0 !important;
+}
+
+html[data-theme="dark"] .language-option:hover {
+    background: #202540 !important;
+    color: #aaaef3 !important;
+}
+
+html[data-theme="dark"] .language-divider {
+    background: #292f3b !important;
+}
+
+html[data-theme="dark"] .language-suggestion-title {
+    color: #999cf0 !important;
+}
+
+html[data-theme="dark"] .language-suggestion-form input {
+    border-color: var(--border) !important;
+    background-color: #10141c !important;
+    color: #e8ebf1 !important;
+}
+
+html[data-theme="dark"] .language-suggestion-form input::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .language-suggestion-form button {
+    border-color: #6d71d7 !important;
+    background: #5558c7 !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="dark"] .language-suggestion-form button:hover {
+    background: #6265ce !important;
+}
+
+/* =========================================================
+   SELECTS NATIVOS
+   ========================================================= */
+
+html[data-theme="dark"] select,
+html[data-theme="dark"] option {
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] select option {
+    background-color: #10141c !important;
+    color: #edf0f5 !important;
+}
+
+/* =========================================================
+   EMPRESAS — DETALHES
+   ========================================================= */
+
+html[data-theme="dark"] .company-page :is(
+    .company-header, .company-metric-card, .company-section,
+    .company-info-card, .company-application
+) {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+html[data-theme="dark"] .company-page :is(
+    h1, h2, h3, .company-metric-card strong,
+    .company-application-main strong, .company-salary-main strong,
+    .company-salary-range strong, .company-cargo-row strong,
+    .company-detail-row strong, .application-salary
+) {
+    color: var(--text);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-meta span, .company-metric-label, .company-section-header p,
+    .company-empty-state p, .company-description, .company-salary-main span,
+    .company-cargo-row span, .company-back-link
+) {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-metric-description, .company-application-main span,
+    .company-salary-range span, .company-description-empty,
+    .company-detail-row span
+) {
+    color: var(--text-muted);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-logo, .company-application-icon, .company-empty-icon
+) {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-external-link, .company-action-link
+) {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-application, .company-external-link, .company-action-link
+):hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+    color: var(--text);
+}
+
+html[data-theme="dark"] .company-page :is(
+    .company-salary-range, .company-cargo-row, .company-detail-row
+) {
+    border-color: var(--border-light);
+}
+
+/* =========================================================
+   CAMPOS — FOCO, ERROS E PREENCHIMENTO AUTOMÁTICO
+   As regras de estado vêm depois das cores básicas dos campos.
+   ========================================================= */
+
+html[data-theme="dark"] .form-group :is(input, select, textarea) {
+    background-color: var(--surface-alt) !important;
+    border-color: var(--border) !important;
+    color: var(--text) !important;
+}
+
+html[data-theme="dark"] .newapp-card-index {
+    background: var(--primary-light);
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+html[data-theme="dark"] :is(
+    .newapp-input-wrap, .form-group, .auth-card, .language-suggestion-form
+) :is(input, select, textarea):hover {
+    border-color: #596376 !important;
+}
+
+html[data-theme="dark"] :is(
+    .newapp-input-wrap, .form-group, .auth-card, .language-suggestion-form
+) :is(input, select, textarea):focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(139, 142, 234, 0.22) !important;
+}
+
+html[data-theme="dark"] :is(
+    .newapp-field.has-error, .form-field.field-has-error, .form-group.has-error
+) :is(input, select, textarea),
+html[data-theme="dark"] .form-page .form-field.field-has-error :is(input, select, textarea),
+html[data-theme="dark"] :is(input, select, textarea)[aria-invalid="true"] {
+    background-color: #281719 !important;
+    border-color: var(--danger) !important;
+}
+
+html[data-theme="dark"] :is(.newapp-global-errors, .error-box) {
+    background: #281719;
+    border-color: #652b32;
+    color: #ff9696;
+}
+
+html[data-theme="dark"] :is(.newapp-field-errors, .newapp-required) {
+    color: var(--danger);
+}
+
+html[data-theme="dark"] input:autofill {
+    box-shadow: 0 0 0 1000px var(--surface-alt) inset !important;
+    color: var(--text) !important;
+    caret-color: var(--text);
+}
+
+html[data-theme="dark"] input:-webkit-autofill {
+    -webkit-text-fill-color: var(--text);
+    box-shadow: 0 0 0 1000px var(--surface-alt) inset !important;
+    caret-color: var(--text);
+}
+
+html[data-theme="dark"] :is(a, button, summary, input, select, textarea):focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+html[data-theme="dark"] .btn-auth {
+    background: #5558c7;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .btn-auth:hover {
+    background: #6265ce;
+}

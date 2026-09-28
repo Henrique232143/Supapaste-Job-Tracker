@@ -1,34 +1,31 @@
+{% extends 'cadastro/base.html' %}
 {% load static %}
+{% load i18n %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
+{% block title %}
+    Job Tracker | {% translate "Editar empresa" %}
+{% endblock %}
 
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+{% block nav_empresas %}
+    active
+{% endblock %}
 
-    <meta
-        name="description"
-        content="Job Tracker — edite os dados da empresa."
-    >
 
-    <title>Job Tracker | Editar empresa</title>
+{% block extra_css %}
 
     <link
         rel="stylesheet"
         href="{% static 'cadastro/nova_empresa.css' %}"
     >
 
-</head>
+{% endblock %}
 
-<body>
 
-    <main class="form-page">
+{% block content %}
+
+    <div class="form-page">
 
         <div class="form-container">
 
@@ -36,7 +33,7 @@
                 href="{% url 'lista_empresas' %}"
                 class="back-link"
             >
-                ← Voltar para empresas
+                ← {% translate "Voltar para empresas" %}
             </a>
 
 
@@ -45,15 +42,15 @@
                 <div class="form-header">
 
                     <span class="page-eyebrow">
-                        EDITAR EMPRESA
+                        {% translate "EDITAR EMPRESA" %}
                     </span>
 
                     <h1>
-                        Editar empresa
+                        {% translate "Editar empresa" %}
                     </h1>
 
                     <p>
-                        Atualize os dados de
+                        {% translate "Atualize os dados de" %}
                         <strong>{{ empresa.name }}</strong>.
                     </p>
 
@@ -135,7 +132,7 @@
                             href="{% url 'lista_empresas' %}"
                             class="btn-secondary"
                         >
-                            Cancelar
+                            {% translate "Cancelar" %}
                         </a>
 
 
@@ -143,7 +140,7 @@
                             type="submit"
                             class="btn-primary"
                         >
-                            Salvar alterações →
+                            {% translate "Salvar alterações" %} →
                         </button>
 
                     </div>
@@ -154,14 +151,11 @@
 
 
             <p class="form-footer">
-                As alterações serão aplicadas à empresa cadastrada
-                no catálogo do Job Tracker.
+                {% translate "As alterações serão aplicadas à empresa cadastrada no catálogo do Job Tracker." %}
             </p>
 
         </div>
 
-    </main>
+    </div>
 
-</body>
-
-</html>
+{% endblock %}

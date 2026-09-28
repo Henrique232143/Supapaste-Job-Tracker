@@ -1,129 +1,161 @@
+{% extends "cadastro/base.html" %}
 {% load static %}
+{% load i18n %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
+{% block title %}
+    Job Tracker | Entrar
+{% endblock %}
 
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+{% block body_class %}
+    auth-body
+{% endblock %}
+
+
+{% block navbar %}
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'cadastro/auth.css' %}"
+>
+
+{% endblock %}
+
+
+{% block page_theme_toggle %}
+
+<button
+    type="button"
+    class="theme-toggle auth-theme-toggle"
+    id="theme-toggle"
+    aria-label="Ativar modo escuro"
+    aria-pressed="false"
+>
+
+    <span
+        class="theme-toggle-icon"
+        aria-hidden="true"
     >
+        ☾
+    </span>
 
-    <title>Job Tracker | Entrar</title>
+</button>
 
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/auth.css' %}"
-    >
-
-</head>
+{% endblock %}
 
 
-<body>
+{% block content %}
+
+<div class="auth-page">
 
 
-    <div class="auth-page">
+    <!-- LADO ESQUERDO -->
+
+    <section class="auth-info">
+
+        <div class="auth-logo">
+            JOB TRACKER
+        </div>
 
 
-        <!-- LADO ESQUERDO -->
+        <div class="auth-info-content">
 
-        <section class="auth-info">
-
-
-            <div class="auth-logo">
-                JOB TRACKER
-            </div>
+            <h1>
+                Sua busca por emprego,
+                organizada.
+            </h1>
 
 
-            <div class="auth-info-content">
+            <p>
+                Acompanhe suas candidaturas,
+                processos seletivos e oportunidades
+                em um só lugar.
+            </p>
 
-                <h1>
-                    Sua busca por emprego,
-                    organizada.
-                </h1>
+        </div>
+
+
+        <div class="auth-info-footer">
+
+            Organize. Acompanhe. Conquiste.
+
+        </div>
+
+    </section>
+
+
+    <!-- LADO DIREITO -->
+
+    <section class="auth-form-area">
+
+
+        <form
+            method="POST"
+            class="auth-form"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="auth-form-header">
+
+                <h2>
+                    Bem-vindo de volta
+                </h2>
 
 
                 <p>
-                    Acompanhe suas candidaturas,
-                    processos seletivos e oportunidades
-                    em um só lugar.
+                    Entre na sua conta para continuar.
                 </p>
 
             </div>
 
 
-            <div class="auth-info-footer">
+            {% if erro %}
 
-                Organize. Acompanhe. Conquiste.
+                <div class="error-box">
+                    {{ erro }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- E-MAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="seu@email.com"
+                    required
+                    autocomplete="username"
+                >
 
             </div>
 
 
-        </section>
+            <!-- SENHA -->
+
+            <div class="form-group">
+
+                <label for="senha">
+                    Senha
+                </label>
 
 
-        <!-- LADO DIREITO -->
-
-        <section class="auth-form-area">
-
-
-            <form
-                method="POST"
-                class="auth-form"
-            >
-
-                {% csrf_token %}
-
-
-                <div class="auth-form-header">
-
-                    <h2>
-                        Bem-vindo de volta
-                    </h2>
-
-                    <p>
-                        Entre na sua conta para continuar.
-                    </p>
-
-                </div>
-
-
-                {% if erro %}
-
-                    <div class="error-box">
-
-                        {{ erro }}
-
-                    </div>
-
-                {% endif %}
-
-
-                <div class="form-group">
-
-                    <label for="email">
-                        E-mail
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="seu@email.com"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="senha">
-                        Senha
-                    </label>
+                <div class="password-input-wrapper">
 
                     <input
                         type="password"
@@ -131,48 +163,148 @@
                         name="senha"
                         placeholder="Digite sua senha"
                         required
+                        autocomplete="current-password"
                     >
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-toggle
+                        data-password-target="senha"
+                        aria-label="Mostrar senha"
+                        aria-pressed="false"
+                        title="Mostrar senha"
+                    >
+
+                        <span
+                            class="icon-eye"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                ></path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5"
+                                ></circle>
+
+                            </svg>
+
+                        </span>
+
+
+                        <span
+                            class="icon-eye-off is-hidden"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M3 3l18 18"
+                                ></path>
+
+                                <path
+                                    d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6 0 9.5 6 9.5 6a17.8 17.8 0 0 1-3.2 3.7"
+                                ></path>
+
+                                <path
+                                    d="M6.2 6.3C3.9 8 2.5 12 2.5 12S6 18 12 18c1.3 0 2.5-.3 3.6-.8"
+                                ></path>
+
+                                <path
+                                    d="M9.9 9.9a3 3 0 0 0 4.2 4.2"
+                                ></path>
+
+                            </svg>
+
+                        </span>
+
+                    </button>
 
                 </div>
 
+            </div>
 
-                <button
-                    type="submit"
-                    class="btn-auth"
+
+            <!-- BOTÃO -->
+
+            <button
+                type="submit"
+                class="btn-auth"
+            >
+                Entrar
+            </button>
+
+
+            <!-- LINKS -->
+
+            <div class="auth-links">
+
+                Ainda não possui uma conta?
+
+
+                <a href="{% url 'cadastro' %}">
+                    Criar conta
+                </a>
+
+
+                <br>
+
+
+                <a
+                    href="{% url 'landing' %}"
+                    class="back-link"
                 >
-                    Entrar
-                </button>
+                    ← Voltar para o início
+                </a>
+
+            </div>
 
 
-                <div class="auth-links">
-
-                    Ainda não possui uma conta?
-
-                    <a href="{% url 'cadastro' %}">
-                        Criar conta
-                    </a>
-
-                    <br>
-
-                    <a
-                        href="{% url 'landing' %}"
-                        class="back-link"
-                    >
-                        ← Voltar para o início
-                    </a>
-
-                </div>
+        </form>
 
 
-            </form>
+    </section>
 
 
-        </section>
+</div>
+
+{% endblock %}
 
 
-    </div>
+{% block extra_js %}
+
+<script
+    src="{% static 'cadastro/js/auth.js' %}"
+></script>
+
+{% endblock %}
 
 
-</body>
-
-</html>
+{% block footer %}
+{% endblock %}

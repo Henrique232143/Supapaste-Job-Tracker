@@ -1,95 +1,36 @@
+{% extends 'cadastro/base.html' %}
 {% load static %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
 
-<head>
+{% block title %}
+    Job Tracker | {% translate "Detalhes da candidatura" %}
+{% endblock %}
 
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/language-switcher.css' %}"
-    >
 
-    <meta charset="UTF-8">
+{% block nav_candidaturas %}
+    active
+{% endblock %}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <meta
-        name="description"
-        content="{% translate 'Job Tracker — detalhes da candidatura.' %}"
-    >
-
-    <title>
-        Job Tracker | {% translate "Detalhes da candidatura" %}
-    </title>
+{% block extra_css %}
 
     <link
         rel="stylesheet"
         href="{% static 'cadastro/detalhe_candidatura.css' %}"
     >
 
-</head>
+{% endblock %}
 
 
-<body>
-
-
-    <!-- =====================================================
-         NAVBAR
-         ===================================================== -->
-
-    <header class="navbar">
-
-        <div class="navbar-inner">
-
-            <div class="brand-group">
-
-                <a
-                    href="{% url 'landing' %}"
-                    class="brand"
-                >
-                    JOB TRACKER
-                </a>
-
-
-                {% include 'cadastro/partials/language_selector.html' %}
-
-            </div>
-
-
-            <nav class="nav-links">
-
-                <a
-                    href="{% url 'candidaturas' %}"
-                    class="nav-link nav-active"
-                >
-                    {% translate "Minhas candidaturas" %}
-                </a>
-
-                <a
-                    href="{% url 'logout' %}"
-                    class="nav-link"
-                >
-                    {% translate "Sair" %}
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
+{% block content %}
 
 
     <!-- =====================================================
          PÁGINA
          ===================================================== -->
 
-    <main class="detail-page">
+    <div class="detail-page">
 
         <div class="detail-container">
 
@@ -138,6 +79,7 @@
                                 {{ candidatura.empresa.name }}
                             </strong>
 
+
                             <span>
 
                                 {% if candidatura.local_vaga %}
@@ -159,38 +101,42 @@
                 </div>
 
 
+                <!-- =================================================
+                     STATUS + AÇÕES
+                     ================================================= -->
+
                 <div class="status-area">
 
-    <span class="status-label">
-        {% translate "STATUS ATUAL" %}
-    </span>
+                    <span class="status-label">
+                        {% translate "STATUS ATUAL" %}
+                    </span>
 
 
-    <span class="status-pill">
-        {{ candidatura.get_status_display }}
-    </span>
+                    <span class="status-pill">
+                        {{ candidatura.get_status_display }}
+                    </span>
 
 
-    <div class="hero-actions">
+                    <div class="hero-actions">
 
-        <a
-            href="{% url 'editar_candidatura' candidatura.id %}"
-            class="hero-action hero-action-edit"
-        >
-            {% translate "Editar" %}
-        </a>
+                        <a
+                            href="{% url 'editar_candidatura' candidatura.id %}"
+                            class="hero-action hero-action-edit"
+                        >
+                            {% translate "Editar" %}
+                        </a>
 
 
-        <a
-            href="{% url 'excluir_candidatura' candidatura.id %}"
-            class="hero-action hero-action-delete"
-        >
-            {% translate "Excluir" %}
-        </a>
+                        <a
+                            href="{% url 'excluir_candidatura' candidatura.id %}"
+                            class="hero-action hero-action-delete"
+                        >
+                            {% translate "Excluir" %}
+                        </a>
 
-    </div>
+                    </div>
 
-</div>
+                </div>
 
             </section>
 
@@ -210,6 +156,7 @@
                             {% translate "PROCESSO SELETIVO" %}
                         </span>
 
+
                         <h2>
                             {% translate "Etapa atual" %}
                         </h2>
@@ -219,7 +166,13 @@
                 </div>
 
 
+
                 {% if status_encerrado %}
+
+
+                    <!-- =================================================
+                         PROCESSO ENCERRADO
+                         ================================================= -->
 
                     <div class="closed-process">
 
@@ -234,32 +187,50 @@
                                 {% translate "Processo encerrado" %}
                             </strong>
 
+
                             <span>
+
                                 {% blocktranslate with status=candidatura.status|lower %}
+
                                     Esta candidatura está marcada como {{ status }}.
+
                                 {% endblocktranslate %}
+
                             </span>
 
                         </div>
 
                     </div>
 
+
                 {% else %}
+
+
+                    <!-- =================================================
+                         ETAPAS
+                         ================================================= -->
 
                     <div class="process-track">
 
+
                         {% for etapa in etapas %}
 
-                            <div class="
-                                process-stage
-                                {% if forloop.counter0 < etapa_atual %}
-                                    stage-done
-                                {% elif forloop.counter0 == etapa_atual %}
-                                    stage-current
-                                {% endif %}
-                            ">
+
+                            <div
+                                class="
+                                    process-stage
+
+                                    {% if forloop.counter0 < etapa_atual %}
+                                        stage-done
+                                    {% elif forloop.counter0 == etapa_atual %}
+                                        stage-current
+                                    {% endif %}
+                                "
+                            >
+
 
                                 <div class="stage-dot">
+
 
                                     {% if forloop.counter0 < etapa_atual %}
 
@@ -271,6 +242,7 @@
 
                                     {% endif %}
 
+
                                 </div>
 
 
@@ -278,24 +250,34 @@
                                     {% translate etapa %}
                                 </span>
 
+
                             </div>
+
 
 
                             {% if not forloop.last %}
 
-                                <div class="
-                                    stage-connector
-                                    {% if forloop.counter0 < etapa_atual %}
-                                        connector-done
-                                    {% endif %}
-                                ">
+
+                                <div
+                                    class="
+                                        stage-connector
+
+                                        {% if forloop.counter0 < etapa_atual %}
+                                            connector-done
+                                        {% endif %}
+                                    "
+                                >
                                 </div>
+
 
                             {% endif %}
 
+
                         {% endfor %}
 
+
                     </div>
+
 
                 {% endif %}
 
@@ -306,6 +288,7 @@
                      ================================================= -->
 
                 <div class="status-update">
+
 
                     <div class="status-update-info">
 
@@ -326,6 +309,7 @@
                     </div>
 
 
+
                     <form
                         method="post"
                         action="{% url 'atualizar_status_candidatura' candidatura.id %}"
@@ -342,8 +326,13 @@
                             type="submit"
                             class="status-update-button"
                         >
+
                             {% translate "Atualizar status" %}
-                            <span>→</span>
+
+                            <span>
+                                →
+                            </span>
+
                         </button>
 
                     </form>
@@ -361,9 +350,9 @@
             <section class="detail-grid">
 
 
-                <!-- =============================================
+                <!-- =================================================
                      INFORMAÇÕES DA VAGA
-                     ============================================= -->
+                     ================================================= -->
 
                 <article class="info-card">
 
@@ -375,6 +364,7 @@
                                 {% translate "INFORMAÇÕES" %}
                             </span>
 
+
                             <h2>
                                 {% translate "Dados da vaga" %}
                             </h2>
@@ -384,14 +374,18 @@
                     </div>
 
 
+
                     <div class="info-list">
 
+
+                        <!-- EMPRESA -->
 
                         <div class="info-row">
 
                             <span>
                                 {% translate "Empresa" %}
                             </span>
+
 
                             <strong>
                                 {{ candidatura.empresa.name }}
@@ -400,11 +394,15 @@
                         </div>
 
 
+
+                        <!-- CARGO -->
+
                         <div class="info-row">
 
                             <span>
                                 {% translate "Cargo" %}
                             </span>
+
 
                             <strong>
                                 {{ candidatura.cargo }}
@@ -413,11 +411,15 @@
                         </div>
 
 
+
+                        <!-- LOCAL -->
+
                         <div class="info-row">
 
                             <span>
                                 {% translate "Local da vaga" %}
                             </span>
+
 
                             <strong>
 
@@ -436,11 +438,15 @@
                         </div>
 
 
+
+                        <!-- MODALIDADE -->
+
                         <div class="info-row">
 
                             <span>
                                 {% translate "Modalidade" %}
                             </span>
+
 
                             <strong>
                                 {{ candidatura.get_modalidade_display }}
@@ -449,18 +455,21 @@
                         </div>
 
 
+
+                        <!-- SALÁRIO -->
+
                         <div class="info-row">
 
                             <span>
                                 {% translate "Salário" %}
                             </span>
 
+
                             <strong>
 
                                 {% if candidatura.salario %}
 
-                                    R$
-                                    {{ candidatura.salario|floatformat:2 }}
+                                    R$ {{ candidatura.salario|floatformat:2 }}
 
                                 {% else %}
 
@@ -479,9 +488,9 @@
 
 
 
-                <!-- =============================================
+                <!-- =================================================
                      DATAS
-                     ============================================= -->
+                     ================================================= -->
 
                 <article class="info-card">
 
@@ -493,6 +502,7 @@
                                 {% translate "ACOMPANHAMENTO" %}
                             </span>
 
+
                             <h2>
                                 {% translate "Datas importantes" %}
                             </h2>
@@ -501,6 +511,9 @@
 
                     </div>
 
+
+
+                    <!-- DATA DA CANDIDATURA -->
 
                     <div class="date-highlight">
 
@@ -516,14 +529,18 @@
                     </div>
 
 
+
                     <div class="info-list">
 
+
+                        <!-- ÚLTIMO CONTATO -->
 
                         <div class="info-row">
 
                             <span>
                                 {% translate "Último contato" %}
                             </span>
+
 
                             <strong>
 
@@ -542,11 +559,15 @@
                         </div>
 
 
+
+                        <!-- DATA DE REGISTRO -->
+
                         <div class="info-row">
 
                             <span>
                                 {% translate "Registrada no sistema" %}
                             </span>
+
 
                             <strong>
                                 {{ candidatura.created_at|date:"d/m/Y" }}
@@ -554,9 +575,11 @@
 
                         </div>
 
-
                     </div>
 
+
+
+                    <!-- LINK DA VAGA -->
 
                     {% if candidatura.link_vaga %}
 
@@ -566,11 +589,17 @@
                             rel="noopener noreferrer"
                             class="external-link"
                         >
+
                             {% translate "Abrir vaga original" %}
-                            <span>↗</span>
+
+                            <span>
+                                ↗
+                            </span>
+
                         </a>
 
                     {% endif %}
+
 
                 </article>
 
@@ -593,6 +622,7 @@
                             {% translate "ANOTAÇÕES" %}
                         </span>
 
+
                         <h2>
                             {% translate "Observações" %}
                         </h2>
@@ -602,7 +632,9 @@
                 </div>
 
 
+
                 {% if candidatura.observacoes %}
+
 
                     <div class="observation-content">
 
@@ -610,7 +642,9 @@
 
                     </div>
 
+
                 {% else %}
+
 
                     <div class="observation-empty">
 
@@ -625,6 +659,7 @@
                                 {% translate "Nenhuma observação registrada." %}
                             </strong>
 
+
                             <span>
                                 {% translate "Quando você adicionar anotações à candidatura, elas aparecerão aqui." %}
                             </span>
@@ -633,12 +668,15 @@
 
                     </div>
 
+
                 {% endif %}
 
             </section>
 
+
+
             <!-- =================================================
-                 FOOTER
+                 FOOTER INTERNO
                  ================================================= -->
 
             <footer class="detail-footer">
@@ -657,9 +695,7 @@
 
         </div>
 
-    </main>
+    </div>
 
 
-</body>
-
-</html>
+{% endblock %}

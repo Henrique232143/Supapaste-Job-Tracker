@@ -1,364 +1,318 @@
+{% extends "cadastro/base.html" %}
 {% load static %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
 
-<head>
+{% block title %}
+    Nova candidatura — Job Tracker
+{% endblock %}
 
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+{% block nav_candidaturas %}
+    active
+{% endblock %}
 
-    <meta
-        name="description"
-        content="{% translate 'Job Tracker — cadastre uma nova candidatura.' %}"
-    >
 
-    <title>
-        Job Tracker | {% translate "Nova candidatura" %}
-    </title>
+{% block extra_css %}
 
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/nova_candidatura.css' %}"
-    >
+<link
+    rel="stylesheet"
+    href="{% static 'cadastro/nova_candidatura.css' %}"
+>
 
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/language-switcher.css' %}"
-    >
+{% endblock %}
 
-</head>
 
-<body>
+{% block content %}
 
-    <main class="form-page">
+<div class="newapp-page">
 
-        <div class="form-container">
+    <div class="newapp-container">
 
-            <div class="language-page-control">
 
-                {% include 'cadastro/partials/language_selector.html' %}
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <header class="newapp-header">
+
+            <div class="newapp-header-top">
+
+                <a
+                    href="{% url 'candidaturas' %}"
+                    class="newapp-back"
+                >
+
+                    <span class="newapp-back-icon">
+                        ←
+                    </span>
+
+                    <span>
+                        Candidaturas
+                    </span>
+
+                </a>
+
+
+                <span class="newapp-context">
+                    NOVA OPORTUNIDADE
+                </span>
 
             </div>
 
 
-            <a
-                href="{% url 'candidaturas' %}"
-                class="back-link"
-            >
-                ← {% translate "Voltar para candidaturas" %}
-            </a>
+            <div class="newapp-heading">
 
+                <div>
 
-            <section class="form-card">
-
-                <div class="form-header">
-
-                    <span class="page-eyebrow">
-                        {% translate "NOVA CANDIDATURA" %}
+                    <span class="newapp-eyebrow">
+                        JOB TRACKER
                     </span>
 
                     <h1>
-                        {% translate "Adicionar oportunidade" %}
+                        Nova candidatura
                     </h1>
 
                     <p>
-                        {% translate "Registre uma nova vaga e acompanhe todo o processo seletivo pelo Job Tracker." %}
+                        Registre uma nova oportunidade e concentre
+                        todos os detalhes do processo em um só lugar.
                     </p>
 
                 </div>
 
 
+                <div class="newapp-header-badge">
+
+                    <span class="newapp-badge-dot"></span>
+
+                    <span>
+                        Novo registro
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             CONTEÚDO
+        ====================================================== -->
+
+        <div class="newapp-layout">
+
+
+            <!-- =================================================
+                 CARD PRINCIPAL
+            ================================================== -->
+
+            <section class="newapp-form-card">
+
+
+                <!-- TOPO DO CARD -->
+
+                <div class="newapp-card-top">
+
+                    <div>
+
+                        <span class="newapp-section-label">
+                            INFORMAÇÕES DA VAGA
+                        </span>
+
+                        <h2>
+                            Dados da oportunidade
+                        </h2>
+
+                    </div>
+
+
+                    <div class="newapp-card-index">
+                        01
+                    </div>
+
+                </div>
+
+
+                <div class="newapp-card-description">
+
+                    Preencha os dados abaixo para adicionar
+                    esta candidatura ao seu acompanhamento.
+
+                </div>
+
+
+                <!-- FORMULÁRIO -->
+
                 <form
                     method="post"
-                    action="{% url 'nova_candidatura' %}"
-                    class="candidatura-form"
+                    class="newapp-form"
+                    data-draft-form="nova-candidatura"
+                    novalidate
                 >
 
                     {% csrf_token %}
 
 
-                    <div class="form-fields">
+                    <!-- CAMPOS OCULTOS -->
+
+                    {% for hidden in form.hidden_fields %}
+
+                        {{ hidden }}
+
+                    {% endfor %}
 
 
-                        <!-- =================================================
-                             EMPRESA
-                             ================================================= -->
+                    <!-- ERROS GERAIS -->
 
-                        <div class="form-field">
+                    {% if form.non_field_errors %}
 
-                            <label for="{{ form.empresa.id_for_label }}">
-                                {% translate "Empresa" %}
-                            </label>
+                        <div class="newapp-global-errors">
 
-                            <div class="field-with-action">
+                            <div class="newapp-error-title">
+                                Não foi possível salvar
+                            </div>
 
-                                {{ form.empresa }}
+                            {% for error in form.non_field_errors %}
 
-                                <a
-                                    href="{% url 'nova_empresa' %}"
-                                    class="add-field-link"
-                                >
-                                    {% translate "Adicionar empresa" %}
-                                </a>
+                                <div class="newapp-error-item">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- CAMPOS -->
+
+                    <div class="newapp-fields">
+
+                        {% for field in form.visible_fields %}
+
+                            <div
+                                class="
+                                    newapp-field
+                                    {% if field.errors %}
+                                        has-error
+                                    {% endif %}
+                                "
+                            >
+
+                                <div class="newapp-field-heading">
+
+                                    <label
+                                        for="{{ field.id_for_label }}"
+                                    >
+                                        {{ field.label }}
+
+                                        {% if field.field.required %}
+
+                                            <span class="newapp-required">
+                                                *
+                                            </span>
+
+                                        {% endif %}
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="newapp-input-wrap">
+
+                                    {{ field }}
+
+                                </div>
+
+
+                                {% if field.help_text %}
+
+                                    <small class="newapp-help">
+                                        {{ field.help_text }}
+                                    </small>
+
+                                {% endif %}
+
+
+                                {% if field.errors %}
+
+                                    <div class="newapp-field-errors">
+
+                                        {% for error in field.errors %}
+
+                                            <span>
+                                                {{ error }}
+                                            </span>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                {% endif %}
 
                             </div>
 
-                            {% for error in form.empresa.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             CARGO
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.cargo_catalogo.id_for_label }}">
-                                {% translate "Cargo" %}
-                            </label>
-
-                            <div class="field-with-action">
-
-                                {{ form.cargo_catalogo }}
-
-                                <a
-                                    href="{% url 'novo_cargo' %}"
-                                    class="add-field-link"
-                                >
-                                    {% translate "Adicionar cargo" %}
-                                </a>
-
-                            </div>
-
-                            {% for error in form.cargo_catalogo.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             LOCAL DA VAGA
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.local_vaga.id_for_label }}">
-                                {% translate "Local da vaga" %}
-                            </label>
-
-                            {{ form.local_vaga }}
-
-                            {% for error in form.local_vaga.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             DATA DA CANDIDATURA
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.data_candidatura.id_for_label }}">
-                                {% translate "Data da candidatura" %}
-                            </label>
-
-                            {{ form.data_candidatura }}
-
-                            {% for error in form.data_candidatura.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             SALÁRIO
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.salario.id_for_label }}">
-                                {% translate "Salário" %}
-                            </label>
-
-                            {{ form.salario }}
-
-                            {% for error in form.salario.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             LINK DA VAGA
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.link_vaga.id_for_label }}">
-                                {% translate "Link da vaga" %}
-                            </label>
-
-                            {{ form.link_vaga }}
-
-                            {% for error in form.link_vaga.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             MODALIDADE
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.modalidade.id_for_label }}">
-                                {% translate "Modalidade" %}
-                            </label>
-
-                            {{ form.modalidade }}
-
-                            {% for error in form.modalidade.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             STATUS
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.status.id_for_label }}">
-                                {% translate "Status" %}
-                            </label>
-
-                            {{ form.status }}
-
-                            {% for error in form.status.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             ÚLTIMO CONTATO
-                             ================================================= -->
-
-                        <div class="form-field">
-
-                            <label for="{{ form.ultimo_contato.id_for_label }}">
-                                {% translate "Último contato" %}
-                            </label>
-
-                            {{ form.ultimo_contato }}
-
-                            {% for error in form.ultimo_contato.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- =================================================
-                             OBSERVAÇÕES
-                             ================================================= -->
-
-                        <div class="form-field form-field-full">
-
-                            <label for="{{ form.observacoes.id_for_label }}">
-                                {% translate "Observações" %}
-                            </label>
-
-                            {{ form.observacoes }}
-
-                            {% for error in form.observacoes.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
+                        {% endfor %}
 
                     </div>
 
 
-                    <!-- =====================================================
-                         BOTÕES
-                         ===================================================== -->
+                    <!-- RODAPÉ -->
 
-                    <div class="form-actions">
+                    <div class="newapp-form-footer">
 
-                        <a
-                            href="{% url 'candidaturas' %}"
-                            class="btn-secondary"
-                        >
-                            {% translate "Cancelar" %}
-                        </a>
 
-                        <button
-                            type="submit"
-                            class="btn-primary"
-                        >
-                            {% translate "Salvar candidatura" %} →
-                        </button>
+                        <div class="newapp-save-info">
+
+                            <span class="newapp-save-icon">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Salve com tranquilidade
+                                </strong>
+
+                                <span>
+                                    A candidatura será vinculada
+                                    à sua conta.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="newapp-actions">
+
+                            <a
+                                href="{% url 'candidaturas' %}"
+                                class="newapp-cancel"
+                            >
+                                Cancelar
+                            </a>
+
+
+                            <button
+                                type="submit"
+                                class="newapp-submit"
+                            >
+
+                                <span>
+                                    Salvar candidatura
+                                </span>
+
+                                <span class="newapp-submit-arrow">
+                                    →
+                                </span>
+
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -367,14 +321,250 @@
             </section>
 
 
-            <p class="form-footer">
-                Job Tracker · {% translate "Organize sua busca. Acompanhe sua evolução." %}
-            </p>
+            <!-- =================================================
+                 LATERAL
+            ================================================== -->
+
+            <aside class="newapp-sidebar">
+
+
+                <!-- =================================================
+                     BLOCO DE ORIENTAÇÃO
+                ================================================== -->
+
+                <div class="newapp-guide">
+
+                    <div class="newapp-guide-top">
+
+                        <span class="newapp-guide-number">
+                            01
+                        </span>
+
+                        <span class="newapp-guide-label">
+                            ORGANIZE
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Registre enquanto
+                        está fresco.
+                    </h3>
+
+
+                    <p>
+                        Guardar os detalhes agora facilita
+                        muito o acompanhamento depois,
+                        principalmente quando você estiver
+                        em vários processos ao mesmo tempo.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     ACESSOS
+                ================================================== -->
+
+                <div class="newapp-side-card">
+
+                    <div class="newapp-side-heading">
+
+                        <span>
+                            CATÁLOGO
+                        </span>
+
+                        <small>
+                            Acessos rápidos
+                        </small>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'nova_empresa' %}"
+                        class="newapp-side-link"
+                    >
+
+                        <span class="newapp-side-link-symbol">
+                            E
+                        </span>
+
+
+                        <span class="newapp-side-link-text">
+
+                            <strong>
+                                Nova empresa
+                            </strong>
+
+                            <small>
+                                Adicionar ao catálogo
+                            </small>
+
+                        </span>
+
+
+                        <span class="newapp-side-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'novo_cargo' %}"
+                        class="newapp-side-link"
+                    >
+
+                        <span class="newapp-side-link-symbol purple">
+                            +
+                        </span>
+
+
+                        <span class="newapp-side-link-text">
+
+                            <strong>
+                                Novo cargo
+                            </strong>
+
+                            <small>
+                                Criar cargo rapidamente
+                            </small>
+
+                        </span>
+
+
+                        <span class="newapp-side-arrow">
+                            →
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- =================================================
+                     FLUXO
+                ================================================== -->
+
+                <div class="newapp-side-card newapp-process">
+
+                    <div class="newapp-side-heading">
+
+                        <span>
+                            PROCESSO
+                        </span>
+
+                        <small>
+                            Seu fluxo
+                        </small>
+
+                    </div>
+
+
+                    <div class="newapp-process-item active">
+
+                        <div class="newapp-process-marker">
+                            1
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Registrar
+                            </strong>
+
+                            <small>
+                                Dados da oportunidade
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="newapp-process-line"></div>
+
+
+                    <div class="newapp-process-item">
+
+                        <div class="newapp-process-marker">
+                            2
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Acompanhar
+                            </strong>
+
+                            <small>
+                                Etapas e status
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="newapp-process-line"></div>
+
+
+                    <div class="newapp-process-item">
+
+                        <div class="newapp-process-marker">
+                            3
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Analisar
+                            </strong>
+
+                            <small>
+                                Sua evolução
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FRASE FINAL
+                ================================================== -->
+
+                <div class="newapp-side-note">
+
+                    <span>
+                        JOB TRACKER
+                    </span>
+
+                    <p>
+                        Um registro organizado hoje
+                        economiza memória amanhã.
+                    </p>
+
+                </div>
+
+            </aside>
 
         </div>
 
-    </main>
+    </div>
 
-</body>
+</div>
 
-</html>
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+    src="{% static 'cadastro/js/form-draft.js' %}"
+></script>
+
+{% endblock %}

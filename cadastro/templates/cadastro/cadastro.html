@@ -1,200 +1,467 @@
+{% extends "cadastro/base.html" %}
 {% load static %}
+{% load i18n %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% block title %}
+    Job Tracker | Criar conta
+{% endblock %}
 
-<head>
+{% block body_class %}
+    auth-body
+{% endblock %}
 
-    <meta charset="UTF-8">
+{% block navbar %}
+{% endblock %}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'cadastro/auth.css' %}"
+>
+
+{% endblock %}
+
+{% block page_theme_toggle %}
+
+<button
+    type="button"
+    class="theme-toggle auth-theme-toggle"
+    id="theme-toggle"
+    aria-label="Ativar modo escuro"
+    aria-pressed="false"
+>
+
+    <span
+        class="theme-toggle-icon"
+        aria-hidden="true"
     >
+        ☾
+    </span>
 
-    <title>Job Tracker | Criar conta</title>
+</button>
 
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/auth.css' %}"
-    >
+{% endblock %}
 
-</head>
+{% block content %}
+
+<div class="auth-page">
+
+    <!-- =====================================================
+         LADO ESQUERDO
+         ===================================================== -->
+
+    <section class="auth-info">
+
+        <div class="auth-logo">
+            JOB TRACKER
+        </div>
+
+        <div class="auth-info-content">
+
+            <h1>
+                Comece a organizar
+                sua jornada.
+            </h1>
+
+            <p>
+                Crie sua conta e tenha seu próprio espaço
+                para acompanhar cada oportunidade profissional.
+            </p>
+
+        </div>
+
+        <div class="auth-info-footer">
+            Organize. Acompanhe. Conquiste.
+        </div>
+
+    </section>
 
 
-<body>
+    <!-- =====================================================
+         LADO DIREITO
+         ===================================================== -->
 
+    <section class="auth-form-area">
 
-    <div class="auth-page">
+        <form
+            method="POST"
+            class="auth-form"
+        >
 
+            {% csrf_token %}
 
-        <!-- LADO ESQUERDO -->
+            <div class="auth-form-header">
 
-        <section class="auth-info">
-
-
-            <div class="auth-logo">
-                JOB TRACKER
-            </div>
-
-
-            <div class="auth-info-content">
-
-                <h1>
-                    Comece a organizar
-                    sua jornada.
-                </h1>
-
+                <h2>
+                    Criar conta
+                </h2>
 
                 <p>
-                    Crie sua conta e tenha seu próprio espaço
-                    para acompanhar cada oportunidade profissional.
+                    Preencha seus dados para começar.
                 </p>
 
             </div>
 
 
-            <div class="auth-info-footer">
+            {% if form.non_field_errors %}
 
-                Organize. Acompanhe. Conquiste.
+                <div class="error-box">
+                    {{ form.non_field_errors }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- NOME -->
+
+            <div class="form-group">
+
+                <label for="{{ form.first_name.id_for_label }}">
+                    Nome
+                </label>
+
+                {{ form.first_name }}
+
+                {% for error in form.first_name.errors %}
+
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
 
             </div>
 
 
-        </section>
+            <!-- SOBRENOME -->
 
+            <div class="form-group">
 
-        <!-- LADO DIREITO -->
+                <label for="{{ form.last_name.id_for_label }}">
+                    Sobrenome
+                </label>
 
-        <section class="auth-form-area">
+                {{ form.last_name }}
 
+                {% for error in form.last_name.errors %}
 
-            <form
-                method="POST"
-                class="auth-form"
-            >
-
-                {% csrf_token %}
-
-
-                <div class="auth-form-header">
-
-                    <h2>
-                        Criar conta
-                    </h2>
-
-                    <p>
-                        Preencha seus dados para começar.
-                    </p>
-
-                </div>
-
-
-                {% if form.non_field_errors %}
-
-                    <div class="error-box">
-
-                        {{ form.non_field_errors }}
-
+                    <div class="field-error">
+                        {{ error }}
                     </div>
 
-                {% endif %}
+                {% endfor %}
+
+            </div>
 
 
-                <div class="form-group">
+            <!-- E-MAIL -->
 
-                    <label for="{{ form.first_name.id_for_label }}">
-                        Nome
-                    </label>
+            <div class="form-group">
 
-                    {{ form.first_name }}
+                <label for="{{ form.email.id_for_label }}">
+                    E-mail
+                </label>
 
-                    {% for error in form.first_name.errors %}
+                {{ form.email }}
 
-                        <div class="field-error">
-                            {{ error }}
-                        </div>
+                {% for error in form.email.errors %}
 
-                    {% endfor %}
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
 
-                </div>
+                {% endfor %}
 
-
-                <div class="form-group">
-
-                    <label for="{{ form.email.id_for_label }}">
-                        E-mail
-                    </label>
-
-                    {{ form.email }}
-
-                    {% for error in form.email.errors %}
-
-                        <div class="field-error">
-                            {{ error }}
-                        </div>
-
-                    {% endfor %}
-
-                </div>
+            </div>
 
 
-                <div class="form-group">
+            <!-- CPF -->
 
-                    <label for="{{ form.senha.id_for_label }}">
-                        Senha
-                    </label>
+            <div class="form-group">
+
+                <label for="{{ form.cpf.id_for_label }}">
+                    CPF
+                </label>
+
+                {{ form.cpf }}
+
+                {% for error in form.cpf.errors %}
+
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <div class="form-group">
+
+                <label for="{{ form.senha.id_for_label }}">
+                    Senha
+                </label>
+
+                <div class="password-input-wrapper">
 
                     {{ form.senha }}
 
-                    {% for error in form.senha.errors %}
-
-                        <div class="field-error">
-                            {{ error }}
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn-auth"
-                >
-                    Criar minha conta
-                </button>
-
-
-                <div class="auth-links">
-
-                    Já possui uma conta?
-
-                    <a href="{% url 'login' %}">
-                        Entrar
-                    </a>
-
-                    <br>
-
-                    <a
-                        href="{% url 'landing' %}"
-                        class="back-link"
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-toggle
+                        data-password-target="{{ form.senha.id_for_label }}"
+                        aria-label="Mostrar senha"
+                        aria-pressed="false"
+                        title="Mostrar senha"
                     >
-                        ← Voltar para o início
-                    </a>
+
+                        <span
+                            class="icon-eye"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                ></path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5"
+                                ></circle>
+
+                            </svg>
+
+                        </span>
+
+                        <span
+                            class="icon-eye-off is-hidden"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M3 3l18 18"
+                                ></path>
+
+                                <path
+                                    d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6 0 9.5 6 9.5 6a17.8 17.8 0 0 1-3.2 3.7"
+                                ></path>
+
+                                <path
+                                    d="M6.2 6.3C3.9 8 2.5 12 2.5 12S6 18 12 18c1.3 0 2.5-.3 3.6-.8"
+                                ></path>
+
+                                <path
+                                    d="M9.9 9.9a3 3 0 0 0 4.2 4.2"
+                                ></path>
+
+                            </svg>
+
+                        </span>
+
+                    </button>
 
                 </div>
 
+                <!--
+                    NOVO:
+                    instrução visual dos requisitos da senha.
+                    A validação real continua sendo feita no backend.
+                -->
 
-            </form>
+                <div class="password-hint">
+                    Use pelo menos 6 caracteres, com maiúscula,
+                    minúscula, número e símbolo.
+                </div>
+
+                {% for error in form.senha.errors %}
+
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
 
 
-        </section>
+            <!-- CONFIRMAR SENHA -->
+
+            <div class="form-group">
+
+                <label for="{{ form.confirmar_senha.id_for_label }}">
+                    Confirmar senha
+                </label>
+
+                <div class="password-input-wrapper">
+
+                    {{ form.confirmar_senha }}
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-password-toggle
+                        data-password-target="{{ form.confirmar_senha.id_for_label }}"
+                        aria-label="Mostrar senha"
+                        aria-pressed="false"
+                        title="Mostrar senha"
+                    >
+
+                        <span
+                            class="icon-eye"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                ></path>
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="2.5"
+                                ></circle>
+
+                            </svg>
+
+                        </span>
+
+                        <span
+                            class="icon-eye-off is-hidden"
+                            aria-hidden="true"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M3 3l18 18"
+                                ></path>
+
+                                <path
+                                    d="M10.6 6.2A10.7 10.7 0 0 1 12 6c6 0 9.5 6 9.5 6a17.8 17.8 0 0 1-3.2 3.7"
+                                ></path>
+
+                                <path
+                                    d="M6.2 6.3C3.9 8 2.5 12 2.5 12S6 18 12 18c1.3 0 2.5-.3 3.6-.8"
+                                ></path>
+
+                                <path
+                                    d="M9.9 9.9a3 3 0 0 0 4.2 4.2"
+                                ></path>
+
+                            </svg>
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+                {% for error in form.confirmar_senha.errors %}
+
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
 
 
-    </div>
+            <!-- BOTÃO -->
+
+            <button
+                type="submit"
+                class="btn-auth"
+            >
+                Criar minha conta
+            </button>
 
 
-</body>
+            <!-- LINKS -->
 
-</html>
+            <div class="auth-links">
+
+                Já possui uma conta?
+
+                <a href="{% url 'login' %}">
+                    Entrar
+                </a>
+
+                <br>
+
+                <a
+                    href="{% url 'landing' %}"
+                    class="back-link"
+                >
+                    ← Voltar para o início
+                </a>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script
+    src="{% static 'cadastro/js/auth.js' %}"
+></script>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

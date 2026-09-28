@@ -1,0 +1,613 @@
+{% extends "cadastro/base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ empresa.name }} — Job Tracker
+{% endblock %}
+
+
+{% block nav_empresas %}
+    active
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'cadastro/css/detalhe_empresa.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="company-page">
+
+
+    <!-- =====================================================
+         VOLTAR
+    ====================================================== -->
+
+    <a
+        href="{% url 'candidaturas' %}"
+        class="company-back-link"
+    >
+        <span>←</span>
+        Voltar para candidaturas
+    </a>
+
+
+    <!-- =====================================================
+         HEADER DA EMPRESA
+    ====================================================== -->
+
+    <header class="company-header">
+
+        <div class="company-header-main">
+
+            <div class="company-logo">
+
+                {% if empresa.logo %}
+
+                    <img
+                        src="{{ empresa.logo }}"
+                        alt="{{ empresa.name }}"
+                    >
+
+                {% else %}
+
+                    {{ empresa.name|first|upper }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="company-header-info">
+
+                <span class="section-eyebrow">
+                    EMPRESA
+                </span>
+
+                <h1>
+                    {{ empresa.name }}
+                </h1>
+
+
+                <div class="company-meta">
+
+                    {% if empresa.setor %}
+
+                        <span>
+                            {{ empresa.setor }}
+                        </span>
+
+                    {% endif %}
+
+
+                    {% if empresa.localizacao %}
+
+                        <span>
+                            {{ empresa.localizacao }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LINKS
+        ================================================== -->
+
+        <div class="company-header-links">
+
+            {% if empresa.website %}
+
+                <a
+                    href="{{ empresa.website }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="company-external-link"
+                >
+                    Site oficial
+                    <span>↗</span>
+                </a>
+
+            {% endif %}
+
+
+            {% if empresa.linkedin %}
+
+                <a
+                    href="{{ empresa.linkedin }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="company-external-link"
+                >
+                    LinkedIn
+                    <span>↗</span>
+                </a>
+
+            {% endif %}
+
+
+            {% if empresa.pagina_carreiras %}
+
+                <a
+                    href="{{ empresa.pagina_carreiras }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="company-external-link"
+                >
+                    Carreiras
+                    <span>↗</span>
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MÉTRICAS
+    ====================================================== -->
+
+    <section class="company-metrics">
+
+
+        <!-- TOTAL -->
+
+        <article class="company-metric-card">
+
+            <span class="company-metric-label">
+                Candidaturas
+            </span>
+
+            <strong>
+                {{ total }}
+            </strong>
+
+            <span class="company-metric-description">
+                registradas nesta empresa
+            </span>
+
+        </article>
+
+
+        <!-- EM ANDAMENTO -->
+
+        <article class="company-metric-card">
+
+            <span class="company-metric-label">
+                Em andamento
+            </span>
+
+            <strong>
+                {{ em_andamento }}
+            </strong>
+
+            <span class="company-metric-description">
+                processos ativos
+            </span>
+
+        </article>
+
+
+        <!-- ENTREVISTAS -->
+
+        <article class="company-metric-card">
+
+            <span class="company-metric-label">
+                Entrevistas
+            </span>
+
+            <strong>
+                {{ entrevistas }}
+            </strong>
+
+            <span class="company-metric-description">
+                etapas de entrevista
+            </span>
+
+        </article>
+
+
+        <!-- APROVADAS -->
+
+        <article class="company-metric-card">
+
+            <span class="company-metric-label">
+                Aprovadas
+            </span>
+
+            <strong>
+                {{ aprovadas }}
+            </strong>
+
+            <span class="company-metric-description">
+                processos aprovados
+            </span>
+
+        </article>
+
+
+        <!-- RECUSADAS -->
+
+        <article class="company-metric-card">
+
+            <span class="company-metric-label">
+                Recusadas
+            </span>
+
+            <strong>
+                {{ recusadas }}
+            </strong>
+
+            <span class="company-metric-description">
+                processos encerrados
+            </span>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <div class="company-content-grid">
+
+
+        <!-- =================================================
+             CANDIDATURAS
+        ================================================== -->
+
+        <section class="company-section">
+
+            <div class="company-section-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        PROCESSOS SELETIVOS
+                    </span>
+
+                    <h2>
+                        Suas candidaturas
+                    </h2>
+
+                    <p>
+                        O histórico dos processos que você registrou nesta empresa.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'nova_candidatura' %}?empresa={{ empresa.id }}"
+                    class="dashboard-button"
+                >
+                    <span class="button-plus">
+                        +
+                    </span>
+
+                    Nova candidatura
+                </a>
+
+            </div>
+
+
+            <div class="company-applications">
+
+                {% for candidatura in candidaturas_empresa %}
+
+                    <a
+                        href="{% url 'detalhe_candidatura' candidatura.id %}"
+                        class="company-application"
+                    >
+
+                        <div class="company-application-main">
+
+                            <div class="company-application-icon">
+                                {{ candidatura.cargo|first|upper }}
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    {{ candidatura.cargo }}
+                                </strong>
+
+                                <span>
+                                    {{ candidatura.data_candidatura|date:"d/m/Y" }}
+
+                                    {% if candidatura.modalidade %}
+                                        · {{ candidatura.modalidade }}
+                                    {% endif %}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="company-application-side">
+
+                            {% if candidatura.salario %}
+
+                                <span class="application-salary">
+                                    R$ {{ candidatura.salario|floatformat:0 }}
+                                </span>
+
+                            {% endif %}
+
+
+                            <span
+                                class="status-badge status-{{ candidatura.status|lower }}"
+                            >
+                                {{ candidatura.status }}
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                {% empty %}
+
+                    <div class="company-empty-state">
+
+                        <div class="company-empty-icon">
+                            +
+                        </div>
+
+                        <h3>
+                            Nenhuma candidatura ainda
+                        </h3>
+
+                        <p>
+                            Você ainda não registrou uma candidatura para esta empresa.
+                        </p>
+
+                        <a
+                            href="{% url 'nova_candidatura' %}?empresa={{ empresa.id }}"
+                            class="dashboard-button"
+                        >
+                            Adicionar candidatura
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COLUNA LATERAL
+        ================================================== -->
+
+        <aside class="company-sidebar">
+
+
+            <!-- =============================================
+                 SALÁRIOS
+            ============================================== -->
+
+            <section class="company-info-card">
+
+                <div class="company-card-heading">
+
+                    <span class="section-eyebrow">
+                        REMUNERAÇÃO
+                    </span>
+
+                    <h3>
+                        Suas expectativas
+                    </h3>
+
+                </div>
+
+
+                <div class="company-salary-main">
+
+                    <span>
+                        Média
+                    </span>
+
+                    <strong>
+
+                        {% if salario_medio %}
+                            R$ {{ salario_medio|floatformat:0 }}
+                        {% else %}
+                            —
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="company-salary-range">
+
+                    <div>
+
+                        <span>
+                            Menor
+                        </span>
+
+                        <strong>
+
+                            {% if salario_menor %}
+                                R$ {{ salario_menor|floatformat:0 }}
+                            {% else %}
+                                —
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Maior
+                        </span>
+
+                        <strong>
+
+                            {% if salario_maior %}
+                                R$ {{ salario_maior|floatformat:0 }}
+                            {% else %}
+                                —
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CARGOS
+            ============================================== -->
+
+            <section class="company-info-card">
+
+                <div class="company-card-heading">
+
+                    <span class="section-eyebrow">
+                        FUNÇÕES
+                    </span>
+
+                    <h3>
+                        Cargos buscados
+                    </h3>
+
+                </div>
+
+
+                <div class="company-cargos">
+
+                    {% for cargo in cargos %}
+
+                        <div class="company-cargo-row">
+
+                            <span>
+                                {{ cargo.cargo }}
+                            </span>
+
+                            <strong>
+                                {{ cargo.total_candidaturas }}
+                            </strong>
+
+                        </div>
+
+                    {% empty %}
+
+                        <span class="analytics-empty">
+                            Nenhum cargo registrado.
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 INFORMAÇÕES
+            ============================================== -->
+
+            <section class="company-info-card">
+
+                <div class="company-card-heading">
+
+                    <span class="section-eyebrow">
+                        INFORMAÇÕES
+                    </span>
+
+                    <h3>
+                        Sobre a empresa
+                    </h3>
+
+                </div>
+
+
+                {% if empresa.descricao %}
+
+                    <p class="company-description">
+                        {{ empresa.descricao }}
+                    </p>
+
+                {% else %}
+
+                    <p class="company-description company-description-empty">
+                        Ainda não há uma descrição cadastrada para esta empresa.
+                    </p>
+
+                {% endif %}
+
+
+                {% if empresa.setor %}
+
+                    <div class="company-detail-row">
+
+                        <span>
+                            Setor
+                        </span>
+
+                        <strong>
+                            {{ empresa.setor }}
+                        </strong>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if empresa.localizacao %}
+
+                    <div class="company-detail-row">
+
+                        <span>
+                            Localização
+                        </span>
+
+                        <strong>
+                            {{ empresa.localizacao }}
+                        </strong>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+        </aside>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,354 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html
+    lang="pt-BR"
+    data-theme-user="{% if request.user.is_authenticated %}{{ request.user.id }}{% else %}guest{% endif %}"
+>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Job Tracker — organize e acompanhe suas candidaturas de emprego."
+    >
+
+
+    <!-- =====================================================
+         TEMA
+         ===================================================== -->
+
+    <script>
+
+        (() => {
+
+            try {
+
+                const themeUser =
+                    document.documentElement.dataset.themeUser ||
+                    "guest";
+
+
+                const storageKey =
+                    `job-tracker-theme-${themeUser}`;
+
+
+                const savedTheme =
+                    localStorage.getItem(storageKey);
+
+
+                const systemDark =
+                    window.matchMedia(
+                        "(prefers-color-scheme: dark)"
+                    ).matches;
+
+
+                const theme =
+                    savedTheme ||
+                    (systemDark ? "dark" : "light");
+
+
+                document.documentElement.dataset.theme =
+                    theme;
+
+
+            } catch {
+
+                document.documentElement.dataset.theme =
+                    "light";
+
+            }
+
+        })();
+
+    </script>
+
+
+    <title>
+
+        {% block title %}
+            Job Tracker
+        {% endblock %}
+
+    </title>
+
+
+    <!-- =====================================================
+         CSS GLOBAL
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/css/site.css' %}"
+    >
+
+
+    <!-- =====================================================
+         SELETOR DE IDIOMA
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/language-switcher.css' %}"
+    >
+
+
+    <!-- =====================================================
+         CSS ESPECÍFICO DA PÁGINA
+         ===================================================== -->
+
+    {% block extra_css %}
+    {% endblock %}
+
+
+    <!-- =====================================================
+         TEMA ESCURO
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/css/darkmode.css' %}"
+    >
+
+</head>
+
+
+<body class="is-preload {% block body_class %}{% endblock %}">
+
+
+    <!-- =====================================================
+         LOADING
+         ===================================================== -->
+
+    <div
+        class="loading-screen"
+        id="loading-screen"
+        aria-hidden="true"
+    >
+
+        <div
+            class="loading-content"
+            role="status"
+            aria-live="polite"
+        >
+
+            <div class="loading-spinner"></div>
+
+            <span class="loading-text">
+                Carregando
+            </span>
+
+            <span class="loading-dots">
+                ...
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    {% block navbar %}
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="{% url 'landing' %}"
+                class="navbar-brand"
+                aria-label="Voltar para o início"
+            >
+
+                <span class="brand-mark">
+                    JT
+                </span>
+
+                <span class="brand-name">
+                    Job Tracker
+                </span>
+
+            </a>
+
+
+            <!-- LINKS -->
+
+            {% if request.user.is_authenticated %}
+
+                <div class="navbar-links">
+
+                    <a
+                        href="{% url 'landing' %}"
+                        class="{% block nav_inicio %}{% endblock %}"
+                    >
+                        {% translate "Início" %}
+                    </a>
+
+
+                    <a
+                        href="{% url 'candidaturas' %}"
+                        class="{% block nav_candidaturas %}{% endblock %}"
+                    >
+                        {% translate "Candidaturas" %}
+                    </a>
+
+
+                    <a
+                        href="{% url 'lista_empresas' %}"
+                        class="{% block nav_empresas %}{% endblock %}"
+                    >
+                        {% translate "Empresas" %}
+                    </a>
+
+
+                    <a href="{% url 'logout' %}">
+                        {% translate "Sair" %}
+                    </a>
+
+                </div>
+
+            {% else %}
+
+                <div class="navbar-links landing-navbar-links">
+
+                    <a href="#como-funciona">
+                        {% translate "Como funciona" %}
+                    </a>
+
+
+                    <a href="#recursos">
+                        {% translate "Recursos" %}
+                    </a>
+
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="navbar-login-link"
+                    >
+                        {% translate "Entrar" %}
+                    </a>
+
+
+                    <a
+                        href="{% url 'cadastro' %}"
+                        class="navbar-signup-link"
+                    >
+                        {% translate "Criar conta" %}
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 IDIOMA
+                 ================================================= -->
+
+            {% include 'cadastro/partials/language_selector.html' %}
+
+
+            <!-- =================================================
+                 TEMA
+                 ================================================= -->
+
+            <button
+                type="button"
+                class="theme-toggle"
+                id="theme-toggle"
+                aria-label="Ativar modo escuro"
+                aria-pressed="false"
+            >
+
+                <span
+                    class="theme-toggle-icon"
+                    aria-hidden="true"
+                >
+                    ☾
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </nav>
+
+    {% endblock %}
+
+
+    <!-- =====================================================
+         BOTÃO DE TEMA ALTERNATIVO
+         ===================================================== -->
+
+    {% block page_theme_toggle %}
+    {% endblock %}
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <main class="page-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    {% block footer %}
+
+    <footer class="site-footer">
+
+        <div class="site-footer-inner">
+
+            <span>
+                © {% now "Y" %} Job Tracker
+            </span>
+
+            <span>
+                Organize. Acompanhe. Conquiste.
+            </span>
+
+        </div>
+
+    </footer>
+
+    {% endblock %}
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="{% static 'cadastro/js/app.js' %}"></script>
+
+    <script src="{% static 'cadastro/js/theme.js' %}"></script>
+
+
+    {% block extra_js %}
+    {% endblock %}
+
+
+</body>
+
+</html>

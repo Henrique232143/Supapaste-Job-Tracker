@@ -1,3 +1,7 @@
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +9,11 @@
 }
 
 
-body {
+/* =========================================================
+   LOGIN — ESTRUTURA DA PÁGINA
+   ========================================================= */
+
+body.auth-body {
     min-height: 100vh;
 
     font-family:
@@ -15,36 +23,67 @@ body {
         "Segoe UI",
         sans-serif;
 
-    color: #111827;
+    background: var(--background);
 
-    background:
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(99, 102, 241, 0.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 80%,
-            rgba(59, 130, 246, 0.10),
-            transparent 30%
-        ),
-        #f8fafc;
+    color: var(--text);
+}
+
+
+/*
+   O base.html normalmente pode ter regras próprias
+   para .page-content.
+
+   Aqui sobrescrevemos essas regras somente no login.
+*/
+
+body.auth-body .page-content {
+    width: 100%;
+
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 30px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    background: var(--background);
 }
 
 
-/*CARD PRINCIPAL*/
+/* =========================================================
+   BOTÃO DE TEMA DO LOGIN
+   ========================================================= */
+
+.auth-theme-toggle {
+    position: fixed !important;
+
+    top: 24px;
+    right: 24px;
+
+    z-index: 9999;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+   ========================================================= */
 
 .auth-page {
     position: relative;
 
     width: 100%;
+
     max-width: 1080px;
 
     min-height: 650px;
@@ -53,24 +92,23 @@ body {
 
     grid-template-columns: 1fr 1fr;
 
-    background: white;
+    background: var(--surface);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 24px;
 
     overflow: hidden;
 
-    box-shadow:
-        0 30px 80px rgba(17, 24, 39, 0.12);
+    box-shadow: var(--shadow-md);
 
     animation: aparecer 0.5s ease;
 }
 
 
-/* =================================
+/* =========================================================
    LADO ESQUERDO
-================================= */
+   ========================================================= */
 
 .auth-info {
     position: relative;
@@ -83,7 +121,7 @@ body {
 
     justify-content: space-between;
 
-    color: white;
+    color: #ffffff;
 
     overflow: hidden;
 
@@ -102,8 +140,6 @@ body {
 }
 
 
-/* brilho decorativo */
-
 .auth-info::before {
     content: "";
 
@@ -117,20 +153,16 @@ body {
 
     border-radius: 50%;
 
-    background:
-        rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 
-/* =================================
-   LOGO
-================================= */
-
 .auth-logo {
     position: relative;
+
     z-index: 2;
 
-    color: white;
+    color: #ffffff;
 
     font-size: 17px;
 
@@ -140,12 +172,9 @@ body {
 }
 
 
-/* =================================
-   TEXTO ESQUERDO
-================================= */
-
 .auth-info-content {
     position: relative;
+
     z-index: 2;
 
     max-width: 420px;
@@ -153,6 +182,8 @@ body {
 
 
 .auth-info-content h1 {
+    color: #ffffff;
+
     font-size: 48px;
 
     line-height: 1.04;
@@ -172,12 +203,9 @@ body {
 }
 
 
-/* =================================
-   RODAPÉ ESQUERDO
-================================= */
-
 .auth-info-footer {
     position: relative;
+
     z-index: 2;
 
     color: #9ca3af;
@@ -186,9 +214,9 @@ body {
 }
 
 
-/* =================================
-   ÁREA DO FORMULÁRIO
-================================= */
+/* =========================================================
+   LADO DIREITO
+   ========================================================= */
 
 .auth-form-area {
     padding: 60px;
@@ -198,7 +226,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: #ffffff;
+    background: var(--surface);
 }
 
 
@@ -209,9 +237,9 @@ body {
 }
 
 
-/* =================================
-   CABEÇALHO DO FORMULÁRIO
-================================= */
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
 
 .auth-form-header {
     margin-bottom: 30px;
@@ -219,6 +247,8 @@ body {
 
 
 .auth-form-header h2 {
+    color: var(--text);
+
     font-size: 32px;
 
     line-height: 1.1;
@@ -230,7 +260,7 @@ body {
 
 
 .auth-form-header p {
-    color: #6b7280;
+    color: var(--text-secondary);
 
     font-size: 14px;
 
@@ -238,9 +268,9 @@ body {
 }
 
 
-/* =================================
+/* =========================================================
    CAMPOS
-================================= */
+   ========================================================= */
 
 .form-group {
     margin-bottom: 18px;
@@ -252,7 +282,7 @@ body {
 
     margin-bottom: 7px;
 
-    color: #374151;
+    color: var(--text);
 
     font-size: 13px;
 
@@ -260,22 +290,20 @@ body {
 }
 
 
-/* Django pode gerar input automaticamente */
-
 .form-group input {
     width: 100%;
 
     padding: 13px 14px;
 
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--border);
 
     border-radius: 9px;
 
     outline: none;
 
-    background: white;
+    background: var(--surface);
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 15px;
 
@@ -286,10 +314,13 @@ body {
 }
 
 
-/* quando clicamos no campo */
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
 
 .form-group input:focus {
-    border-color: #6366f1;
+    border-color: var(--primary);
 
     box-shadow:
         0 0 0 4px rgba(99, 102, 241, 0.10);
@@ -298,9 +329,9 @@ body {
 }
 
 
-/* =================================
+/* =========================================================
    ERRO
-================================= */
+   ========================================================= */
 
 .error-box {
     padding: 12px 14px;
@@ -309,11 +340,11 @@ body {
 
     border-radius: 9px;
 
-    background: #fef2f2;
+    background: rgba(239, 68, 68, 0.10);
 
-    border: 1px solid #fecaca;
+    border: 1px solid rgba(239, 68, 68, 0.25);
 
-    color: #b91c1c;
+    color: var(--danger);
 
     font-size: 13px;
 
@@ -324,15 +355,15 @@ body {
 .field-error {
     margin-top: 5px;
 
-    color: #dc2626;
+    color: var(--danger);
 
     font-size: 12px;
 }
 
 
-/* =================================
-   BOTÃO
-================================= */
+/* =========================================================
+   BOTÃO ENTRAR / CRIAR CONTA
+   ========================================================= */
 
 .btn-auth {
     width: 100%;
@@ -343,9 +374,9 @@ body {
 
     border-radius: 10px;
 
-    background: #111827;
+    background: var(--primary);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 15px;
 
@@ -361,7 +392,7 @@ body {
 
 
 .btn-auth:hover {
-    background: #374151;
+    background: var(--primary-hover);
 
     transform: translateY(-2px);
 
@@ -375,16 +406,16 @@ body {
 }
 
 
-/* =================================
+/* =========================================================
    LINKS
-================================= */
+   ========================================================= */
 
 .auth-links {
     margin-top: 22px;
 
     text-align: center;
 
-    color: #6b7280;
+    color: var(--text-secondary);
 
     font-size: 13px;
 
@@ -393,7 +424,7 @@ body {
 
 
 .auth-links a {
-    color: #4f46e5;
+    color: var(--primary);
 
     font-weight: 700;
 
@@ -406,16 +437,12 @@ body {
 }
 
 
-/* =================================
-   VOLTAR
-================================= */
-
 .back-link {
     display: inline-block;
 
     margin-top: 8px;
 
-    color: #6b7280 !important;
+    color: var(--text-secondary) !important;
 
     font-size: 13px;
 
@@ -424,15 +451,15 @@ body {
 
 
 .back-link:hover {
-    color: #111827 !important;
+    color: var(--text) !important;
 
     text-decoration: none !important;
 }
 
 
-/* =================================
+/* =========================================================
    ANIMAÇÃO
-================================= */
+   ========================================================= */
 
 @keyframes aparecer {
 
@@ -447,20 +474,26 @@ body {
 
         transform: translateY(0);
     }
-
 }
 
 
-/* =================================
+/* =========================================================
    RESPONSIVO
-================================= */
+   ========================================================= */
 
 @media (max-width: 850px) {
+
+    body.auth-body .page-content {
+        padding: 20px;
+    }
+
 
     .auth-page {
         grid-template-columns: 1fr;
 
         max-width: 500px;
+
+        min-height: auto;
     }
 
 
@@ -484,13 +517,12 @@ body {
     .auth-form-area {
         padding: 40px;
     }
-
 }
 
 
 @media (max-width: 500px) {
 
-    body {
+    body.auth-body .page-content {
         padding: 15px;
     }
 
@@ -517,4 +549,142 @@ body {
         letter-spacing: 3px;
     }
 
+
+    .auth-theme-toggle {
+        top: 15px;
+
+        right: 15px;
+    }
+}
+
+
+/* =========================================================
+   CAMPOS DE SENHA COM VISUALIZAÇÃO
+   ========================================================= */
+
+.password-input-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.password-input-wrapper input {
+    padding-right: 48px;
+}
+
+
+.password-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: 8px;
+
+    width: 36px;
+    height: 36px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s,
+        background 0.2s;
+}
+
+
+.password-toggle:hover {
+    color: var(--text);
+
+    background: rgba(127, 127, 127, 0.08);
+}
+
+
+.password-toggle:focus-visible {
+    outline: 2px solid var(--primary);
+
+    outline-offset: 2px;
+}
+
+
+.password-toggle svg {
+    display: block;
+}
+
+
+.icon-eye,
+.icon-eye-off {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.is-hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   INSTRUÇÃO DA SENHA
+   ========================================================= */
+
+.password-hint {
+    margin-top: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   CADASTRO — VERSÃO MAIS COMPACTA
+
+   Essas regras só entram quando existe um campo CPF.
+   Dessa forma o LOGIN mantém suas dimensões originais.
+   ========================================================= */
+
+.auth-form:has(input[name="cpf"]) .form-group {
+    margin-bottom: 12px;
+}
+
+
+.auth-form:has(input[name="cpf"]) .auth-form-header {
+    margin-bottom: 20px;
+}
+
+
+.auth-form:has(input[name="cpf"]) .form-group input {
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+
+.auth-form:has(input[name="cpf"]) .auth-links {
+    margin-top: 15px;
+}
+
+
+.auth-form-area:has(input[name="cpf"]) {
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
