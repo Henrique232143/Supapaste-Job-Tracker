@@ -1,0 +1,557 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n %}
+{% load admin_dashboard %}
+
+
+{% block title %}
+    Painel administrativo — Job Tracker
+{% endblock %}
+
+
+{% block breadcrumbs %}{% endblock %}
+
+
+{% block content_title %}{% endblock %}
+
+
+{% block content %}
+
+{% total_empresas as empresas_total %}
+{% total_candidaturas as candidaturas_total %}
+{% total_solicitacoes as solicitacoes_total %}
+{% total_solicitacoes_pendentes as pendentes_total %}
+{% solicitacoes_pendentes 5 as pendentes %}
+
+
+<div class="jt-admin-dashboard">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
+    <section class="jt-admin-hero">
+
+        <div>
+
+            <span class="jt-admin-eyebrow">
+                ADMINISTRAÇÃO
+            </span>
+
+            <h1>
+                Visão geral
+            </h1>
+
+            <p>
+                Acompanhe o catálogo, as candidaturas e
+                as solicitações enviadas pelos usuários.
+            </p>
+
+        </div>
+
+
+        <div class="jt-admin-hero-actions">
+
+            <a
+                href="{% url 'admin:cadastro_solicitacaoempresa_changelist' %}?status__exact=pendente"
+                class="jt-admin-primary-button"
+            >
+                Revisar solicitações
+                <span>→</span>
+            </a>
+
+            <a
+                href="{% url 'admin:cadastro_empresa_changelist' %}"
+                class="jt-admin-secondary-button"
+            >
+                Ver catálogo
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MÉTRICAS
+         ===================================================== -->
+
+    <section class="jt-admin-stats">
+
+
+        <a
+            href="{% url 'admin:cadastro_solicitacaoempresa_changelist' %}?status__exact=pendente"
+            class="jt-admin-stat-card"
+        >
+
+            <div class="jt-admin-stat-top">
+
+                <span class="jt-admin-stat-icon purple">
+                    S
+                </span>
+
+                <span class="jt-admin-stat-label">
+                    PENDENTES
+                </span>
+
+            </div>
+
+            <strong>
+                {{ pendentes_total }}
+            </strong>
+
+            <p>
+                Solicitações aguardando análise
+            </p>
+
+        </a>
+
+
+        <a
+            href="{% url 'admin:cadastro_empresa_changelist' %}"
+            class="jt-admin-stat-card"
+        >
+
+            <div class="jt-admin-stat-top">
+
+                <span class="jt-admin-stat-icon blue">
+                    E
+                </span>
+
+                <span class="jt-admin-stat-label">
+                    EMPRESAS
+                </span>
+
+            </div>
+
+            <strong>
+                {{ empresas_total }}
+            </strong>
+
+            <p>
+                Empresas disponíveis no catálogo
+            </p>
+
+        </a>
+
+
+        <a
+            href="{% url 'admin:cadastro_candidatura_changelist' %}"
+            class="jt-admin-stat-card"
+        >
+
+            <div class="jt-admin-stat-top">
+
+                <span class="jt-admin-stat-icon green">
+                    C
+                </span>
+
+                <span class="jt-admin-stat-label">
+                    CANDIDATURAS
+                </span>
+
+            </div>
+
+            <strong>
+                {{ candidaturas_total }}
+            </strong>
+
+            <p>
+                Candidaturas registradas na plataforma
+            </p>
+
+        </a>
+
+
+        <a
+            href="{% url 'admin:cadastro_solicitacaoempresa_changelist' %}"
+            class="jt-admin-stat-card"
+        >
+
+            <div class="jt-admin-stat-top">
+
+                <span class="jt-admin-stat-icon amber">
+                    #
+                </span>
+
+                <span class="jt-admin-stat-label">
+                    SOLICITAÇÕES
+                </span>
+
+            </div>
+
+            <strong>
+                {{ solicitacoes_total }}
+            </strong>
+
+            <p>
+                Solicitações recebidas no total
+            </p>
+
+        </a>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+         ===================================================== -->
+
+    <div class="jt-admin-main-grid">
+
+
+        <!-- =================================================
+             SOLICITAÇÕES
+             ================================================= -->
+
+        <section class="jt-admin-panel">
+
+            <div class="jt-admin-panel-header">
+
+                <div>
+
+                    <span class="jt-admin-panel-eyebrow">
+                        MODERAÇÃO
+                    </span>
+
+                    <h2>
+                        Solicitações pendentes
+                    </h2>
+
+                    <p>
+                        Empresas aguardando análise para
+                        entrada no catálogo.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'admin:cadastro_solicitacaoempresa_changelist' %}?status__exact=pendente"
+                    class="jt-admin-panel-link"
+                >
+                    Ver todas →
+                </a>
+
+            </div>
+
+
+            {% if pendentes %}
+
+                <div class="jt-admin-request-list">
+
+                    {% for solicitacao in pendentes %}
+
+                        <a
+                            href="{% url 'admin:cadastro_solicitacaoempresa_change' solicitacao.id %}"
+                            class="jt-admin-request"
+                        >
+
+                            <div class="jt-admin-request-avatar">
+
+                                {{ solicitacao.name|first|upper }}
+
+                            </div>
+
+
+                            <div class="jt-admin-request-info">
+
+                                <strong>
+                                    {{ solicitacao.name }}
+                                </strong>
+
+                                <span>
+                                    Solicitado por
+                                    {{ solicitacao.usuario.get_full_name|default:solicitacao.usuario.username }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="jt-admin-request-meta">
+
+                                <span class="jt-admin-status pending">
+                                    Pendente
+                                </span>
+
+                                <small>
+                                    {{ solicitacao.created_at|date:"d/m/Y H:i" }}
+                                </small>
+
+                            </div>
+
+
+                            <span class="jt-admin-request-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="jt-admin-empty">
+
+                    <div class="jt-admin-empty-icon">
+                        ✓
+                    </div>
+
+                    <strong>
+                        Tudo em dia
+                    </strong>
+
+                    <p>
+                        Não há solicitações de empresas
+                        aguardando análise.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- =================================================
+             ACESSOS RÁPIDOS
+             ================================================= -->
+
+        <aside class="jt-admin-panel jt-admin-quick-panel">
+
+            <div class="jt-admin-panel-header">
+
+                <div>
+
+                    <span class="jt-admin-panel-eyebrow">
+                        GERENCIAMENTO
+                    </span>
+
+                    <h2>
+                        Acessos rápidos
+                    </h2>
+
+                    <p>
+                        Áreas principais da administração.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="jt-admin-quick-list">
+
+
+                <a
+                    href="{% url 'admin:cadastro_solicitacaoempresa_changelist' %}"
+                    class="jt-admin-quick-link"
+                >
+
+                    <span class="jt-admin-quick-icon">
+                        S
+                    </span>
+
+                    <span>
+
+                        <strong>
+                            Solicitações
+                        </strong>
+
+                        <small>
+                            Aprovar ou rejeitar empresas
+                        </small>
+
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+                <a
+                    href="{% url 'admin:cadastro_empresa_changelist' %}"
+                    class="jt-admin-quick-link"
+                >
+
+                    <span class="jt-admin-quick-icon blue">
+                        E
+                    </span>
+
+                    <span>
+
+                        <strong>
+                            Empresas
+                        </strong>
+
+                        <small>
+                            Gerenciar catálogo oficial
+                        </small>
+
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+                <a
+                    href="{% url 'admin:cadastro_candidatura_changelist' %}"
+                    class="jt-admin-quick-link"
+                >
+
+                    <span class="jt-admin-quick-icon green">
+                        C
+                    </span>
+
+                    <span>
+
+                        <strong>
+                            Candidaturas
+                        </strong>
+
+                        <small>
+                            Consultar registros da plataforma
+                        </small>
+
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+                <a
+                    href="{% url 'admin:auth_user_changelist' %}"
+                    class="jt-admin-quick-link"
+                >
+
+                    <span class="jt-admin-quick-icon amber">
+                        U
+                    </span>
+
+                    <span>
+
+                        <strong>
+                            Usuários
+                        </strong>
+
+                        <small>
+                            Contas e permissões
+                        </small>
+
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+            </div>
+
+        </aside>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         DJANGO ADMIN
+         ===================================================== -->
+
+    <section class="jt-admin-native-section">
+
+        <div class="jt-admin-native-heading">
+
+            <span class="jt-admin-panel-eyebrow">
+                SISTEMA
+            </span>
+
+            <h2>
+                Administração avançada
+            </h2>
+
+            <p>
+                Acesso aos recursos administrativos
+                registrados no Django.
+            </p>
+
+        </div>
+
+
+        {% if app_list %}
+
+            <div class="jt-admin-app-grid">
+
+                {% for app in app_list %}
+
+                    <div class="jt-admin-app-card">
+
+                        <div class="jt-admin-app-header">
+
+                            <strong>
+                                {{ app.name }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="jt-admin-app-models">
+
+                            {% for model in app.models %}
+
+                                {% if model.admin_url %}
+
+                                    <a href="{{ model.admin_url }}">
+
+                                        <span>
+                                            {{ model.name }}
+                                        </span>
+
+                                        <span>
+                                            →
+                                        </span>
+
+                                    </a>
+
+                                {% else %}
+
+                                    <span class="jt-admin-disabled-model">
+
+                                        {{ model.name }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+</div>
+
+{% endblock %}

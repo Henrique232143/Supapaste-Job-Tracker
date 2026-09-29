@@ -1,28 +1,55 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+
 from .perfil_usuario import PerfilUsuario
 
 import unicodedata
 import re
 
 
+# ============================================================
+# NORMALIZAÇÃO
+# ============================================================
+
 def normalizar_nome(valor):
+
     valor = valor.strip()
-    valor = " ".join(valor.split())
-    valor = unicodedata.normalize("NFKD", valor)
+
+    valor = " ".join(
+        valor.split()
+    )
+
+    valor = unicodedata.normalize(
+        "NFKD",
+        valor
+    )
+
     valor = "".join(
         caractere
         for caractere in valor
         if not unicodedata.combining(caractere)
     )
+
     return valor.casefold()
 
 
 def normalizar_nome_empresa_base(valor):
-    valor = normalizar_nome(valor)
-    valor = re.sub(r"[^a-z0-9\s]", " ", valor)
-    valor = " ".join(valor.split())
+
+    valor = normalizar_nome(
+        valor
+    )
+
+    valor = re.sub(
+        r"[^a-z0-9\s]",
+        " ",
+        valor
+    )
+
+    valor = " ".join(
+        valor.split()
+    )
 
     sufixos = {
         "sa",
@@ -44,10 +71,15 @@ def normalizar_nome_empresa_base(valor):
 
     palavras = valor.split()
 
-    while palavras and palavras[-1] in sufixos:
+    while (
+        palavras
+        and palavras[-1] in sufixos
+    ):
         palavras.pop()
 
-    return " ".join(palavras)
+    return " ".join(
+        palavras
+    )
 
 
 # ============================================================
@@ -77,8 +109,13 @@ STATUS_CHOICES = [
     ("Desistiu", _("Desistiu")),
 ]
 
+
+# ============================================================
+# EMPRESA
+# ============================================================
+
 class Empresa(models.Model):
-    
+
     name = models.CharField(
         max_length=200
     )
@@ -126,6 +163,7 @@ class Empresa(models.Model):
     )
 
     def clean(self):
+
         self.name = " ".join(
             self.name.strip().split()
         )
@@ -144,20 +182,36 @@ class Empresa(models.Model):
             self.name
         )
 
-        super().save(*args, **kwargs)
+        super().save(
+            *args,
+            **kwargs
+        )
 
     def __str__(self):
+
         return self.name
 
 
+# ============================================================
+# ALIASES DE EMPRESA
+# ============================================================
+
 class EmpresaAlias(models.Model):
-    name = models.CharField(max_length=200)
+
+    name = models.CharField(
+        max_length=200
+    )
+
     name_normalized = models.CharField(
         max_length=200,
         unique=True,
         editable=False
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
     empresa = models.ForeignKey(
         Empresa,
         on_delete=models.CASCADE,
@@ -165,12 +219,31 @@ class EmpresaAlias(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.name = " ".join(self.name.strip().split())
-        self.name_normalized = normalizar_nome(self.name)
-        super().save(*args, **kwargs)
+
+        self.name = " ".join(
+            self.name.strip().split()
+        )
+
+        self.name_normalized = normalizar_nome(
+            self.name
+        )
+
+        super().save(
+            *args,
+            **kwargs
+        )
 
     def __str__(self):
-        return f"{self.name} ({self.empresa.name})"
+
+        return (
+            f"{self.name} "
+            f"({self.empresa.name})"
+        )
+
+
+# ============================================================
+# CARGO
+# ============================================================
 
 class Cargo(models.Model):
 
@@ -208,11 +281,19 @@ class Cargo(models.Model):
             self.name
         )
 
-        super().save(*args, **kwargs)
+        super().save(
+            *args,
+            **kwargs
+        )
 
     def __str__(self):
+
         return self.name
 
+
+# ============================================================
+# CANDIDATURA
+# ============================================================
 
 class Candidatura(models.Model):
 
@@ -277,8 +358,16 @@ class Candidatura(models.Model):
     )
 
     def __str__(self):
-        return f"{self.cargo} - {self.empresa.name}"
 
+        return (
+            f"{self.cargo} - "
+            f"{self.empresa.name}"
+        )
+
+
+# ============================================================
+# SUGESTÃO DE IDIOMA
+# ============================================================
 
 class LanguageSuggestion(models.Model):
 
@@ -299,4 +388,188 @@ class LanguageSuggestion(models.Model):
     )
 
     def __str__(self):
+
         return self.idioma
+
+
+# ============================================================
+# SOLICITAÇÃO DE EMPRESA
+# ============================================================
+
+class SolicitacaoEmpresa(models.Model):
+
+    STATUS_CHOICES = [
+        (
+            "pendente",
+            "Pendente"
+        ),
+        (
+            "aprovada",
+            "Aprovada"
+        ),
+        (
+            "rejeitada",
+            "Rejeitada"
+        ),
+    ]
+
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="solicitacoes_empresa"
+    )
+
+    name = models.CharField(
+        max_length=255
+    )
+
+    name_normalized = models.CharField(
+        max_length=255,
+        db_index=True
+    )
+
+    website = models.URLField(
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pendente"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    def save(self, *args, **kwargs):
+
+        self.name_normalized = normalizar_nome(
+            self.name
+        )
+
+        super().save(
+            *args,
+            **kwargs
+        )
+
+    def __str__(self):
+
+        return (
+            f"{self.name} "
+            f"({self.get_status_display()})"
+        )
+
+    class Meta:
+
+        ordering = [
+            "-created_at"
+        ]
+
+        verbose_name = (
+            "Solicitação de empresa"
+        )
+
+        verbose_name_plural = (
+            "Solicitações de empresas"
+        )
+
+
+# ============================================================
+# REGISTRO DE AUDITORIA
+# ============================================================
+
+class RegistroAuditoria(models.Model):
+
+    EVENTO_CHOICES = [
+        (
+            "request",
+            "Requisição"
+        ),
+        (
+            "login",
+            "Login"
+        ),
+        (
+            "logout",
+            "Logout"
+        ),
+        (
+            "login_failed",
+            "Login recusado"
+        ),
+        (
+            "empresa_aprovada",
+            "Empresa aprovada"
+        ),
+        (
+            "empresa_rejeitada",
+            "Empresa rejeitada"
+        ),
+    ]
+
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="registros_auditoria"
+    )
+
+    evento = models.CharField(
+        max_length=30,
+        choices=EVENTO_CHOICES,
+        db_index=True
+    )
+
+    metodo = models.CharField(
+        max_length=10,
+        blank=True
+    )
+
+    rota = models.CharField(
+        max_length=500,
+        blank=True
+    )
+
+    status_http = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_index=True
+    )
+
+    def __str__(self):
+
+        usuario = (
+            self.usuario.username
+            if self.usuario
+            else "Anônimo"
+        )
+
+        return (
+            f"{usuario} - "
+            f"{self.get_evento_display()} - "
+            f"{self.created_at:%d/%m/%Y %H:%M}"
+        )
+
+    class Meta:
+
+        ordering = [
+            "-created_at"
+        ]
+
+        verbose_name = (
+            "Registro de auditoria"
+        )
+
+        verbose_name_plural = (
+            "Registros de auditoria"
+        )

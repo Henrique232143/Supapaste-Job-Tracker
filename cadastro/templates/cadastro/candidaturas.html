@@ -817,3 +817,36 @@
 </div>
 
 {% endblock %}
+
+{% block extra_js %}
+
+{% if candidatura_criada_com_sucesso %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const userId =
+            document.documentElement.dataset.themeUser;
+
+        if (!userId || userId === "guest") {
+            return;
+        }
+
+        const storageKey =
+            `job-tracker-draft-${userId}-nova-candidatura`;
+
+        try {
+            localStorage.removeItem(storageKey);
+
+            sessionStorage.removeItem(
+                `${storageKey}-submitted`
+            );
+        } catch (error) {
+            // Se o navegador bloquear o storage,
+            // a candidatura continua salva normalmente.
+        }
+
+    });
+</script>
+{% endif %}
+
+{% endblock %}

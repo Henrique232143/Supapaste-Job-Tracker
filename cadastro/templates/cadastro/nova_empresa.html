@@ -1,297 +1,338 @@
+{% extends "cadastro/base.html" %}
+
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Job Tracker — adicione uma nova empresa."
-    >
-
-    <title>Job Tracker | Nova empresa</title>
-
-    <link
-        rel="stylesheet"
-        href="{% static 'cadastro/nova_empresa.css' %}"
-    >
-
-</head>
-
-<body>
-
-    <main class="form-page">
-
-        <div class="form-container">
-
-            <a
-                href="{% url 'nova_candidatura' %}"
-                class="back-link"
-            >
-                ← Voltar para candidatura
-            </a>
+{% load i18n %}
 
 
-            <section class="form-card">
+{% block title %}
+    Solicitar empresa — Job Tracker
+{% endblock %}
 
-                <div class="form-header">
 
-                    <span class="page-eyebrow">
-                        NOVA EMPRESA
-                    </span>
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'cadastro/nova_empresa.css' %}"
+>
+{% endblock %}
 
-                    <h1>
-                        Adicionar empresa
-                    </h1>
 
-                    <p>
-                        Cadastre uma empresa para utilizá-la nas
-                        suas candidaturas e disponibilizá-la no
-                        catálogo do Job Tracker.
-                    </p>
+{% block content %}
+
+<main class="form-page">
+
+    <div class="form-container">
+
+        <a
+            href="{% url 'nova_candidatura' %}"
+            class="back-link"
+        >
+            ← Voltar para candidatura
+        </a>
+
+
+        <section class="form-card">
+
+            <div class="form-header">
+
+                <span class="page-eyebrow">
+                    CATÁLOGO DE EMPRESAS
+                </span>
+
+                <h1>
+                    Solicitar empresa
+                </h1>
+
+                <p>
+                    Não encontrou a empresa que procura?
+                    Envie uma solicitação para que ela seja
+                    analisada antes de entrar no catálogo
+                    do Job Tracker.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUCESSO
+                 ================================================= -->
+
+            {% if empresa_solicitada %}
+
+                <div class="form-global-success">
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Solicitação enviada
+                        </strong>
+
+                        <p>
+                            <strong>
+                                {{ empresa_solicitada }}
+                            </strong>
+                            foi solicitada para inclusão no catálogo.
+                            A empresa ficará disponível após a análise
+                            e aprovação.
+                        </p>
+
+                    </div>
 
                 </div>
 
+            {% endif %}
 
-                <!-- =================================================
-                     EMPRESAS SEMELHANTES
-                     ================================================= -->
 
-                {% if semelhantes %}
+            <!-- =================================================
+                 EMPRESAS SEMELHANTES
+                 ================================================= -->
 
-                    <div class="similarity-box">
+            {% if semelhantes %}
 
-                        <div class="similarity-header">
+                <div class="similarity-box">
 
-                            <div class="similarity-icon">
-                                ?
-                            </div>
+                    <div class="similarity-header">
 
-                            <div>
+                        <div class="similarity-icon">
+                            ?
+                        </div>
 
-                                <strong>
-                                    Encontramos empresas semelhantes
-                                </strong>
+                        <div>
 
-                                <p>
-                                    Encontramos uma ou mais empresas
-                                    que podem ser a mesma que você
-                                    está tentando cadastrar.
-                                </p>
+                            <strong>
+                                Encontramos empresas semelhantes
+                            </strong>
 
-                            </div>
+                            <p>
+                                Antes de enviar a solicitação,
+                                confira se uma dessas empresas
+                                é a que você procura.
+                            </p>
 
                         </div>
 
+                    </div>
 
-                        <div class="similarity-list">
 
-                            {% for empresa, percentual in semelhantes %}
+                    <div class="similarity-list">
 
-                                <div class="similarity-item">
+                        {% for empresa, percentual in semelhantes %}
 
-                                    <div class="similarity-company">
+                            <div class="similarity-item">
 
-                                        <div class="company-avatar">
-                                            {{ empresa.name|first|upper }}
-                                        </div>
+                                <div class="similarity-company">
 
-                                        <div>
-
-                                            <strong>
-                                                {{ empresa.name }}
-                                            </strong>
-
-                                        </div>
-
+                                    <div class="company-avatar">
+                                        {{ empresa.name|first|upper }}
                                     </div>
 
+                                    <div>
 
-                                    <div class="similarity-actions">
-
-                                        <div class="similarity-info">
-
-                                            <span class="similarity-score">
-                                                {{ percentual }}% semelhante
-                                            </span>
-
-                                        </div>
-
-
-                                        <form
-                                            method="post"
-                                            action="{% url 'usar_empresa_existente' empresa.id %}"
-                                        >
-
-                                            {% csrf_token %}
-
-                                            <input
-                                                type="hidden"
-                                                name="alias"
-                                                value="{{ form.name.value|default:'' }}"
-                                            >
-
-                                            <button
-                                                type="submit"
-                                                class="btn-use"
-                                            >
-                                                Usar esta empresa
-                                            </button>
-
-                                        </form>
+                                        <strong>
+                                            {{ empresa.name }}
+                                        </strong>
 
                                     </div>
 
                                 </div>
 
-                            {% endfor %}
 
-                        </div>
+                                <div class="similarity-actions">
+
+                                    <div class="similarity-info">
+
+                                        <span class="similarity-score">
+                                            {{ percentual }}% semelhante
+                                        </span>
+
+                                    </div>
 
 
-                        <div class="similarity-footer">
+                                    <form
+                                        method="post"
+                                        action="{% url 'usar_empresa_existente' empresa.id %}"
+                                    >
 
-                            <span>
-                                Nenhuma dessas empresas corresponde
-                                ao que você procura?
-                            </span>
+                                        {% csrf_token %}
 
-                            <strong>
-                                Você pode cadastrar uma nova mesmo assim.
-                            </strong>
+                                        <input
+                                            type="hidden"
+                                            name="alias"
+                                            value="{{ form.name.value|default:'' }}"
+                                        >
 
-                        </div>
+                                        <button
+                                            type="submit"
+                                            class="btn-use"
+                                        >
+                                            Usar esta empresa
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="similarity-footer">
+
+                        <span>
+                            Nenhuma dessas é a empresa que
+                            você procura?
+                        </span>
+
+                        <strong>
+                            Você pode enviar a solicitação mesmo assim.
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+                 ================================================= -->
+
+            <form
+                method="post"
+                class="empresa-form"
+            >
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-global-error">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>
+                                {{ error }}
+                            </p>
+
+                        {% endfor %}
 
                     </div>
 
                 {% endif %}
 
 
+                <div class="form-fields">
+
+
+                    <!-- EMPRESA -->
+
+                    <div class="
+                        form-field
+                        {% if form.name.errors %}
+                            field-has-error
+                        {% endif %}
+                    ">
+
+                        {{ form.name.label_tag }}
+
+                        {{ form.name }}
+
+                        {% for error in form.name.errors %}
+
+                            <span class="field-error">
+                                {{ error }}
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- SITE -->
+
+                    <div class="
+                        form-field
+                        {% if form.website.errors %}
+                            field-has-error
+                        {% endif %}
+                    ">
+
+                        {{ form.website.label_tag }}
+
+                        {{ form.website }}
+
+                        {% for error in form.website.errors %}
+
+                            <span class="field-error">
+                                {{ error }}
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
                 <!-- =================================================
-                     FORMULÁRIO PRINCIPAL
+                     AÇÕES
                      ================================================= -->
 
-                <form
-                    method="post"
-                    class="empresa-form"
-                >
+                <div class="form-actions">
 
-                    {% csrf_token %}
-
-
-                    <div class="form-fields">
-
-
-                        <!-- EMPRESA -->
-
-                        <div class="
-                            form-field
-                            {% if form.name.errors %}
-                                field-has-error
-                            {% endif %}
-                        ">
-
-                            {{ form.name.label_tag }}
-
-                            {{ form.name }}
-
-                            {% for error in form.name.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
+                    <a
+                        href="{% url 'nova_candidatura' %}"
+                        class="btn-secondary"
+                    >
+                        Cancelar
+                    </a>
 
 
-                        <!-- SITE -->
+                    {% if semelhantes %}
 
-                        <div class="
-                            form-field
-                            {% if form.website.errors %}
-                                field-has-error
-                            {% endif %}
-                        ">
-
-                            {{ form.website.label_tag }}
-
-                            {{ form.website }}
-
-                            {% for error in form.website.errors %}
-
-                                <span class="field-error">
-                                    {{ error }}
-                                </span>
-
-                            {% endfor %}
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- =================================================
-                         AÇÕES
-                         ================================================= -->
-
-                    <div class="form-actions">
-
-                        <a
-                            href="{% url 'nova_candidatura' %}"
-                            class="btn-secondary"
+                        <button
+                            type="submit"
+                            name="confirmar_cadastro"
+                            value="1"
+                            class="btn-primary"
                         >
-                            Cancelar
-                        </a>
+                            Solicitar mesmo assim →
+                        </button>
+
+                    {% else %}
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                        >
+                            Solicitar inclusão →
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </form>
+
+        </section>
 
 
-                        {% if semelhantes %}
+        <p class="form-footer">
+            Job Tracker · Solicitações passam por análise
+            antes de entrarem no catálogo.
+        </p>
 
-                            <button
-                                type="submit"
-                                name="confirmar_cadastro"
-                                value="1"
-                                class="btn-primary"
-                            >
-                                Cadastrar como nova →
-                            </button>
+    </div>
 
-                        {% else %}
+</main>
 
-                            <button
-                                type="submit"
-                                class="btn-primary"
-                            >
-                                Cadastrar empresa →
-                            </button>
-
-                        {% endif %}
-
-                    </div>
-
-                </form>
-
-            </section>
-
-
-            <p class="form-footer">
-                Job Tracker · Empresas cadastradas ficam disponíveis
-                para todos os usuários.
-            </p>
-
-        </div>
-
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

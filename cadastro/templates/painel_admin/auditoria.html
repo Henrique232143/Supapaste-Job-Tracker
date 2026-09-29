@@ -1,0 +1,521 @@
+{% extends "admin/base_site.html" %}
+
+{% load static %}
+
+{% block title %}
+    Atividade e Segurança — Job Tracker
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content_title %}
+{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/css/auditoria-admin.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="audit-page">
+
+    <section class="audit-header">
+
+        <div>
+
+            <span class="audit-eyebrow">
+                SEGURANÇA E ATIVIDADE
+            </span>
+
+            <h1>
+                Registro de auditoria
+            </h1>
+
+            <p>
+                Acompanhe acessos, autenticações, falhas de login
+                e requisições realizadas no Job Tracker.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="audit-stats">
+
+        <article class="audit-stat-card">
+
+            <span class="audit-stat-label">
+                REQUISIÇÕES HOJE
+            </span>
+
+            <strong>
+                {{ metricas.requisicoes }}
+            </strong>
+
+        </article>
+
+
+        <article class="audit-stat-card">
+
+            <span class="audit-stat-label">
+                LOGINS HOJE
+            </span>
+
+            <strong>
+                {{ metricas.logins }}
+            </strong>
+
+        </article>
+
+
+        <article class="audit-stat-card">
+
+            <span class="audit-stat-label">
+                FALHAS DE LOGIN
+            </span>
+
+            <strong>
+                {{ metricas.falhas_login }}
+            </strong>
+
+        </article>
+
+
+        <article class="audit-stat-card">
+
+            <span class="audit-stat-label">
+                USUÁRIOS ATIVOS
+            </span>
+
+            <strong>
+                {{ metricas.usuarios }}
+            </strong>
+
+        </article>
+
+    </section>
+
+
+    <section class="audit-filter-panel">
+
+        <form
+            method="get"
+            class="audit-filters"
+        >
+
+            <div class="audit-filter-field audit-search-field">
+
+                <label for="busca">
+                    Buscar
+                </label>
+
+                <input
+                    type="text"
+                    id="busca"
+                    name="busca"
+                    value="{{ busca }}"
+                    placeholder="Usuário ou rota..."
+                >
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="evento">
+                    Evento
+                </label>
+
+                <select
+                    id="evento"
+                    name="evento"
+                >
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    {% for valor, nome in eventos %}
+
+                        <option
+                            value="{{ valor }}"
+                            {% if evento_selecionado == valor %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="metodo">
+                    Método
+                </label>
+
+                <select
+                    id="metodo"
+                    name="metodo"
+                >
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    {% for metodo in metodos %}
+
+                        <option
+                            value="{{ metodo }}"
+                            {% if metodo_selecionado == metodo %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ metodo }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="status">
+                    Status HTTP
+                </label>
+
+                <select
+                    id="status"
+                    name="status"
+                >
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    {% for status in status_http %}
+
+                        <option
+                            value="{{ status }}"
+                            {% if status_selecionado == status|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ status }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="periodo">
+                    Período
+                </label>
+
+                <select
+                    id="periodo"
+                    name="periodo"
+                >
+
+                    <option value="">
+                        Qualquer data
+                    </option>
+
+                    <option
+                        value="hoje"
+                        {% if periodo_selecionado == "hoje" %}
+                            selected
+                        {% endif %}
+                    >
+                        Hoje
+                    </option>
+
+                    <option
+                        value="7dias"
+                        {% if periodo_selecionado == "7dias" %}
+                            selected
+                        {% endif %}
+                    >
+                        Últimos 7 dias
+                    </option>
+
+                    <option
+                        value="30dias"
+                        {% if periodo_selecionado == "30dias" %}
+                            selected
+                        {% endif %}
+                    >
+                        Últimos 30 dias
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-actions">
+
+                <button
+                    type="submit"
+                    class="audit-filter-submit"
+                >
+                    Filtrar
+                </button>
+
+                <a
+                    href="{% url 'painel_admin:auditoria' %}"
+                    class="audit-filter-clear"
+                >
+                    Limpar
+                </a>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <section class="audit-table-card">
+
+        <div class="audit-table-header">
+
+            <div>
+
+                <span class="audit-eyebrow">
+                    ATIVIDADE RECENTE
+                </span>
+
+                <h2>
+                    Registros
+                </h2>
+
+            </div>
+
+            <span class="audit-record-count">
+                {{ pagina.paginator.count }}
+                registro{{ pagina.paginator.count|pluralize }}
+            </span>
+
+        </div>
+
+
+        <div class="audit-table-wrapper">
+
+            <table class="audit-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Evento</th>
+                        <th>Método</th>
+                        <th>Rota</th>
+                        <th>Status</th>
+                        <th>Data e hora</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for registro in pagina %}
+
+                        <tr>
+
+                            <td>
+
+                                {% if registro.usuario %}
+
+                                    <div class="audit-user">
+
+                                        <span class="audit-avatar">
+                                            {{ registro.usuario.username|first|upper }}
+                                        </span>
+
+                                        <span>
+                                            {{ registro.usuario.username }}
+                                        </span>
+
+                                    </div>
+
+                                {% else %}
+
+                                    <div class="audit-user">
+
+                                        <span class="audit-avatar anonymous">
+                                            ?
+                                        </span>
+
+                                        <span>
+                                            Anônimo
+                                        </span>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="audit-event audit-event-{{ registro.evento }}">
+                                    {{ registro.get_evento_display }}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if registro.metodo %}
+
+                                    <span class="audit-method">
+                                        {{ registro.metodo }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="audit-empty-value">
+                                        —
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="audit-route">
+                                {{ registro.rota|default:"—" }}
+                            </td>
+
+
+                            <td>
+
+                                {% if registro.status_http %}
+
+                                    <span class="
+                                        audit-http
+                                        {% if registro.status_http >= 500 %}
+                                            server-error
+                                        {% elif registro.status_http >= 400 %}
+                                            error
+                                        {% elif registro.status_http >= 300 %}
+                                            redirect
+                                        {% else %}
+                                            success
+                                        {% endif %}
+                                    ">
+                                        {{ registro.status_http }}
+                                    </span>
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td class="audit-date">
+                                {{ registro.created_at|date:"d/m/Y H:i:s" }}
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="audit-empty"
+                            >
+                                Nenhum registro encontrado com os filtros selecionados.
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% if pagina.paginator.num_pages > 1 %}
+
+            <div class="audit-pagination">
+
+                <div class="audit-pagination-info">
+
+                    Página
+                    <strong>
+                        {{ pagina.number }}
+                    </strong>
+                    de
+                    <strong>
+                        {{ pagina.paginator.num_pages }}
+                    </strong>
+
+                </div>
+
+
+                <div class="audit-pagination-actions">
+
+                    {% if pagina.has_previous %}
+
+                        <a
+                            href="?page={{ pagina.previous_page_number }}&busca={{ busca|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}"
+                        >
+                            ← Anterior
+                        </a>
+
+                    {% endif %}
+
+
+                    {% if pagina.has_next %}
+
+                        <a
+                            href="?page={{ pagina.next_page_number }}&busca={{ busca|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}"
+                        >
+                            Próxima →
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}

@@ -728,3 +728,95 @@ body {
     }
 
 }
+
+/* =========================================================
+   ERRO DE ADIÇÃO AO CATALOGO GLOBAL
+   ========================================================= */
+
+
+    .form-global-error {
+        margin-bottom: 24px;
+        padding: 14px 16px;
+
+        border: 1px solid rgba(220, 38, 38, 0.35);
+        border-radius: 12px;
+
+        background: rgba(220, 38, 38, 0.08);
+
+        color: #dc2626;
+
+        font-size: 14px;
+        line-height: 1.5;
+ }
+
+    .form-global-error p {
+        margin: 0;
+ }
+
+/* =========================================================
+   SOLICITAÇÃO ENVIADA
+   ========================================================= */
+
+.form-global-success {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    margin-bottom: 28px;
+    padding: 18px;
+
+    border: 1px solid rgba(34, 197, 94, 0.28);
+    border-radius: 14px;
+
+    background: rgba(34, 197, 94, 0.08);
+
+    color: inherit;
+}
+
+.success-icon {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: rgba(34, 197, 94, 0.14);
+
+    color: #22c55e;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.form-global-success > div:last-child {
+    min-width: 0;
+}
+
+.form-global-success strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-global-success p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    opacity: 0.8;
+}
+
+.form-global-success p strong {
+    display: inline;
+
+    margin: 0;
+}

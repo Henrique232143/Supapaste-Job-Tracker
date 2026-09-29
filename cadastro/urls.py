@@ -1,4 +1,7 @@
-from django.urls import path
+from django.urls import (
+    include,
+    path,
+)
 
 from . import views
 
@@ -103,6 +106,17 @@ urlpatterns = [
         'candidaturas/<int:candidatura_id>/excluir/',
         views.excluir_candidatura,
         name='excluir_candidatura'
+    ),
+
+    # =============================================================
+    # PAINEL ADMINISTRATIVO CUSTOMIZADO
+    # =============================================================
+
+    path(
+        'painel-admin/',
+        include(
+            'cadastro.painel_admin.urls'
+        )
     ),
 
 ]

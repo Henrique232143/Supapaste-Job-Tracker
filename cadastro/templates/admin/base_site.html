@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+
+    {% if subtitle %}
+        {{ subtitle }} |
+    {% endif %}
+
+    {{ title }} | Job Tracker
+
+{% endblock %}
+
+
+{% block extrastyle %}
+
+    {{ block.super }}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/admin-jobtracker.css' %}"
+    >
+
+{% endblock %}
+
+
+{% block branding %}
+
+<div class="jobtracker-admin-brand">
+
+    <a
+        href="{% url 'admin:index' %}"
+        class="jobtracker-admin-logo"
+    >
+
+        <span class="jobtracker-admin-logo-symbol">
+            J
+        </span>
+
+
+        <span class="jobtracker-admin-logo-text">
+
+            <strong>
+                Job Tracker
+            </strong>
+
+            <small>
+                Administração
+            </small>
+
+        </span>
+
+    </a>
+
+</div>
+
+{% endblock %}
+
+
+{% block extrabody %}
+
+    {{ block.super }}
+
+    <script
+        src="{% static 'cadastro/js/admin-theme.js' %}"
+    ></script>
+
+{% endblock %}
