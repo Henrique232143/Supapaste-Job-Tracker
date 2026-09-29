@@ -14,4 +14,10 @@ urlpatterns = [
         name="auditoria"
     ),
 
+    path(
+        "auditoria/<int:registro_id>/",
+        views.auditoria_detalhe,
+        name="auditoria_detalhe"
+    ),
+
 ]

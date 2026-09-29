@@ -484,32 +484,14 @@ class SolicitacaoEmpresa(models.Model):
 # ============================================================
 
 class RegistroAuditoria(models.Model):
-
+    
     EVENTO_CHOICES = [
-        (
-            "request",
-            "Requisição"
-        ),
-        (
-            "login",
-            "Login"
-        ),
-        (
-            "logout",
-            "Logout"
-        ),
-        (
-            "login_failed",
-            "Login recusado"
-        ),
-        (
-            "empresa_aprovada",
-            "Empresa aprovada"
-        ),
-        (
-            "empresa_rejeitada",
-            "Empresa rejeitada"
-        ),
+        ("request", "Requisição"),
+        ("login", "Login"),
+        ("logout", "Logout"),
+        ("login_failed", "Login recusado"),
+        ("empresa_aprovada", "Empresa aprovada"),
+        ("empresa_rejeitada", "Empresa rejeitada"),
     ]
 
     usuario = models.ForeignKey(
@@ -541,6 +523,20 @@ class RegistroAuditoria(models.Model):
         blank=True
     )
 
+    ip_address = models.GenericIPAddressField(
+        null=True,
+        blank=True
+    )
+
+    user_agent = models.TextField(
+        blank=True
+    )
+
+    referer = models.URLField(
+        max_length=1000,
+        blank=True
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
         db_index=True
@@ -555,11 +551,24 @@ class RegistroAuditoria(models.Model):
         )
 
         return (
+            f"{self.evento} - "
             f"{usuario} - "
-            f"{self.get_evento_display()} - "
-            f"{self.created_at:%d/%m/%Y %H:%M}"
+            f"{self.created_at}"
         )
 
+    class Meta:
+
+        ordering = [
+            "-created_at"
+        ]
+
+        verbose_name = (
+            "Registro de auditoria"
+        )
+
+        verbose_name_plural = (
+            "Registros de auditoria"
+        )
     class Meta:
 
         ordering = [

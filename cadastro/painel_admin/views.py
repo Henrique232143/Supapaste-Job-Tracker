@@ -1,12 +1,17 @@
-from datetime import timedelta
+from datetime import datetime, time, timedelta
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 
 from cadastro.models import RegistroAuditoria
+
+
+User = get_user_model()
 
 
 @staff_member_required(
@@ -29,6 +34,11 @@ def auditoria(request):
         .strip()
     )
 
+    usuario_id = (
+        request.GET.get("usuario", "")
+        .strip()
+    )
+
     evento = (
         request.GET.get("evento", "")
         .strip()
@@ -44,8 +54,28 @@ def auditoria(request):
         .strip()
     )
 
+    status_faixa = (
+        request.GET.get("status_faixa", "")
+        .strip()
+    )
+
     periodo = (
         request.GET.get("periodo", "")
+        .strip()
+    )
+
+    data_inicio = (
+        request.GET.get("data_inicio", "")
+        .strip()
+    )
+
+    data_fim = (
+        request.GET.get("data_fim", "")
+        .strip()
+    )
+
+    ordenacao = (
+        request.GET.get("ordenacao", "recentes")
         .strip()
     )
 
@@ -72,6 +102,17 @@ def auditoria(request):
 
 
     # =========================================================
+    # USUÁRIO
+    # =========================================================
+
+    if usuario_id.isdigit():
+
+        registros = registros.filter(
+            usuario_id=int(usuario_id)
+        )
+
+
+    # =========================================================
     # EVENTO
     # =========================================================
 
@@ -94,13 +135,46 @@ def auditoria(request):
 
 
     # =========================================================
-    # STATUS HTTP
+    # STATUS HTTP EXATO
     # =========================================================
 
     if status_http.isdigit():
 
         registros = registros.filter(
             status_http=int(status_http)
+        )
+
+
+    # =========================================================
+    # FAIXA DE STATUS HTTP
+    # =========================================================
+
+    if status_faixa == "2xx":
+
+        registros = registros.filter(
+            status_http__gte=200,
+            status_http__lt=300
+        )
+
+    elif status_faixa == "3xx":
+
+        registros = registros.filter(
+            status_http__gte=300,
+            status_http__lt=400
+        )
+
+    elif status_faixa == "4xx":
+
+        registros = registros.filter(
+            status_http__gte=400,
+            status_http__lt=500
+        )
+
+    elif status_faixa == "5xx":
+
+        registros = registros.filter(
+            status_http__gte=500,
+            status_http__lt=600
         )
 
 
@@ -137,6 +211,100 @@ def auditoria(request):
             created_at__gte=(
                 agora - timedelta(days=30)
             )
+        )
+
+
+    # =========================================================
+    # DATA INICIAL
+    # =========================================================
+
+    if data_inicio:
+
+        try:
+
+            data_inicio_obj = datetime.strptime(
+                data_inicio,
+                "%Y-%m-%d"
+            ).date()
+
+            inicio_dia = timezone.make_aware(
+                datetime.combine(
+                    data_inicio_obj,
+                    time.min
+                )
+            )
+
+            registros = registros.filter(
+                created_at__gte=inicio_dia
+            )
+
+        except ValueError:
+            pass
+
+
+    # =========================================================
+    # DATA FINAL
+    # =========================================================
+
+    if data_fim:
+
+        try:
+
+            data_fim_obj = datetime.strptime(
+                data_fim,
+                "%Y-%m-%d"
+            ).date()
+
+            fim_dia = timezone.make_aware(
+                datetime.combine(
+                    data_fim_obj,
+                    time.max
+                )
+            )
+
+            registros = registros.filter(
+                created_at__lte=fim_dia
+            )
+
+        except ValueError:
+            pass
+
+
+    # =========================================================
+    # ORDENAÇÃO
+    # =========================================================
+
+    if ordenacao == "antigos":
+
+        registros = registros.order_by(
+            "created_at"
+        )
+
+    elif ordenacao == "status":
+
+        registros = registros.order_by(
+            "status_http",
+            "-created_at"
+        )
+
+    elif ordenacao == "usuario":
+
+        registros = registros.order_by(
+            "usuario__username",
+            "-created_at"
+        )
+
+    elif ordenacao == "evento":
+
+        registros = registros.order_by(
+            "evento",
+            "-created_at"
+        )
+
+    else:
+
+        registros = registros.order_by(
+            "-created_at"
         )
 
 
@@ -188,6 +356,20 @@ def auditoria(request):
 
 
     # =========================================================
+    # USUÁRIOS DISPONÍVEIS NO FILTRO
+    # =========================================================
+
+    usuarios = (
+        User.objects
+        .filter(
+            registros_auditoria__isnull=False
+        )
+        .distinct()
+        .order_by("username")
+    )
+
+
+    # =========================================================
     # PAGINAÇÃO
     # =========================================================
 
@@ -213,10 +395,17 @@ def auditoria(request):
             "metricas": metricas,
 
             "busca": busca,
+            "usuario_selecionado": usuario_id,
             "evento_selecionado": evento,
             "metodo_selecionado": metodo,
             "status_selecionado": status_http,
+            "status_faixa_selecionado": status_faixa,
             "periodo_selecionado": periodo,
+            "data_inicio": data_inicio,
+            "data_fim": data_fim,
+            "ordenacao_selecionada": ordenacao,
+
+            "usuarios": usuarios,
 
             "eventos": (
                 RegistroAuditoria.EVENTO_CHOICES
@@ -242,5 +431,46 @@ def auditoria(request):
                 404,
                 500,
             ],
+
+            "status_faixas": [
+                ("2xx", "2xx — Sucesso"),
+                ("3xx", "3xx — Redirecionamento"),
+                ("4xx", "4xx — Erro do cliente"),
+                ("5xx", "5xx — Erro do servidor"),
+            ],
+
+            "ordenacoes": [
+                ("recentes", "Mais recentes"),
+                ("antigos", "Mais antigos"),
+                ("status", "Status HTTP"),
+                ("usuario", "Usuário"),
+                ("evento", "Evento"),
+            ],
         }
+    )
+
+
+@staff_member_required(
+    login_url="/admin/login/"
+)
+def auditoria_detalhe(
+    request,
+    registro_id
+):
+
+    registro = get_object_or_404(
+        RegistroAuditoria.objects.select_related(
+            "usuario"
+        ),
+        id=registro_id
+    )
+
+    contexto = {
+        "registro": registro,
+    }
+
+    return render(
+        request,
+        "painel_admin/auditoria_detalhe.html",
+        contexto
     )

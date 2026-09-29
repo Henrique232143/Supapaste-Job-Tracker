@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db import transaction
+from django.shortcuts import redirect
 from django.utils import timezone
 
 from .models import (
@@ -135,9 +136,7 @@ class SolicitacaoEmpresaAdmin(admin.ModelAdmin):
     ):
 
         aprovadas = 0
-
         empresas_criadas = 0
-
         empresas_existentes = 0
 
         solicitacoes = queryset.filter(
@@ -248,6 +247,8 @@ class RegistroAuditoriaAdmin(admin.ModelAdmin):
         "usuario__username",
         "usuario__email",
         "rota",
+        "ip_address",
+        "user_agent",
     )
 
     ordering = (
@@ -264,8 +265,25 @@ class RegistroAuditoriaAdmin(admin.ModelAdmin):
         "metodo",
         "rota",
         "status_http",
+        "ip_address",
+        "user_agent",
+        "referer",
         "created_at",
     )
+
+    # =========================================================
+    # INTERFACE CUSTOMIZADA
+    # =========================================================
+
+    def changelist_view(
+        self,
+        request,
+        extra_context=None
+    ):
+
+        return redirect(
+            "painel_admin:auditoria"
+        )
 
     # =========================================================
     # HORÁRIO LOCAL
@@ -275,7 +293,10 @@ class RegistroAuditoriaAdmin(admin.ModelAdmin):
         description="Data e hora",
         ordering="created_at"
     )
-    def horario_local(self, obj):
+    def horario_local(
+        self,
+        obj
+    ):
 
         data = timezone.localtime(
             obj.created_at
@@ -292,7 +313,10 @@ class RegistroAuditoriaAdmin(admin.ModelAdmin):
     @admin.display(
         description="Usuário"
     )
-    def usuario_exibicao(self, obj):
+    def usuario_exibicao(
+        self,
+        obj
+    ):
 
         if obj.usuario:
 

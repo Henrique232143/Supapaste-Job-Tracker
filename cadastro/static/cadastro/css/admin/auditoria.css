@@ -1,0 +1,1223 @@
+/* =========================================================
+   JOB TRACKER — PAINEL ADMIN
+   REGISTRO DE AUDITORIA
+   ========================================================= */
+
+
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
+.audit-page {
+    width: 100%;
+    max-width: 1480px;
+
+    margin: 0 auto;
+    padding: 34px 38px 56px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.audit-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+
+.audit-header > div {
+    max-width: 760px;
+}
+
+
+.audit-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    color: #8b8eea;
+}
+
+
+.audit-header h1 {
+    margin: 0;
+
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+
+    font-weight: 750;
+
+    color: var(--body-fg);
+}
+
+
+.audit-header p {
+    max-width: 680px;
+
+    margin: 14px 0 0;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    color: var(--body-quiet-color);
+}
+
+
+/* =========================================================
+   MÉTRICAS
+   ========================================================= */
+
+.audit-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+
+.audit-stat-card {
+    position: relative;
+
+    min-height: 126px;
+
+    padding: 22px;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 16px;
+
+    background: var(--body-bg);
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 8px 24px rgba(0, 0, 0, 0.025);
+
+    overflow: hidden;
+}
+
+
+.audit-stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6f73df,
+            #8c8ff0
+        );
+}
+
+
+.audit-stat-label {
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+
+    color: var(--body-quiet-color);
+}
+
+
+.audit-stat-card strong {
+    display: block;
+
+    font-size: 30px;
+    line-height: 1;
+
+    font-weight: 750;
+
+    color: var(--body-fg);
+}
+
+
+/* =========================================================
+   PAINEL DE FILTROS
+   ========================================================= */
+
+.audit-filter-panel {
+    margin-bottom: 22px;
+
+    padding: 20px;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 16px;
+
+    background: var(--body-bg);
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 8px 24px rgba(0, 0, 0, 0.02);
+}
+
+
+.audit-filters {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 1.7fr)
+        minmax(140px, 0.8fr)
+        minmax(120px, 0.65fr)
+        minmax(120px, 0.65fr)
+        minmax(150px, 0.8fr)
+        auto;
+
+    gap: 14px;
+
+    align-items: end;
+}
+
+
+.audit-filter-field {
+    min-width: 0;
+}
+
+
+.audit-filter-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+
+    color: var(--body-quiet-color);
+}
+
+
+.audit-filter-field input,
+.audit-filter-field select {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 10px;
+
+    outline: none;
+
+    background: var(--darkened-bg);
+    color: var(--body-fg);
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.audit-filter-field input::placeholder {
+    color: var(--body-quiet-color);
+}
+
+
+.audit-filter-field input:hover,
+.audit-filter-field select:hover {
+    border-color: rgba(139, 142, 234, 0.55);
+}
+
+
+.audit-filter-field input:focus,
+.audit-filter-field select:focus {
+    border-color: #8b8eea;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 142, 234, 0.12);
+}
+
+
+.audit-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    min-width: max-content;
+}
+
+
+.audit-filter-submit,
+.audit-filter-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.15s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.audit-filter-submit {
+    border: 1px solid transparent;
+
+    background: #7377e6;
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+
+.audit-filter-submit:hover {
+    background: #8185ec;
+
+    transform: translateY(-1px);
+}
+
+
+.audit-filter-clear {
+    border: 1px solid var(--hairline-color);
+
+    background: transparent;
+    color: var(--body-fg);
+}
+
+
+.audit-filter-clear:hover {
+    border-color: rgba(139, 142, 234, 0.6);
+
+    color: #9b9ef5;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CARD DA TABELA
+   ========================================================= */
+
+.audit-table-card {
+    border: 1px solid var(--hairline-color);
+    border-radius: 16px;
+
+    background: var(--body-bg);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 10px 30px rgba(0, 0, 0, 0.025);
+}
+
+
+.audit-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+
+.audit-table-header .audit-eyebrow {
+    margin-bottom: 5px;
+}
+
+
+.audit-table-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: var(--body-fg);
+}
+
+
+.audit-record-count {
+    flex-shrink: 0;
+
+    padding: 7px 11px;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 999px;
+
+    background: var(--darkened-bg);
+
+    font-size: 11px;
+    font-weight: 650;
+
+    color: var(--body-quiet-color);
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.audit-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.audit-table {
+    width: 100%;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    table-layout: auto;
+}
+
+
+.audit-table thead th {
+    padding: 12px 18px;
+
+    border-bottom: 1px solid var(--hairline-color);
+
+    background: var(--darkened-bg);
+
+    text-align: left;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: var(--body-quiet-color);
+
+    white-space: nowrap;
+}
+
+
+.audit-table tbody td {
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--hairline-color);
+
+    vertical-align: middle;
+
+    font-size: 12px;
+
+    color: var(--body-fg);
+}
+
+
+.audit-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+
+.audit-table tbody tr:hover {
+    background: rgba(139, 142, 234, 0.045);
+}
+
+
+.audit-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   USUÁRIO
+   ========================================================= */
+
+.audit-user {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 150px;
+}
+
+
+.audit-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: rgba(115, 119, 230, 0.14);
+    color: #9b9ef5;
+
+    font-size: 11px;
+    font-weight: 750;
+
+    text-transform: uppercase;
+}
+
+
+.audit-avatar.anonymous {
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--body-quiet-color);
+}
+
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
+
+.audit-event {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 26px;
+
+    padding: 0 9px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    background: rgba(139, 142, 234, 0.12);
+    color: #a5a7f5;
+}
+
+
+.audit-event-login {
+    background: rgba(34, 197, 94, 0.12);
+    color: #68d78c;
+}
+
+
+.audit-event-logout {
+    background: rgba(148, 163, 184, 0.12);
+    color: #aeb6c4;
+}
+
+
+.audit-event-login_failed {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ff8383;
+}
+
+
+.audit-event-empresa_aprovada {
+    background: rgba(16, 185, 129, 0.12);
+    color: #62d4ab;
+}
+
+
+.audit-event-empresa_rejeitada {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f2bd68;
+}
+
+
+/* =========================================================
+   MÉTODO HTTP
+   ========================================================= */
+
+.audit-method {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 8px;
+
+    border-radius: 7px;
+
+    background: var(--darkened-bg);
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    color: var(--body-fg);
+}
+
+
+/* =========================================================
+   ROTA
+   ========================================================= */
+
+.audit-route {
+    max-width: 440px;
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+    font-size: 11px !important;
+
+    color: var(--body-quiet-color) !important;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   STATUS HTTP
+   ========================================================= */
+
+.audit-http {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 42px;
+    height: 25px;
+
+    padding: 0 8px;
+
+    border-radius: 999px;
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+
+.audit-http.success {
+    background: rgba(34, 197, 94, 0.12);
+    color: #68d78c;
+}
+
+
+.audit-http.redirect {
+    background: rgba(59, 130, 246, 0.12);
+    color: #78aaf5;
+}
+
+
+.audit-http.error {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f2bd68;
+}
+
+
+.audit-http.server-error {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ff8383;
+}
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+.audit-date {
+    min-width: 150px;
+
+    white-space: nowrap;
+
+    color: var(--body-quiet-color) !important;
+
+    font-size: 11px !important;
+}
+
+
+/* =========================================================
+   VAZIO
+   ========================================================= */
+
+.audit-empty {
+    padding: 50px 20px !important;
+
+    text-align: center;
+
+    color: var(--body-quiet-color) !important;
+}
+
+
+.audit-empty-value {
+    color: var(--body-quiet-color);
+}
+
+
+/* =========================================================
+   PAGINAÇÃO
+   ========================================================= */
+
+.audit-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 22px;
+
+    border-top: 1px solid var(--hairline-color);
+}
+
+
+.audit-pagination-info {
+    font-size: 12px;
+
+    color: var(--body-quiet-color);
+}
+
+
+.audit-pagination-info strong {
+    color: var(--body-fg);
+}
+
+
+.audit-pagination-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.audit-pagination-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 36px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 9px;
+
+    background: var(--darkened-bg);
+
+    color: var(--body-fg);
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.audit-pagination-actions a:hover {
+    border-color: rgba(139, 142, 234, 0.6);
+
+    color: #9b9ef5;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   AJUSTES DO DJANGO ADMIN
+   SOMENTE NESTA PÁGINA
+   ========================================================= */
+
+body:has(.audit-page) #content {
+    width: auto;
+    max-width: none;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+}
+
+
+body:has(.audit-page) #content-main {
+    float: none;
+
+    width: 100%;
+}
+
+
+body:has(.audit-page) #content-related {
+    display: none;
+}
+
+
+body:has(.audit-page) .breadcrumbs {
+    display: none;
+}
+
+
+body:has(.audit-page) main#content-start {
+    width: 100%;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html[data-theme="dark"] .audit-stat-card,
+html[data-theme="dark"] .audit-filter-panel,
+html[data-theme="dark"] .audit-table-card {
+    background: #11151d;
+
+    border-color: #272d39;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.22),
+        0 14px 40px rgba(0, 0, 0, 0.13);
+}
+
+
+html[data-theme="dark"] .audit-filter-field input,
+html[data-theme="dark"] .audit-filter-field select {
+    background: #0c1016;
+
+    border-color: #2b313d;
+
+    color: #eef1f7;
+}
+
+
+html[data-theme="dark"] .audit-table thead th {
+    background: #0d1118;
+
+    border-color: #272d39;
+}
+
+
+html[data-theme="dark"] .audit-table tbody td {
+    border-color: #232934;
+}
+
+
+html[data-theme="dark"] .audit-table tbody tr:hover {
+    background: rgba(139, 142, 234, 0.055);
+}
+
+
+html[data-theme="dark"] .audit-method,
+html[data-theme="dark"] .audit-record-count,
+html[data-theme="dark"] .audit-pagination-actions a {
+    background: #0c1016;
+
+    border-color: #2b313d;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .audit-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .audit-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .audit-search-field {
+        grid-column: span 2;
+    }
+
+
+    .audit-filter-actions {
+        grid-column: span 2;
+
+        justify-content: flex-end;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .audit-page {
+        padding:
+            24px
+            16px
+            40px;
+    }
+
+
+    .audit-header h1 {
+        font-size: 30px;
+    }
+
+
+    .audit-stats {
+        grid-template-columns: 1fr;
+    }
+
+
+    .audit-filters {
+        grid-template-columns: 1fr;
+    }
+
+
+    .audit-search-field,
+    .audit-filter-actions {
+        grid-column: auto;
+    }
+
+
+    .audit-filter-actions {
+        justify-content: stretch;
+    }
+
+
+    .audit-filter-submit,
+    .audit-filter-clear {
+        flex: 1;
+    }
+
+
+    .audit-table-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .audit-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+/* =========================================================
+   DETALHE DO REGISTRO
+   ========================================================= */
+
+.audit-detail-card {
+    border: 1px solid var(--hairline-color);
+    border-radius: 16px;
+
+    background: var(--body-bg);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 10px 30px rgba(0, 0, 0, 0.025);
+}
+
+
+.audit-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+
+.audit-detail-header h2 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: var(--body-fg);
+}
+
+
+.audit-detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 0;
+}
+
+
+.audit-detail-item {
+    min-width: 0;
+
+    padding: 20px 24px;
+
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+
+.audit-detail-item:nth-child(odd) {
+    border-right: 1px solid var(--hairline-color);
+}
+
+
+.audit-detail-wide {
+    grid-column: 1 / -1;
+
+    border-right: 0 !important;
+}
+
+
+.audit-detail-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    color: var(--body-quiet-color);
+}
+
+
+.audit-detail-item strong {
+    font-size: 13px;
+
+    color: var(--body-fg);
+}
+
+
+.audit-detail-code {
+    display: block;
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 10px;
+
+    background: var(--darkened-bg);
+
+    color: var(--body-fg);
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+    font-size: 12px;
+
+    word-break: break-word;
+}
+
+
+.audit-detail-actions {
+    display: flex;
+
+    margin-top: 18px;
+}
+
+
+html[data-theme="dark"] .audit-detail-card {
+    background: #11151d;
+
+    border-color: #272d39;
+}
+
+
+html[data-theme="dark"] .audit-detail-item,
+html[data-theme="dark"] .audit-detail-header {
+    border-color: #272d39;
+}
+
+
+html[data-theme="dark"] .audit-detail-code {
+    background: #0c1016;
+
+    border-color: #2b313d;
+}
+
+
+@media (max-width: 760px) {
+
+    .audit-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .audit-detail-item:nth-child(odd) {
+        border-right: 0;
+    }
+
+
+    .audit-detail-wide {
+        grid-column: auto;
+    }
+
+}
+
+.audit-date-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+}
+
+
+.audit-detail-link {
+    flex-shrink: 0;
+
+    color: #8b8eea;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    opacity: 0;
+
+    transform: translateX(-4px);
+
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        color 0.15s ease;
+}
+
+
+.audit-table tbody tr:hover .audit-detail-link {
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+.audit-detail-link:hover {
+    color: #a5a7f5;
+}
+
+/* =========================================================
+   DETALHE — CONTEXTO DA REQUISIÇÃO
+   ========================================================= */
+
+.audit-detail-section {
+    margin-top: 18px;
+}
+
+
+.audit-detail-inline-code {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 30px;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--hairline-color);
+    border-radius: 8px;
+
+    background: var(--darkened-bg);
+
+    color: var(--body-fg);
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+    font-size: 12px;
+}
+
+
+.audit-detail-external-link {
+    display: inline-block;
+
+    max-width: 100%;
+
+    color: #8b8eea;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    word-break: break-all;
+}
+
+
+.audit-detail-external-link:hover {
+    color: #a5a7f5;
+
+    text-decoration: underline;
+}
+
+
+html[data-theme="dark"] .audit-detail-inline-code {
+    background: #0c1016;
+
+    border-color: #2b313d;
+}

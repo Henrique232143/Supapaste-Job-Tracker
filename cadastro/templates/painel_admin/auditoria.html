@@ -121,8 +121,41 @@
                     id="busca"
                     name="busca"
                     value="{{ busca }}"
-                    placeholder="Usuário ou rota..."
+                    placeholder="Usuário, e-mail ou rota..."
                 >
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="usuario">
+                    Usuário
+                </label>
+
+                <select
+                    id="usuario"
+                    name="usuario"
+                >
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    {% for usuario in usuarios %}
+
+                        <option
+                            value="{{ usuario.id }}"
+                            {% if usuario_selecionado == usuario.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ usuario.username }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
 
             </div>
 
@@ -196,7 +229,7 @@
             <div class="audit-filter-field">
 
                 <label for="status">
-                    Status HTTP
+                    Status exato
                 </label>
 
                 <select
@@ -228,8 +261,41 @@
 
             <div class="audit-filter-field">
 
+                <label for="status_faixa">
+                    Faixa HTTP
+                </label>
+
+                <select
+                    id="status_faixa"
+                    name="status_faixa"
+                >
+
+                    <option value="">
+                        Todas
+                    </option>
+
+                    {% for valor, nome in status_faixas %}
+
+                        <option
+                            value="{{ valor }}"
+                            {% if status_faixa_selecionado == valor %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
                 <label for="periodo">
-                    Período
+                    Período rápido
                 </label>
 
                 <select
@@ -267,6 +333,67 @@
                     >
                         Últimos 30 dias
                     </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="data_inicio">
+                    Data inicial
+                </label>
+
+                <input
+                    type="date"
+                    id="data_inicio"
+                    name="data_inicio"
+                    value="{{ data_inicio }}"
+                >
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="data_fim">
+                    Data final
+                </label>
+
+                <input
+                    type="date"
+                    id="data_fim"
+                    name="data_fim"
+                    value="{{ data_fim }}"
+                >
+
+            </div>
+
+
+            <div class="audit-filter-field">
+
+                <label for="ordenacao">
+                    Ordenação
+                </label>
+
+                <select
+                    id="ordenacao"
+                    name="ordenacao"
+                >
+
+                    {% for valor, nome in ordenacoes %}
+
+                        <option
+                            value="{{ valor }}"
+                            {% if ordenacao_selecionada == valor %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ nome }}
+                        </option>
+
+                    {% endfor %}
 
                 </select>
 
@@ -440,7 +567,23 @@
 
 
                             <td class="audit-date">
-                                {{ registro.created_at|date:"d/m/Y H:i:s" }}
+
+                                <div class="audit-date-content">
+
+                                    <span>
+                                        {{ registro.created_at|date:"d/m/Y H:i:s" }}
+                                    </span>
+
+                                    <a
+                                        href="{% url 'painel_admin:auditoria_detalhe' registro.id %}"
+                                        class="audit-detail-link"
+                                        title="Ver detalhes do registro"
+                                    >
+                                        Detalhes →
+                                    </a>
+
+                                </div>
+
                             </td>
 
                         </tr>
@@ -490,7 +633,7 @@
                     {% if pagina.has_previous %}
 
                         <a
-                            href="?page={{ pagina.previous_page_number }}&busca={{ busca|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}"
+                            href="?page={{ pagina.previous_page_number }}&busca={{ busca|urlencode }}&usuario={{ usuario_selecionado|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&status_faixa={{ status_faixa_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}&data_inicio={{ data_inicio|urlencode }}&data_fim={{ data_fim|urlencode }}&ordenacao={{ ordenacao_selecionada|urlencode }}"
                         >
                             ← Anterior
                         </a>
@@ -501,7 +644,7 @@
                     {% if pagina.has_next %}
 
                         <a
-                            href="?page={{ pagina.next_page_number }}&busca={{ busca|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}"
+                            href="?page={{ pagina.next_page_number }}&busca={{ busca|urlencode }}&usuario={{ usuario_selecionado|urlencode }}&evento={{ evento_selecionado|urlencode }}&metodo={{ metodo_selecionado|urlencode }}&status={{ status_selecionado|urlencode }}&status_faixa={{ status_faixa_selecionado|urlencode }}&periodo={{ periodo_selecionado|urlencode }}&data_inicio={{ data_inicio|urlencode }}&data_fim={{ data_fim|urlencode }}&ordenacao={{ ordenacao_selecionada|urlencode }}"
                         >
                             Próxima →
                         </a>

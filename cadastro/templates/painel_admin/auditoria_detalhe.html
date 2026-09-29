@@ -1,0 +1,482 @@
+{% extends "admin/base_site.html" %}
+
+{% load static %}
+
+{% block title %}
+    Registro #{{ registro.id }} — Auditoria
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content_title %}
+{% endblock %}
+
+{% block extrastyle %}
+
+    {{ block.super }}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'cadastro/css/admin/auditoria.css' %}"
+    >
+
+{% endblock %}
+
+{% block content %}
+
+<div class="audit-page">
+
+    <section class="audit-header">
+
+        <div>
+
+            <span class="audit-eyebrow">
+                DETALHE DO EVENTO
+            </span>
+
+            <h1>
+                Registro #{{ registro.id }}
+            </h1>
+
+            <p>
+                Informações técnicas registradas pelo sistema
+                para este evento de auditoria.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="audit-detail-card">
+
+        <div class="audit-detail-header">
+
+            <div>
+
+                <span class="audit-eyebrow">
+                    EVENTO
+                </span>
+
+                <h2>
+                    {{ registro.get_evento_display }}
+                </h2>
+
+            </div>
+
+
+            {% if registro.status_http %}
+
+                <span class="
+                    audit-http
+                    {% if registro.status_http >= 500 %}
+                        server-error
+                    {% elif registro.status_http >= 400 %}
+                        error
+                    {% elif registro.status_http >= 300 %}
+                        redirect
+                    {% else %}
+                        success
+                    {% endif %}
+                ">
+                    {{ registro.status_http }}
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="audit-detail-grid">
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    ID
+                </span>
+
+                <strong>
+                    {{ registro.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Data e hora
+                </span>
+
+                <strong>
+                    {{ registro.created_at|date:"d/m/Y H:i:s" }}
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Usuário
+                </span>
+
+                <strong>
+
+                    {% if registro.usuario %}
+
+                        {{ registro.usuario.username }}
+
+                    {% else %}
+
+                        Anônimo
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    E-mail
+                </span>
+
+                <strong>
+
+                    {% if registro.usuario and registro.usuario.email %}
+
+                        {{ registro.usuario.email }}
+
+                    {% else %}
+
+                        —
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Tipo de usuário
+                </span>
+
+                <strong>
+
+                    {% if registro.usuario %}
+
+                        {% if registro.usuario.is_superuser %}
+
+                            Superusuário
+
+                        {% elif registro.usuario.is_staff %}
+
+                            Staff
+
+                        {% else %}
+
+                            Usuário comum
+
+                        {% endif %}
+
+                    {% else %}
+
+                        Não autenticado
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Evento técnico
+                </span>
+
+                <strong>
+                    {{ registro.evento }}
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Método HTTP
+                </span>
+
+                {% if registro.metodo %}
+
+                    <span class="audit-method">
+                        {{ registro.metodo }}
+                    </span>
+
+                {% else %}
+
+                    <strong>
+                        —
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Status HTTP
+                </span>
+
+                {% if registro.status_http %}
+
+                    <span class="
+                        audit-http
+                        {% if registro.status_http >= 500 %}
+                            server-error
+                        {% elif registro.status_http >= 400 %}
+                            error
+                        {% elif registro.status_http >= 300 %}
+                            redirect
+                        {% else %}
+                            success
+                        {% endif %}
+                    ">
+                        {{ registro.status_http }}
+                    </span>
+
+                {% else %}
+
+                    <strong>
+                        —
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="audit-detail-item audit-detail-wide">
+
+                <span class="audit-detail-label">
+                    Rota
+                </span>
+
+                <code class="audit-detail-code">
+                    {{ registro.rota|default:"—" }}
+                </code>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="audit-detail-card audit-detail-section">
+
+        <div class="audit-detail-header">
+
+            <div>
+
+                <span class="audit-eyebrow">
+                    CONTEXTO DA REQUISIÇÃO
+                </span>
+
+                <h2>
+                    Origem e cliente
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="audit-detail-grid">
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Endereço IP
+                </span>
+
+                {% if registro.ip_address %}
+
+                    <code class="audit-detail-inline-code">
+                        {{ registro.ip_address }}
+                    </code>
+
+                {% else %}
+
+                    <strong>
+                        Não registrado
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Referer
+                </span>
+
+                {% if registro.referer %}
+
+                    <a
+                        href="{{ registro.referer }}"
+                        class="audit-detail-external-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ registro.referer }}
+                    </a>
+
+                {% else %}
+
+                    <strong>
+                        Não informado pelo cliente
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="audit-detail-item audit-detail-wide">
+
+                <span class="audit-detail-label">
+                    User-Agent
+                </span>
+
+                {% if registro.user_agent %}
+
+                    <code class="audit-detail-code">
+                        {{ registro.user_agent }}
+                    </code>
+
+                {% else %}
+
+                    <strong>
+                        Não registrado
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="audit-detail-card audit-detail-section">
+
+        <div class="audit-detail-header">
+
+            <div>
+
+                <span class="audit-eyebrow">
+                    LEITURA TÉCNICA
+                </span>
+
+                <h2>
+                    Interpretação do registro
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="audit-detail-grid">
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Autenticação
+                </span>
+
+                <strong>
+
+                    {% if registro.usuario %}
+
+                        Usuário autenticado
+
+                    {% else %}
+
+                        Requisição anônima
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="audit-detail-item">
+
+                <span class="audit-detail-label">
+                    Resultado HTTP
+                </span>
+
+                <strong>
+
+                    {% if registro.status_http >= 500 %}
+
+                        Erro do servidor
+
+                    {% elif registro.status_http >= 400 %}
+
+                        Erro do cliente
+
+                    {% elif registro.status_http >= 300 %}
+
+                        Redirecionamento
+
+                    {% elif registro.status_http >= 200 %}
+
+                        Sucesso
+
+                    {% else %}
+
+                        Não classificado
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="audit-detail-actions">
+
+        <a
+            href="{% url 'painel_admin:auditoria' %}"
+            class="audit-filter-clear"
+        >
+            ← Voltar para auditoria
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

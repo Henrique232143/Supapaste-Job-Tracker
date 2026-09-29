@@ -5,7 +5,9 @@
 
 
 {% block title %}
+
     Painel administrativo — Job Tracker
+
 {% endblock %}
 
 
@@ -449,6 +451,38 @@
 
                         <small>
                             Contas e permissões
+                        </small>
+
+                    </span>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+                <!-- =================================================
+                     AUDITORIA
+                     ================================================= -->
+
+                <a
+                    href="{% url 'painel_admin:auditoria' %}"
+                    class="jt-admin-quick-link"
+                >
+
+                    <span class="jt-admin-quick-icon purple">
+                        A
+                    </span>
+
+                    <span>
+
+                        <strong>
+                            Auditoria e Segurança
+                        </strong>
+
+                        <small>
+                            Requisições, logins e eventos do sistema
                         </small>
 
                     </span>
