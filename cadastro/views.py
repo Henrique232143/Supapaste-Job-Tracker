@@ -73,7 +73,7 @@ def lista_empresas(request):
 
     return render(
         request,
-        'cadastro/lista_empresas.html',
+        'cadastro/empresas/lista.html',
         {
             'empresas': empresas
         }
@@ -173,7 +173,7 @@ def detalhe_empresa(
 
     return render(
         request,
-        'cadastro/detalhe_empresa.html',
+        'cadastro/empresas/detalhe.html',
         {
             'empresa': empresa,
             'candidaturas_empresa': candidaturas_empresa,
@@ -516,7 +516,7 @@ def candidaturas(request):
 
     return render(
         request,
-        'cadastro/candidaturas.html',
+        'cadastro/candidaturas/lista.html',
         {
             'candidaturas': candidaturas_queryset,
             'recentes': recentes,
@@ -592,7 +592,7 @@ def detalhe_candidatura(
 
     return render(
         request,
-        'cadastro/detalhe_candidatura.html',
+        'cadastro/candidaturas/detalhe.html',
         {
             'candidatura': candidatura,
             'etapas': etapas,
@@ -679,7 +679,7 @@ def editar_candidatura(
 
     return render(
         request,
-        'cadastro/editar_candidatura.html',
+        'cadastro/candidaturas/editar.html',
         {
             'form': form,
             'candidatura': candidatura,
@@ -715,7 +715,7 @@ def excluir_candidatura(
 
     return render(
         request,
-        'cadastro/excluir_candidatura.html',
+        'cadastro/candidaturas/excluir.html',
         {
             'candidatura': candidatura,
         }
@@ -775,7 +775,7 @@ def nova_candidatura(request):
 
     return render(
         request,
-        'cadastro/nova_candidatura.html',
+        'cadastro/candidaturas/nova.html',
         {
             'form': form
         }
@@ -836,7 +836,7 @@ def nova_empresa(request):
 
                 return render(
                     request,
-                    'cadastro/nova_empresa.html',
+                    'cadastro/empresas/nova.html',
                     {
                         'form': form,
                         'semelhantes': semelhantes,
@@ -902,7 +902,7 @@ def nova_empresa(request):
 
     return render(
         request,
-        'cadastro/nova_empresa.html',
+        'cadastro/empresas/nova.html',
         {
             'form': form,
             'semelhantes': semelhantes,
@@ -1005,7 +1005,7 @@ def nova_cargo(request):
 
     return render(
         request,
-        'cadastro/novo_cargo.html',
+        'cadastro/cargos/novo.html',
         {
             'form': form
         }
@@ -1091,7 +1091,7 @@ def cadastro(request):
 
     return render(
         request,
-        'cadastro/cadastro.html',
+        'cadastro/auth/cadastro.html',
         {
             'form': form
         }
@@ -1132,7 +1132,7 @@ def login_usuario(request):
 
         return render(
             request,
-            'cadastro/login.html',
+            'cadastro/auth/login.html',
             {
                 'erro':
                     'E-mail ou senha incorretos.'
@@ -1141,7 +1141,7 @@ def login_usuario(request):
 
     return render(
         request,
-        'cadastro/login.html'
+        'cadastro/auth/login.html'
     )
 
 
